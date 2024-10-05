@@ -1,5 +1,5 @@
 
-![ReactMovieStore Logo](assets/logo.webp)
+![ReactMovieStore Logo](src/assets/logo.webp)
 
 # Examination project group 3 - React Movie Store
 
