@@ -1,6 +1,10 @@
-# Examination proect group 3
-# React Movie Store
 
+![ReactMovieStore Logo](assets/logo.webp)
 
-![ReactMovieStore Logo](assets/images/logo.webp)
+# Examination project group 3 - React Movie Store
+
+Made with React JS, Router and Redux.
+
+Github pages: 
+
 
