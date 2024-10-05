@@ -1,0 +1,66 @@
+# Node-modules
+node_modules/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+package-lock.json
+yarn.lock
+
+# Vite build output
+dist/
+
+# Local environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# React Native
+.expo/
+.expo-shared/
+
+# Cache files
+.cache/
+.vite/
+*.cache
+*.tmp
+
+# Editor directories and files
+.vscode/
+.idea/
+.DS_Store
+
+# OS generated files
+Thumbs.db
+*.swp
+
+# Coverage directory (for testing)
+coverage/
+
+# ESLint cache
+eslintcache
+
+# Sentry debug files
+.sentryclirc
+
+# Mac-specific files
+.DS_Store
+
+# Build artifacts
+out/
+build/
+
+# Storybook files
+storybook-static/
+
+# TypeScript cache and build files
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Redux dev tools
+redux-state.json
