@@ -1,4 +1,4 @@
-/* Globala stilar för att nollställa standardvärden */
+
 body, html {
   margin: 0;
   padding: 0;
@@ -18,9 +18,12 @@ body, html {
 
 .search-container {
   width: 100%;
-  padding: 20px;
+  position: sticky;
+  margin-top: 150px;
+  background-image: url('assets/banner.webp');
+  background-size: cover;
+  height: 350px;
 }
-
 .main-layout {
   display: flex;
 
