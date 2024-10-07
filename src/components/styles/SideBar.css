@@ -1,12 +1,17 @@
 .category-sidebar {
     width: 150px;
     padding: 20px;
+    border-right: 1px solid #000;
   }
   
-  .category-sidebar button {
+  .category-sidebar li {
     display: block;
     width: 100%;
     margin: 10px 0;
     padding: 10px;
+  }
+  .category-sidebar a {
+    color: #000;
+    font-style: none;;
   }
   
