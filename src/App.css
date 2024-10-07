@@ -3,6 +3,8 @@ body, html {
   margin: 0;
   padding: 0;
   width: 100%;
+  background-color: white;
+  color: grey;
 }
 
 /* App container */
@@ -15,8 +17,8 @@ body, html {
 
 
 .search-container {
-  padding: 20px;
   width: 100%;
+  padding: 20px;
 }
 
 .main-layout {
