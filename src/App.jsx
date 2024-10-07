@@ -7,20 +7,14 @@ import MovieCatalog from './components/MovieCatalog';
 function App() {
   return (
     <div className="app-container">
-      {/* Header */}
       <Header />
 
-      {/* Search Bar */}
       <div className="search-container">
         <SearchBar />
       </div>
 
-      {/* Main Layout */}
       <div className="main-layout">
-        {/* Left Sidebar */}
         <Sidebar />
-
-        {/* Movie Section */}
         <MovieCatalog />
       </div>
     </div>

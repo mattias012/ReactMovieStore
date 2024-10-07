@@ -1,0 +1,42 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #7299C6;
+    color: white;
+    width: 100%;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+  }
+  
+  .nav-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    margin-right: 20px;
+    width: 120px;
+  }
+  
+  .nav a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .nav-right {
+    margin-left: auto;
+  }
+  
+  .cart-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  

@@ -1,11 +1,25 @@
+/* Globala stilar för att nollställa standardvärden */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* App container */
 .app-container {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
+
 
 .search-container {
   padding: 20px;
+  width: 100%;
 }
 
 .main-layout {
   display: flex;
+
 }

@@ -1,0 +1,12 @@
+.category-sidebar {
+    width: 150px;
+    padding: 20px;
+  }
+  
+  .category-sidebar button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+  }
+  
