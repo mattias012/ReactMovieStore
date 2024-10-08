@@ -15,7 +15,7 @@ function App() {
 
       <div className="main-layout">
         <Sidebar />
-        <MovieCatalog />
+        <MovieCatalog /> 
       </div>
     </div>
   );
