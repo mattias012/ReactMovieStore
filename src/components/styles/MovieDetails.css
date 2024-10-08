@@ -1,0 +1,134 @@
+.movie-details {
+    display: flex;
+    padding: 20px;
+    background-color: #f9f9f9;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.movie-poster img {
+    border-radius: 8px;
+    width: 220px;
+    height: 350px;
+    object-fit: cover;
+}
+
+.movie-info {
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-info h1 {
+    font-size: 1.8em;
+    margin: 0;
+    color: #000000;
+}
+
+.movie-meta {
+    font-size: 0.9em;
+    color: #777;
+    margin: 2px 0;
+}
+
+.movie-price {
+    font-size: 1.2em;
+    color: #000;
+    margin: 5px 0;
+}
+
+.movie-rating-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.movie-rating {
+    background-color: #7299C6;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 1em;
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px; 
+}
+
+.rating-label {
+    font-size: 1em;
+    color: #000000; 
+    margin-right: 70px; 
+    
+}
+
+.cart-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px; 
+  }
+
+  .add-to-cart {
+    display: flex;
+    align-items: center;  
+    padding: 5px 15px;
+    background-color: #7299C6;
+    font-size: 1em;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+}
+
+
+.movie-genre {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px; 
+    margin-bottom: 10px; 
+}
+
+.genre-tag {
+    background-color: #7299C6;
+    border-radius: 35px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    color: #ffffff;
+}
+
+h2 {
+    margin-top: 0px;
+    margin-bottom: 0px; 
+    font-size: 1.3em;
+    color: #000000;
+}
+
+p {
+    margin: 5px 0;
+    color: #000000;
+    font-size: 1em;
+}
+
+.movie-credits {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-right: 300px;
+    
+}
+
+.credit-item {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.role {
+    margin-top: 0px;
+}
+
