@@ -1,4 +1,5 @@
 import './styles/Header.css'
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -7,12 +8,12 @@ function Header() {
     <div className="nav-left">
     <div className="logo"><img alt="logo" src="/src/assets/logo.webp" /></div>
       <nav className="nav">
-        <a href="#movies">Movies</a>
+        <Link to="/">Movies</Link>
       </nav>
     </div>
 
     <div className="nav-right">
-      <a href="#cart" className="cart-link">Cart 🛒</a>
+      <Link to="/cart" className='cart-link' >Cart 🛒</Link>
     </div>
   </header>
   );
