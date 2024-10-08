@@ -16,14 +16,14 @@ function App() {
 const dispatch = useDispatch();
 
 // Get movies, status, and error from the Redux store
-const movies = useSelector((state) => state.movies.movies); // Select movies array from state
-const status = useSelector((state) => state.movies.status); // Select status from state
-const error = useSelector((state) => state.movies.error); // Select error message from state
+const movies = useSelector((state) => state.movies.movies); //Select movies array from state
+const status = useSelector((state) => state.movies.status); //Select status from state
+const error = useSelector((state) => state.movies.error); //Select error message from state
 
-// useEffect to dispatch fetchMovies when the component is mounted
+//useEffect to dispatch fetchMovies when the component is mounted
 useEffect(() => {
   if (status === 'idle') {
-    // Dispatch fetchMovies action if status is 'idle'
+    //Dispatch fetchMovies action if status is 'idle'
     dispatch(fetchMovies());
   }
 }, [status, dispatch]);
@@ -40,7 +40,7 @@ useEffect(() => {
       <div className="main-layout">
         <Sidebar />
         <MovieCatalog />
-        <div className="App">
+     
       <h1>React Movie Store</h1>
       {/* Display loading message when movies are being fetched */}
       {status === 'loading' && <p>Loading movies...</p>}
@@ -65,7 +65,6 @@ useEffect(() => {
       </ul>
     </div>
       </div>
-    </div>
   );
 }
 
