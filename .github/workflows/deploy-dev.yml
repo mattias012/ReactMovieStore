@@ -1,0 +1,43 @@
+# .github/workflows/deploy-dev.yml
+name: Deploy to GitHub Pages (Dev)
+
+on:
+  pull_request:
+    branches:
+      - dev
+    types:
+      - closed
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      # Dynamiskt sätt `homepage` för dev
+      - name: Set homepage for dev
+        run: |
+          echo '"homepage": "https://mattias012.github.io/ReactMovieStore/dev"' > homepage.json
+          jq -s '.[0] * .[1]' package.json homepage.json > temp.json && mv temp.json package.json
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages-dev  # Använd en separat gren för dev
