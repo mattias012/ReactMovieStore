@@ -2,9 +2,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background-color: #7299C6;
-  color: white;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 30px;
+  background-color: #adc4df;
+  color: rgb(23, 23, 23);
   width: 100%;
   position: fixed; 
   top: 0;
@@ -20,12 +23,12 @@
 
 .logo img {
   margin-right: 20px;
-  width: 120px;
+  width: 100px;
 }
 
 .nav a {
   margin: 0 10px;
-  color: white;
+  color: rgb(58, 58, 58);
   text-decoration: none;
   font-weight: bold;
 }
@@ -35,16 +38,25 @@
 }
 
 .cart-link {
+  background: none;
+  border: none;
   color: white;
-  text-decoration: none;
-  font-weight: bold;
   cursor: pointer;
+  padding: 20px;
+  margin: 0;
+  font-size: 50px;
+  display: flex;
+  align-items: center;
 }
 
-/* Cart dropdownmenu*/
+.cart-link:hover {
+  opacity: 0.8;
+}
+
+/* Cart dropdownmenu */
 .cart-dropdown {
   position: absolute;
-  top: 60px; /* Depending on header height */
+  top: 120px; /* Depending on header height */
   right: 20px;
   background-color: white;
   color: black;
@@ -87,4 +99,3 @@
 .checkout-button:hover {
   background-color: #7299C6; 
 }
-
