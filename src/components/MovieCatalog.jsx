@@ -1,8 +1,17 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'; 
+import { useNavigate } from 'react-router-dom'; 
+import { setSelectedMovie } from '../features/movieSlice';
 
 const MovieCatalog = ({ status, error }) => {
   // Retrieve movies from the Redux store
   const movies = useSelector((state) => state.movies.movies);
+  const dispatch = useDispatch();  
+  const navigate = useNavigate();  
+  console.log("Fetched movies from API: ", movies);
+  const handleMovieClick = (movie) => {
+    dispatch(setSelectedMovie(movie));  
+    navigate(`/movie/${movie.imdbID}`, { state: { movie } });
+  };
 
   // Render the UI based on the state
   return (
@@ -17,7 +26,7 @@ const MovieCatalog = ({ status, error }) => {
       <ul>
         {movies && movies.length > 0 ? (
           movies.map((movie, index) => (
-            <li key={index}>
+            <li key={index} onClick={() => handleMovieClick(movie)}>  
               <h2>{movie.Title}</h2>
               <p>Year: {movie.Year}</p>
               <p>Type: {movie.Type}</p>

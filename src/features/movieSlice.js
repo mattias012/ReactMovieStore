@@ -22,9 +22,14 @@ const movieSlice = createSlice({
     movies: [], //store movies here
     status: 'idle', //Status of the API request ('idle', 'loading', 'succeeded', 'failed')
     error: null, //In case of failure, stores error messages from api req.
+    selectedMovie: null,  // Add selectedMovie to the initial state
   },
-  reducers: {},
-  extraReducers: (builder) => {
+  reducers: {
+    setSelectedMovie: (state, action) => {
+      state.selectedMovie = action.payload; 
+    },
+  },
+    extraReducers: (builder) => {
     //Handle different states of the fetchMovies action
     //extraReducers is a key from redux toolkit to handle async ops.
     builder
@@ -46,4 +51,5 @@ const movieSlice = createSlice({
 });
 
 //Export the reducer to include it in the store
+export const { setSelectedMovie } = movieSlice.actions;
 export default movieSlice.reducer;
