@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import './styles/Header.css';
+import './styles/Header.css'
+//Import image
+import imageLink from '../assets/logo.webp'
+
 
 function Header() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -13,7 +15,7 @@ function Header() {
     <header className="header">
       <div className="nav-left">
         <div className="logo">
-          <img alt="logo" src="/src/assets/logo.webp" />
+          <img alt="logo" src={imageLink} />
         </div>
         <nav className="nav">
           <a href="#movies">Movies</a>
