@@ -1,0 +1,41 @@
+# .github/workflows/deploy-main.yml
+name: Deploy to GitHub Pages (Main)
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Uppdatera till Node.js 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set homepage for main
+        run: |
+          echo '"homepage": "https://mattias012.github.io/ReactMovieStore"' > homepage.json
+          jq -s '.[0] * .[1]' package.json homepage.json > temp.json && mv temp.json package.json
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
