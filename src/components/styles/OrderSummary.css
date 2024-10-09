@@ -1,9 +1,9 @@
 .order-summary {
-    background-color: #9eb7db; /* Background color */
+    background-color: #9eb7db; 
     padding: 20px;
     border-radius: 10px;
-    max-width: 300px; /* Adjust width to your design */
-    margin: 0 auto; /* Center it horizontally */
+    max-width: 300px; 
+    margin: 0 auto; 
     font-family: 'Arial', sans-serif;
     color: white;
   }
@@ -21,12 +21,12 @@
   }
   
   hr {
-    border: 1px solid rgba(255, 255, 255, 0.5); /* Light divider */
+    border: 1px solid rgba(255, 255, 255, 0.5); 
     margin: 20px 0;
   }
   
   .to-pay-section {
-    background-color: #7299C6; /* Highlight section */
+    background-color: #7299C6; 
     padding: 10px;
     border-radius: 8px;
   }
@@ -40,7 +40,7 @@
   }
   
   .pay-button {
-    background-color: #7299C6; /* Button background */
+    background-color: #7299C6; 
     color: white;
     border: none;
     border-radius: 8px;
@@ -52,6 +52,6 @@
   }
   
   .pay-button:hover {
-    background-color: #5a87b1; /* Darker on hover */
+    background-color: #5a87b1; 
   }
   

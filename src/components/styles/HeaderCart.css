@@ -1,6 +1,6 @@
 .header-cart {
     display: flex;
-    justify-content: center; /* Change this to center the content */
+    justify-content: center; 
     align-items: center;
     padding: 20px;
     background-color: #7299C6;
@@ -30,7 +30,7 @@
   }
   
   .nav-right {
-    flex: 1; /* Add this class for equal spacing on the right side */
+    flex: 1; 
   }
   
   

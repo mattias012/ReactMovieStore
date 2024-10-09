@@ -1,0 +1,79 @@
+.checkout-infromtaion {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  /* Form header with back link and logo */
+  .form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .back-link {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    background-color: #7299C6;
+    padding: 8px 12px;
+    border-radius: 5px;
+  }
+  
+  .form-logo {
+    width: 60px;
+  }
+  
+  /* Form sections for personal info and card details */
+  .checkout-information {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .information-section {
+    background-color: #9eb7db;
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1;
+  }
+  
+  /* Grid layout for form inputs */
+  .information-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .information-grid input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+  }
+  
+  /* Add specific classes for full-width inputs instead of using nth-child */
+  .full-width {
+    grid-column: span 2;
+  }
+  
+  /* Pay button styling */
+  .pay-button {
+    background-color: #7299C6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .pay-button:hover {
+    background-color: #5a87b1;
+  }
+  
+  

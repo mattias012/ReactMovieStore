@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles/Cart.css';
-import moviePoster from '/src/assets/shawshank-redemption.jpg'; // Placeholder for the movie poster
+import moviePoster from '/src/assets/shawshank-redemption.jpg'; 
 
 function CartItem({ title, year, price }) {
   const [quantity, setQuantity] = useState(1);
@@ -24,7 +24,7 @@ function CartItem({ title, year, price }) {
       <div className="actions">
         <button className="remove-btn">Remove</button>
         <button className="trash-btn">
-          <i className="fa fa-trash"></i> {/* Font Awesome Icon */}
+          <i className="fa fa-trash"></i> {}
         </button>
       </div>
     </div>
