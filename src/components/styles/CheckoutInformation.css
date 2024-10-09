@@ -4,14 +4,7 @@
     color: #333;
   }
   
-  /* Form header with back link and logo */
-  .form-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
+
   .back-link {
     text-decoration: none;
     color: white;
@@ -25,7 +18,7 @@
     width: 60px;
   }
   
-  /* Form sections for personal info and card details */
+
   .checkout-information {
     display: flex;
     justify-content: space-between;
@@ -38,8 +31,7 @@
     padding: 20px;
     flex: 1;
   }
-  
-  /* Grid layout for form inputs */
+
   .information-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -54,12 +46,12 @@
     font-size: 1rem;
   }
   
-  /* Add specific classes for full-width inputs instead of using nth-child */
+
   .full-width {
     grid-column: span 2;
   }
   
-  /* Pay button styling */
+
   .pay-button {
     background-color: #7299C6;
     color: white;

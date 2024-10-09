@@ -4,11 +4,6 @@ import "./styles/CheckoutInformation.css";
 function CheckoutInformation() {
     return (
         <div className="checkout-infromtaion">
-        <div className="form-header">
-          <a href="#back" className="back-link">&larr; Checkout</a>
-          <img src="/src/assets/logo.png" alt="logo" className="form-logo" />
-        </div>
-      
         <div className="checkout-information">
           <div className="information-section">
             <h3>Your information</h3>
@@ -37,15 +32,7 @@ function CheckoutInformation() {
         <button className="pay-button">Pay</button>
       </div>
       
-        
-
-
-
-
     );
-
-
-
 }
 
 export default CheckoutInformation;

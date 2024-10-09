@@ -1,0 +1,37 @@
+.thank-you-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #333;
+  }
+  
+  .thank-you-container h1 {
+    font-size: 2rem;
+    color: black;
+  }
+  
+  .thank-you-container p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .track-order-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #7299C6;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .track-order-button:hover {
+    background-color: #5a87b1;
+  }
+  

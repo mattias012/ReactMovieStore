@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './styles/Cart.css';
-import moviePoster from '/src/assets/shawshank-redemption.jpg'; 
+
 
 function CartItem({ title, year, price }) {
   const [quantity, setQuantity] = useState(1);
@@ -24,7 +24,7 @@ function CartItem({ title, year, price }) {
       <div className="actions">
         <button className="remove-btn">Remove</button>
         <button className="trash-btn">
-          <i className="fa fa-trash"></i> {}
+          {/* trash button here */}
         </button>
       </div>
     </div>
@@ -35,8 +35,9 @@ function Cart() {
   return (
     <div className="cart">
       <h2>In your cart right now</h2>
-      <CartItem title="The Shawshank Redemption" year="1994" price={10.80} />
-      <CartItem title="The Shawshank Redemption" year="1994" price={10.80} />
+      {/* cart item here!!!!!!! */}
+      {/* fix when cart is empty */}
+     
     </div>
   );
 }
