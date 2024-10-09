@@ -1,49 +1,41 @@
 # .github/workflows/deploy-main.yml
 name: Deploy to GitHub Pages (Main)
 
-# Körs endast när en pull request mergas till `main`
 on:
   pull_request:
     branches:
       - main
     types:
-      - closed  # Trigga workflowet när en PR är stängd (vilket inkluderar merges)
+      - closed
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    if: github.event.pull_request.merged == true  # Kör endast om PR:en verkligen mergades
+    if: github.event.pull_request.merged == true
 
     steps:
-      # Steg 1: Checka ut koden från repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Steg 2: Installera Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'  # Uppdatera till Node.js 20
 
-      # Steg 3: Installera projektets beroenden
       - name: Install dependencies
         run: npm install
 
-      # Steg 4: Sätt dynamiskt `homepage` för main
-      # Ändrar "homepage" i package.json till rätt URL för main-deploymenten
       - name: Set homepage for main
         run: |
           echo '"homepage": "https://mattias012.github.io/ReactMovieStore"' > homepage.json
           jq -s '.[0] * .[1]' package.json homepage.json > temp.json && mv temp.json package.json
 
-      # Steg 5: Bygg projektet med den uppdaterade `package.json`
       - name: Build the project
         run: npm run build
 
-      # Steg 6: Deploya byggfilerna till GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # Ange den rätta byggmappen (som är "dist" för Vite)
+          publish_dir: ./dist
