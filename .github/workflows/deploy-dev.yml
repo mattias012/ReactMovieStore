@@ -21,12 +21,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'  # Ändra från '16' till '20' för att använda den senaste versionen
 
       - name: Install dependencies
         run: npm install
 
-      # Dynamiskt sätt `homepage` för dev
       - name: Set homepage for dev
         run: |
           echo '"homepage": "https://mattias012.github.io/ReactMovieStore/dev"' > homepage.json
@@ -40,4 +39,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          publish_branch: gh-pages-dev  # Använd en separat gren för dev
+          publish_branch: gh-pages-dev
