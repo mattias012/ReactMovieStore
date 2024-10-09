@@ -3,11 +3,11 @@
   justify-content: space-between;
   align-items: center;
   padding-left: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   padding-right: 30px;
-  background-color: #adc4df;
-  color: rgb(23, 23, 23);
+  background-color: rgba(24, 49, 69, 0.95);
+  color: rgb(227, 227, 227);
   width: 100%;
   position: fixed; 
   top: 0;
@@ -28,7 +28,7 @@
 
 .nav a {
   margin: 0 10px;
-  color: rgb(58, 58, 58);
+  color: rgb(240, 240, 240);
   text-decoration: none;
   font-weight: bold;
 }
@@ -56,10 +56,10 @@
 /* Cart dropdownmenu */
 .cart-dropdown {
   position: absolute;
-  top: 102px; /* Depending on header height */
+  top: 92px; /* Depending on header height */
   right: 0px;
-  background-color: #8fadcf;
-  color: black;
+  background-color: rgba(24, 49, 69, 0.95);
+  color: rgb(239, 239, 239);
   border-radius: 0px;
   padding: 10px;
   z-index: 1001;
