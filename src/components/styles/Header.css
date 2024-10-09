@@ -70,3 +70,21 @@
   border-bottom: none;
 }
 
+/* Button to checkout */
+.checkout-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #2c5d95;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.checkout-button:hover {
+  background-color: #7299C6; 
+}
+
