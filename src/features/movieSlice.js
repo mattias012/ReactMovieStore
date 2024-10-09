@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 //Define the base URL for the OMDB API
-const apiUrl = 'http://www.omdbapi.com/?s=batman&&plot=full&apikey=8eec2a77&page=1';
+const apiUrl = 'https://www.omdbapi.com/?s=batman&&plot=full&apikey=8eec2a77&page=1';
 
 // Define an async thunk for fetching movies from the API
 // createAsyncThunk allows us to create asynchronous Redux actions more easy
