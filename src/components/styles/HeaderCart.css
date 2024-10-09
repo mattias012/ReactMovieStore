@@ -1,0 +1,36 @@
+.header-cart {
+    display: flex;
+    justify-content: center; /* Change this to center the content */
+    align-items: center;
+    padding: 20px;
+    background-color: #7299C6;
+    color: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+  }
+  
+  .nav-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .continue-shopping {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .logo {
+    width: 120px;
+  }
+  
+  .nav-right {
+    flex: 1; /* Add this class for equal spacing on the right side */
+  }
+  
+  
