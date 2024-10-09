@@ -1,14 +1,31 @@
-import './styles/Header.css'
-import { Link } from "react-router-dom";
-import imageLink from '../assets/logo.webp'
-import { useState } from 'react';
+import './styles/Header.css';
+import imageLink from '../assets/logo.webp';
+import { useState, useRef, useEffect } from 'react';
 
 function Header() {
   const [cartOpen, setCartOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  // Click to show/hide cart
   const toggleCart = () => {
     setCartOpen(!cartOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setCartOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
+
+  const handleCheckout = () => {
+    // Navigate to the checkout section
+    window.location.hash = "#cart";
   };
 
   return (
@@ -23,20 +40,18 @@ function Header() {
       </div>
 
       <div className="nav-right">
-        <a href="#cart" className="cart-link" onClick={toggleCart}>
-          Cart 🛒
-        </a>
+        <button className="cart-link" onClick={toggleCart}>
+          🛒
+        </button>
 
-        {/* Dropdown */}
         {cartOpen && (
-          <div className="cart-dropdown">
+          <div className="cart-dropdown" ref={dropdownRef}>
             <ul>
               <li>Movie 1</li>
               <li>Movie 2</li>
               <li>Movie 3</li>
             </ul>
-            {/* Button to checkout */}
-            <button className="checkout-button" onClick={() => alert('Go to checkout!')}>
+            <button className="checkout-button" onClick={handleCheckout}>
               Go to Checkout
             </button>
           </div>
