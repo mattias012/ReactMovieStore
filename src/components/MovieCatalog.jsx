@@ -7,10 +7,10 @@ const MovieCatalog = ({ status, error }) => {
   const movies = useSelector((state) => state.movies.movies);
   const dispatch = useDispatch();  
   const navigate = useNavigate();  
-  console.log("Fetched movies from API: ", movies);
+
   const handleMovieClick = (movie) => {
-    dispatch(setSelectedMovie(movie));  
-    navigate(`/movie/${movie.imdbID}`, { state: { movie } });
+    dispatch(setSelectedMovie(movie)); 
+    navigate(`/movie/${movie.imdbID}`); 
   };
 
   // Render the UI based on the state

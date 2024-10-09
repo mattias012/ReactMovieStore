@@ -1,16 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom'; 
 import './styles/MovieDetails.css';
 
 const MovieDetails = () => {
-  const location = useLocation();  
   const navigate = useNavigate();  
-  const movie = location.state?.movie || useSelector((state) => state.movies.selectedMovie);  
-  console.log("Movie details from API: ", movie);
+  const movie = useSelector((state) => state.movies.selectedMovie); 
+  console.log("Movie details from Redux: ", movie);
 
   if (!movie) {
-    return <div>Movie not found.</div>;
+    return <div>Movie not found.</div>; 
   }
 
   const runtime = movie.Runtime ? movie.Runtime.replace(' min', '') : "Unknown";
