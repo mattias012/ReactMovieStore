@@ -1,6 +1,7 @@
 import './styles/Header.css'
 import { Link } from "react-router-dom";
 import imageLink from '../assets/logo.webp'
+import { useState } from 'react';
 
 function Header() {
   const [cartOpen, setCartOpen] = useState(false);
