@@ -1,11 +1,14 @@
 import './styles/Header.css';
 import imageLink from '../assets/logo.webp';
 import { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function Header() {
   const [cartOpen, setCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]); // Håll koll på varorna i varukorgen
   const dropdownRef = useRef(null);
+  
+  // Get movies from redux store
+  const cartItems = useSelector((state) => state.movies.cart);
 
   const toggleCart = () => {
     setCartOpen(!cartOpen);
@@ -25,7 +28,7 @@ function Header() {
   }, [dropdownRef]);
 
   const handleCheckout = () => {
-    // Navigera till kassan
+    // TO DO: Go to cart
     window.location.hash = "#cart";
   };
 
@@ -52,7 +55,7 @@ function Header() {
             ) : (
               <ul>
                 {cartItems.map((item, index) => (
-                  <li key={index}>{item}</li>
+                  <li key={item.imdbID}>{item.Title}</li>
                 ))}
               </ul>
             )}
