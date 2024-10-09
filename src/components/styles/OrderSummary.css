@@ -1,0 +1,57 @@
+.order-summary {
+    background-color: #9eb7db; /* Background color */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px; /* Adjust width to your design */
+    margin: 0 auto; /* Center it horizontally */
+    font-family: 'Arial', sans-serif;
+    color: white;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .cost-section, .shipping-section, .to-pay-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  hr {
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Light divider */
+    margin: 20px 0;
+  }
+  
+  .to-pay-section {
+    background-color: #7299C6; /* Highlight section */
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .questions-section {
+    margin-top: 20px;
+  }
+  
+  .questions-section p {
+    margin: 5px 0;
+  }
+  
+  .pay-button {
+    background-color: #7299C6; /* Button background */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .pay-button:hover {
+    background-color: #5a87b1; /* Darker on hover */
+  }
+  
