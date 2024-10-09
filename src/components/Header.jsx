@@ -1,5 +1,5 @@
 import './styles/Header.css';
-import imageLink from '../assets/logo.webp';
+import imageLink from '../assets/logo-nobackground.png';
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
