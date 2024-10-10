@@ -9,12 +9,11 @@ on:
       - closed
 
 permissions:
-  contents: write  # Ger GITHUB_TOKEN rättigheter att skriva till innehållet
+  contents: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     if: github.event.pull_request.merged == true
 
     steps:
@@ -29,23 +28,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Set homepage for dev
-        run: |
-          sed -i 's#"homepage": .*#"homepage": "https://mattias012.github.io/ReactMovieStore/dev"#' package.json
-
-      - name: Verify package.json after homepage change
-        run: cat package.json
-
       - name: Build the project
         run: npm run build
 
       - name: List dist directory after build
         run: ls -R ./dist
 
-      # Deploy till `gh-pages-dev`-branchen
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          publish_branch: gh-pages-dev  # Specifik gren för dev
+          publish_branch: gh-pages-dev
