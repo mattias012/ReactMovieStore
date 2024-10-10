@@ -9,7 +9,6 @@ const MovieCatalog = ({ status, error }) => {
   const navigate = useNavigate();  
 
   const handleMovieClick = (movie) => {
-    dispatch(setSelectedMovie(movie)); 
     navigate(`/movie/${movie.imdbID}`); 
   };
 

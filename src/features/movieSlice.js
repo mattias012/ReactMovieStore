@@ -4,14 +4,20 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 //Define the base URL for the OMDB API
-const apiUrl = 'https://www.omdbapi.com/?s=batman&&plot=full&apikey=8eec2a77&page=1';
-
+const apiKey = '8eec2a77';
+const baseUrl = `https://www.omdbapi.com/?apikey=${apiKey}`;
 // Define an async thunk for fetching movies from the API
 // createAsyncThunk allows us to create asynchronous Redux actions more easy
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
   //Axios GET request to fetch movies from the API
-  const response = await axios.get(apiUrl);
+  const response = await axios.get(`${baseUrl}&s=batman`);
   return response.data.Search; //Return the list of movies from the response
+});
+
+export const fetchMovieById = createAsyncThunk('movies/fetchMovieById', async (imdbID) => {
+  const response = await axios.get(`${baseUrl}&i=${imdbID}&plot=full`); 
+  console.log("API Response for fetchMovieById: ", response.data);
+  return response.data;
 });
 
 //Create a movie slice using createSlice
@@ -44,6 +50,17 @@ const movieSlice = createSlice({
       })
       .addCase(fetchMovies.rejected, (state, action) => {
         // When the request fails, set status to 'failed' and store the error message
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(fetchMovieById.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchMovieById.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.selectedMovie = action.payload; 
+      })
+      .addCase(fetchMovieById.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

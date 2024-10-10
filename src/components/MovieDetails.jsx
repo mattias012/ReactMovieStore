@@ -1,12 +1,24 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; 
+import React, { useEffect } from 'react'; 
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchMovieById } from '../features/movieSlice'; 
 import './styles/MovieDetails.css';
 
 const MovieDetails = () => {
+  const { imdbID } = useParams(); 
   const navigate = useNavigate();  
+  const dispatch = useDispatch();
   const movie = useSelector((state) => state.movies.selectedMovie); 
+  const status = useSelector((state) => state.movies.status);
   console.log("Movie details from Redux: ", movie);
+
+  useEffect(() => {
+    if (!movie || movie.imdbID !== imdbID) {
+      dispatch(fetchMovieById(imdbID)); 
+    }
+  }, [imdbID, movie, dispatch]);
+  console.log("Detailed Movie details from API: ", movie);
+
 
   if (!movie) {
     return <div>Movie not found.</div>; 
@@ -49,9 +61,9 @@ const MovieDetails = () => {
             <span key={index} className="genre-tag">{g}</span>
           ))}
         </div>
-        {/*<h2>Overview</h2>
+        <h2>Overview</h2>
         <p>{movie.Plot}</p>
-        <div className="movie-credits">
+        {/*<div className="movie-credits">
           <div className="credit-item">
             <p><strong>{movie.Director}</strong></p>
             <p className="role">Director</p>
@@ -61,6 +73,7 @@ const MovieDetails = () => {
             <p className="role">Writer</p>
           </div>
         </div>*/}
+        
       </div>
     </div>
   );
