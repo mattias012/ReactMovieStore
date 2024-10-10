@@ -11,6 +11,7 @@ import Checkout from './components/Checkout';
 import Details from './components/Details';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MovieDetails from './components/MovieDetails'; 
 
 //Import fetchMovies action from our slice
 import { fetchMovies } from "./features/movieSlice";
@@ -47,7 +48,7 @@ function App() {
             <Route exact path="/cart" element={<Cart />} />
             <Route exact path="/checkout" element={<Checkout />} />
             <Route exact path="/thankyou" element={<Thankyou />} />
-            <Route exact path="/details" element={<Details />} />
+            <Route exact path="/movie/:imdbID" element={<MovieDetails />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

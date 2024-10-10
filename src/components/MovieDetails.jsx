@@ -1,48 +1,79 @@
+import React, { useEffect } from 'react'; 
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchMovieById } from '../features/movieSlice'; 
 import './styles/MovieDetails.css';
 
-const MovieDetails = ({ title, ageLimit, duration, year, price, rating, genre, description, director, novel }) => {
-  const hours = Math.floor(duration / 60);
-  const minutes = duration % 60;
+const MovieDetails = () => {
+  const { imdbID } = useParams(); 
+  const navigate = useNavigate();  
+  const dispatch = useDispatch();
+  const movie = useSelector((state) => state.movies.selectedMovie); 
+  const status = useSelector((state) => state.movies.status);
+  console.log("Movie details from Redux: ", movie);
+
+  useEffect(() => {
+    if (!movie || movie.imdbID !== imdbID) {
+      dispatch(fetchMovieById(imdbID)); 
+    }
+  }, [imdbID, dispatch]);
+  console.log("Detailed Movie details from API: ", movie);
+
+
+  if (!movie) {
+    return <div>Movie not found.</div>; 
+  }
+
+  const runtime = movie.Runtime ? movie.Runtime.replace(' min', '') : "Unknown";
+  const hours = runtime !== "Unknown" ? Math.floor(runtime / 60) : "N/A";
+  const minutes = runtime !== "Unknown" ? runtime % 60 : "N/A";
+
+  const genres = movie.Genre ? movie.Genre.split(', ') : ['Unknown Genre'];
 
   return (
     <div className="movie-details">
+      <button className="back-button" onClick={() => navigate(-1)}> 
+        Back
+      </button>
       <div className="movie-poster">
         <img
-          src="https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_.jpg"
-          alt={`${title} poster`}
+          src={movie.Poster}
+          alt={`${movie.Title} poster`}
         />
       </div>
       <div className="movie-info">
-        <h1>{title}</h1>
+        <h1>{movie.Title}</h1>
         <p className="movie-meta">
-          <span>{ageLimit}</span> • <span>{hours}h {minutes}m</span> • <span>{year}</span>
+          <span>{movie.Rated}</span> • <span>{hours}h {minutes}m</span> • <span>{movie.Year}</span>
         </p>
-        <p className="movie-price">{price} USD</p>
+        <p className="movie-price">Price: $15.99 USD</p>
         <div className="movie-rating-container">
           <div className="movie-rating">
-            {rating}
+            {movie.imdbRating}
           </div>
-          <span className="rating-label">Rating</span> 
+          <span className="rating-label">Rating</span>
           <button className="add-to-cart">
-            <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="cart icon" className="cart-icon" /> Add to cart</button>
+            <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="cart icon" className="cart-icon" /> Add to cart
+          </button>
         </div>
         <div className="movie-genre">
-          {genre.map((g, index) => (
+          {genres.map((g, index) => (
             <span key={index} className="genre-tag">{g}</span>
           ))}
         </div>
         <h2>Overview</h2>
-        <p>{description}</p>        
+        <p>{movie.Plot}</p>
         <div className="movie-credits">
           <div className="credit-item">
-            <p><strong>{director}</strong></p>
-            <p className="role">Director, Screenplay</p>
+            <p><strong>{movie.Director}</strong></p>
+            <p className="role">Director</p>
           </div>
           <div className="credit-item">
-            <p><strong>{novel}</strong></p>
-            <p className="role">Novel</p>
+            <p><strong>{movie.Writer}</strong></p>
+            <p className="role">Writer</p>
           </div>
         </div>
+        
       </div>
     </div>
   );
