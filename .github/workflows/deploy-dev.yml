@@ -6,7 +6,7 @@ on:
     branches:
       - dev
     types:
-      - closed
+      - closed  # Trigga workflow när en pull request till `dev` stängs (mergas)
 
 permissions:
   contents: write
@@ -14,6 +14,7 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     if: github.event.pull_request.merged == true
 
     steps:
@@ -31,12 +32,14 @@ jobs:
       - name: Build the project
         run: npm run build
 
+      # Extra steg för att verifiera byggmappens innehåll
       - name: List dist directory after build
         run: ls -R ./dist
 
+      # Deploya till `gh-pages-dev`-grenen
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          publish_branch: gh-pages-dev
+          publish_branch: gh-pages-dev  # Använd separat gren för dev-deploymenten
