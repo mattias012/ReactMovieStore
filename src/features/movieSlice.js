@@ -1,6 +1,4 @@
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-//import axios, http library to handle http requests easier
 import axios from 'axios';
 
 //Define the base URL for the OMDB API
@@ -48,18 +46,16 @@ const movieSlice = createSlice({
     extraReducers: (builder) => {
     //Handle different states of the fetchMovies action
     //extraReducers is a key from redux toolkit to handle async ops.
+
     builder
       .addCase(fetchMovies.pending, (state) => {
-        //When the request is pending, set status to 'loading'
         state.status = 'loading';
       })
       .addCase(fetchMovies.fulfilled, (state, action) => {
-        //When the request is successful, set status to 'succeeded' and update the movies array
         state.status = 'succeeded';
-        state.movies = action.payload; //Store the fetched movies in the state
+        state.movies = action.payload;
       })
       .addCase(fetchMovies.rejected, (state, action) => {
-        // When the request fails, set status to 'failed' and store the error message
         state.status = 'failed';
         state.error = action.error.message;
       })
@@ -81,3 +77,4 @@ const movieSlice = createSlice({
 //Export the reducer to include it in the store
 export const { setSelectedMovie } = movieSlice.actions;
 export default movieSlice.reducer;
+
