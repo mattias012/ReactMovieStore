@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchMovieById } from '../features/movieSlice'; 
+import { fetchMovieById, addMovieToCart } from '../features/movieSlice'; 
 import './styles/MovieDetails.css';
 
 const MovieDetails = () => {
@@ -10,15 +10,12 @@ const MovieDetails = () => {
   const dispatch = useDispatch();
   const movie = useSelector((state) => state.movies.selectedMovie); 
   const status = useSelector((state) => state.movies.status);
-  console.log("Movie details from Redux: ", movie);
 
   useEffect(() => {
     if (!movie || movie.imdbID !== imdbID) {
       dispatch(fetchMovieById(imdbID)); 
     }
   }, [imdbID, dispatch]);
-  console.log("Detailed Movie details from API: ", movie);
-
 
   if (!movie) {
     return <div>Movie not found.</div>; 
@@ -29,6 +26,10 @@ const MovieDetails = () => {
   const minutes = runtime !== "Unknown" ? runtime % 60 : "N/A";
 
   const genres = movie.Genre ? movie.Genre.split(', ') : ['Unknown Genre'];
+
+  const handleAddToCart = () => {
+    dispatch(addMovieToCart(movie));
+  };
 
   return (
     <div className="movie-details">
@@ -52,7 +53,7 @@ const MovieDetails = () => {
             {movie.imdbRating}
           </div>
           <span className="rating-label">Rating</span>
-          <button className="add-to-cart">
+          <button className="add-to-cart" onClick={handleAddToCart}>
             <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="cart icon" className="cart-icon" /> Add to cart
           </button>
         </div>

@@ -1,3 +1,4 @@
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -11,6 +12,7 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
   const response = await axios.get(`${baseUrl}&s=batman`);
   return response.data.Search; //Return the list of movies from the response
 });
+
 
 export const fetchMovieById = createAsyncThunk(
   'movies/fetchMovieById',
@@ -27,12 +29,14 @@ export const fetchMovieById = createAsyncThunk(
 );
 
 
+
 //Create a movie slice using createSlice
 //This will define our initial state and the reducers to handle state changes
 const movieSlice = createSlice({
   name: 'movies',
   initialState: {
     movies: [], //store movies here
+    cart: [],
     movieDetails: {}, // Cache for detailed data
     status: 'idle', //Status of the API request ('idle', 'loading', 'succeeded', 'failed')
     error: null, //In case of failure, stores error messages from api req.
@@ -42,20 +46,34 @@ const movieSlice = createSlice({
     setSelectedMovie: (state, action) => {
       state.selectedMovie = action.payload; 
     },
+    addMovieToCart: (state, action) => {
+      const exists = state.cart.find(movie => movie.imdbID === action.payload.imdbID);
+      if (!exists) {
+        state.cart.push(action.payload);
+      }
+    },
+    removeMovieFromCart: (state, action) => {
+      state.cart = state.cart.filter(movie => movie.imdbID !== action.payload.imdbID);
+    },
+    clearCart: (state) => {
+      state.cart = [];
+    },
   },
     extraReducers: (builder) => {
     //Handle different states of the fetchMovies action
     //extraReducers is a key from redux toolkit to handle async ops.
-
     builder
       .addCase(fetchMovies.pending, (state) => {
+        //When the request is pending, set status to 'loading'
         state.status = 'loading';
       })
       .addCase(fetchMovies.fulfilled, (state, action) => {
+        //When the request is successful, set status to 'succeeded' and update the movies array
         state.status = 'succeeded';
-        state.movies = action.payload;
+        state.movies = action.payload; //Store the fetched movies in the state
       })
       .addCase(fetchMovies.rejected, (state, action) => {
+        // When the request fails, set status to 'failed' and store the error message
         state.status = 'failed';
         state.error = action.error.message;
       })
@@ -75,6 +93,5 @@ const movieSlice = createSlice({
 });
 
 //Export the reducer to include it in the store
-export const { setSelectedMovie } = movieSlice.actions;
+export const { setSelectedMovie, addMovieToCart, removeMovieFromCart, clearCart  } = movieSlice.actions;
 export default movieSlice.reducer;
-
