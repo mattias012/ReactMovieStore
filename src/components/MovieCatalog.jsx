@@ -1,12 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux'; 
+import { useSelector } from 'react-redux'; 
 import { useNavigate } from 'react-router-dom'; 
-import { setSelectedMovie } from '../features/movieSlice';
 
 const MovieCatalog = ({ status, error }) => {
-  // Get movies from redux
+  // Hämta filmer från Redux
   const movies = useSelector((state) => state.movies.movies);
-
-  const dispatch = useDispatch();  
   const navigate = useNavigate();  
 
   const handleMovieClick = (movie) => {
@@ -20,17 +17,12 @@ const MovieCatalog = ({ status, error }) => {
 
       <ul>
         {movies && movies.length > 0 ? (
-         
           movies.map((movie, index) => (
-            <li key={index} onClick={() => handleMovieClick(movie)}>  
-
+            <li key={movie.imdbID} onClick={() => handleMovieClick(movie)}>  
               <h2>{movie.Title}</h2>
               <p>Year: {movie.Year}</p>
               <p>Type: {movie.Type}</p>
               <img src={movie.Poster} alt={movie.Title} />
-              <button onClick={() => dispatch(addMovieToCart(movie))}>
-                Add to Cart
-              </button>
             </li>
           ))
         ) : (
