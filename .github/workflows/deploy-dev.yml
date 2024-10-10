@@ -8,10 +8,12 @@ on:
     types:
       - closed
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     if: github.event.pull_request.merged == true
 
     steps:
@@ -21,18 +23,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Ändra från '16' till '20' för att använda den senaste versionen
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Set homepage for dev
-        run: |
-          echo '"homepage": "https://mattias012.github.io/ReactMovieStore/dev"' > homepage.json
-          jq -s '.[0] * .[1]' package.json homepage.json > temp.json && mv temp.json package.json
-
       - name: Build the project
         run: npm run build
+
+      - name: List dist directory after build
+        run: ls -R ./dist
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
