@@ -108,7 +108,7 @@
     background-color: #7299C6;
     border-radius: 35px;
     padding: 5px 10px;
-    margin-right: 10px;
+    margin-right: 5px;
     margin-bottom: 10px;
     font-size: 0.8em;
     color: #ffffff;
@@ -127,11 +127,12 @@ p {
     font-size: 1em;
 }
 
+
+  
 .movie-credits {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
-    margin-right: 300px;
     
 }
 

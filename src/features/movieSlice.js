@@ -14,11 +14,20 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
   return response.data.Search; //Return the list of movies from the response
 });
 
-export const fetchMovieById = createAsyncThunk('movies/fetchMovieById', async (imdbID) => {
-  const response = await axios.get(`${baseUrl}&i=${imdbID}&plot=full`); 
-  console.log("API Response for fetchMovieById: ", response.data);
-  return response.data;
-});
+export const fetchMovieById = createAsyncThunk(
+  'movies/fetchMovieById',
+  async (imdbID, { getState }) => {
+    const state = getState();
+    const cachedMovie = state.movies.movieDetails[imdbID];
+    if (cachedMovie) {
+      return cachedMovie;
+    } else {
+      const response = await axios.get(`${baseUrl}&i=${imdbID}&plot=full`);
+      return response.data;
+    }
+  }
+);
+
 
 //Create a movie slice using createSlice
 //This will define our initial state and the reducers to handle state changes
@@ -26,6 +35,7 @@ const movieSlice = createSlice({
   name: 'movies',
   initialState: {
     movies: [], //store movies here
+    movieDetails: {}, // Cache for detailed data
     status: 'idle', //Status of the API request ('idle', 'loading', 'succeeded', 'failed')
     error: null, //In case of failure, stores error messages from api req.
     selectedMovie: null,  // Add selectedMovie to the initial state
@@ -59,6 +69,7 @@ const movieSlice = createSlice({
       .addCase(fetchMovieById.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.selectedMovie = action.payload; 
+        state.movieDetails[action.payload.imdbID] = action.payload;
       })
       .addCase(fetchMovieById.rejected, (state, action) => {
         state.status = 'failed';

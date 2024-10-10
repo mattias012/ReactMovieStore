@@ -16,7 +16,7 @@ const MovieDetails = () => {
     if (!movie || movie.imdbID !== imdbID) {
       dispatch(fetchMovieById(imdbID)); 
     }
-  }, [imdbID, movie, dispatch]);
+  }, [imdbID, dispatch]);
   console.log("Detailed Movie details from API: ", movie);
 
 
@@ -48,10 +48,10 @@ const MovieDetails = () => {
         </p>
         <p className="movie-price">Price: $15.99 USD</p>
         <div className="movie-rating-container">
-          {/*<div className="movie-rating">
+          <div className="movie-rating">
             {movie.imdbRating}
           </div>
-          <span className="rating-label">Rating</span>*/}
+          <span className="rating-label">Rating</span>
           <button className="add-to-cart">
             <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="cart icon" className="cart-icon" /> Add to cart
           </button>
@@ -63,7 +63,7 @@ const MovieDetails = () => {
         </div>
         <h2>Overview</h2>
         <p>{movie.Plot}</p>
-        {/*<div className="movie-credits">
+        <div className="movie-credits">
           <div className="credit-item">
             <p><strong>{movie.Director}</strong></p>
             <p className="role">Director</p>
@@ -72,7 +72,7 @@ const MovieDetails = () => {
             <p><strong>{movie.Writer}</strong></p>
             <p className="role">Writer</p>
           </div>
-        </div>*/}
+        </div>
         
       </div>
     </div>
