@@ -1,42 +1,62 @@
 # .github/workflows/deploy-dev.yml
 name: Deploy to GitHub Pages (Dev)
 
+# Workflowet körs när en pull request mergas till `dev`
 on:
   pull_request:
     branches:
       - dev
     types:
-      - closed
+      - closed  # Trigga workflowet när en PR stängs (vilket inkluderar merges)
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    # Se till att jobbet endast körs om PR:en är mergad och inte bara stängd
     if: github.event.pull_request.merged == true
 
     steps:
+      # Steg 1: Checka ut koden från repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Steg 2: Installera Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Ändra från '16' till '20' för att använda den senaste versionen
+          node-version: '20'
 
+      # Steg 3: Installera projektets beroenden
       - name: Install dependencies
         run: npm install
 
+      # Steg 4: Verifiera package.json innan vi ändrar `homepage`
+      - name: Show package.json
+        run: cat package.json
+
+      # Steg 5: Sätt dynamiskt `homepage` för dev
       - name: Set homepage for dev
         run: |
           echo '"homepage": "https://mattias012.github.io/ReactMovieStore/dev"' > homepage.json
           jq -s '.[0] * .[1]' package.json homepage.json > temp.json && mv temp.json package.json
 
+      # Steg 6: Verifiera att `homepage` har ändrats korrekt
+      - name: Verify package.json after homepage change
+        run: cat package.json
+
+      # Steg 7: Bygg projektet
       - name: Build the project
         run: npm run build
 
+      # Steg 8: Verifiera att `dist`-mappen har skapats
+      - name: List dist directory after build
+        run: ls -R ./dist || echo "dist directory does not exist"
+
+      # Steg 9: Deploya till GitHub Pages på `gh-pages-dev`
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          publish_branch: gh-pages-dev
+          publish_branch: gh-pages-dev  # Deploya till en separat gren för dev
