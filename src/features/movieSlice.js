@@ -1,79 +1,84 @@
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-//Define the base URL for the OMDB API
-const apiKey = '8eec2a77';
-const baseUrl = `https://www.omdbapi.com/?apikey=${apiKey}`;
-// Define an async thunk for fetching movies from the API
-// createAsyncThunk allows us to create asynchronous Redux actions more easy
+// Define the base URL for the TMDb API
+const tmdbApiKey = 'a986d7821a9ea8443749e7e796735aa3'; // Replace with your actual API key
+const tmdbBaseUrl = 'https://api.themoviedb.org/3';
+
+// Async thunk for fetching movies from TMDb
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
-  //Axios GET request to fetch movies from the API
-  const response = await axios.get(`${baseUrl}&s=batman`);
-  return response.data.Search; //Return the list of movies from the response
+  const response = await axios.get(`${tmdbBaseUrl}/search/movie`, {
+    params: {
+      api_key: tmdbApiKey,
+      query: 'batman', // You can make this dynamic later
+    },
+  });
+
+  // Log the raw response data
+  console.log('TMDb fetchMovies response:', response.data);
+
+  return response.data.results;
 });
 
-
+// Async thunk for fetching movie details by ID from TMDb
 export const fetchMovieById = createAsyncThunk(
   'movies/fetchMovieById',
-  async (imdbID, { getState }) => {
+  async (movieId, { getState }) => {
     const state = getState();
-    const cachedMovie = state.movies.movieDetails[imdbID];
+    const cachedMovie = state.movies.movieDetails[movieId];
     if (cachedMovie) {
       return cachedMovie;
     } else {
-      const response = await axios.get(`${baseUrl}&i=${imdbID}&plot=full`);
+      const response = await axios.get(`${tmdbBaseUrl}/movie/${movieId}`, {
+        params: {
+          api_key: tmdbApiKey,
+          append_to_response: 'credits,images,videos,reviews,keywords,similar,recommendations,release_dates,external_ids,translations',
+        },
+      });
+      // Log the full response data
+      console.log(`TMDb fetchMovieById response for movieId ${movieId}:`, response.data);
       return response.data;
     }
   }
 );
 
 
-
-//Create a movie slice using createSlice
-//This will define our initial state and the reducers to handle state changes
+// Create a movie slice using createSlice
 const movieSlice = createSlice({
   name: 'movies',
   initialState: {
-    movies: [], //store movies here
+    movies: [], // Store movies here
     cart: [],
     movieDetails: {}, // Cache for detailed data
-    status: 'idle', //Status of the API request ('idle', 'loading', 'succeeded', 'failed')
-    error: null, //In case of failure, stores error messages from api req.
-    selectedMovie: null,  // Add selectedMovie to the initial state
+    status: 'idle', // Status of the API request ('idle', 'loading', 'succeeded', 'failed')
+    error: null, // In case of failure, stores error messages from API request
+    selectedMovie: null, // Add selectedMovie to the initial state
   },
   reducers: {
-    setSelectedMovie: (state, action) => {
-      state.selectedMovie = action.payload; 
-    },
     addMovieToCart: (state, action) => {
-      const exists = state.cart.find(movie => movie.imdbID === action.payload.imdbID);
+      const exists = state.cart.find(movie => movie.id === action.payload.id);
       if (!exists) {
         state.cart.push(action.payload);
       }
     },
     removeMovieFromCart: (state, action) => {
-      state.cart = state.cart.filter(movie => movie.imdbID !== action.payload.imdbID);
+      state.cart = state.cart.filter(movie => movie.id !== action.payload.id);
     },
     clearCart: (state) => {
       state.cart = [];
     },
   },
-    extraReducers: (builder) => {
-    //Handle different states of the fetchMovies action
-    //extraReducers is a key from redux toolkit to handle async ops.
+  extraReducers: (builder) => {
+    // Handle different states of the fetchMovies action
     builder
       .addCase(fetchMovies.pending, (state) => {
-        //When the request is pending, set status to 'loading'
         state.status = 'loading';
       })
       .addCase(fetchMovies.fulfilled, (state, action) => {
-        //When the request is successful, set status to 'succeeded' and update the movies array
         state.status = 'succeeded';
-        state.movies = action.payload; //Store the fetched movies in the state
+        state.movies = action.payload;
       })
       .addCase(fetchMovies.rejected, (state, action) => {
-        // When the request fails, set status to 'failed' and store the error message
         state.status = 'failed';
         state.error = action.error.message;
       })
@@ -82,8 +87,8 @@ const movieSlice = createSlice({
       })
       .addCase(fetchMovieById.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.selectedMovie = action.payload; 
-        state.movieDetails[action.payload.imdbID] = action.payload;
+        state.selectedMovie = action.payload;
+        state.movieDetails[action.payload.id] = action.payload;
       })
       .addCase(fetchMovieById.rejected, (state, action) => {
         state.status = 'failed';
@@ -92,6 +97,6 @@ const movieSlice = createSlice({
   },
 });
 
-//Export the reducer to include it in the store
-export const { setSelectedMovie, addMovieToCart, removeMovieFromCart, clearCart  } = movieSlice.actions;
+// Export the reducer to include it in the store
+export const { addMovieToCart, removeMovieFromCart, clearCart } = movieSlice.actions;
 export default movieSlice.reducer;
