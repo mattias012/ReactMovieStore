@@ -1,11 +1,16 @@
 .search-bar {
-    padding: 20px;
+    padding: 150px;
     text-align: center;
     color: rgba(255, 255, 255, 0.947);
     font-weight: bold;
     text-shadow: black 2px 2px;
     font-size: 2em;  
   }  
+  .search-bar p {
+    color: rgba(255, 255, 255, 0.947);
+    font-weight: bold;
+    text-shadow: black 2px 2px; 
+  }
   
   .search-input input {
     padding: 14px;

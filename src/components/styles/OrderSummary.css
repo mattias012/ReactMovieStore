@@ -1,0 +1,57 @@
+.order-summary {
+    background-color: #9eb7db; 
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px; 
+    margin: 0 auto; 
+    font-family: 'Arial', sans-serif;
+    color: white;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .cost-section, .shipping-section, .to-pay-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  hr {
+    border: 1px solid rgba(255, 255, 255, 0.5); 
+    margin: 20px 0;
+  }
+  
+  .to-pay-section {
+    background-color: #7299C6; 
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .questions-section {
+    margin-top: 20px;
+  }
+  
+  .questions-section p {
+    margin: 5px 0;
+  }
+  
+  .pay-button {
+    background-color: #7299C6; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .pay-button:hover {
+    background-color: #5a87b1; 
+  }
+  
