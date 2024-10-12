@@ -29,10 +29,7 @@ const MovieCatalog = ({ status, error }) => {
             <li key={movie.imdbID} onClick={() => handleMovieClick(movie)}>
               <h2>{movie.Title}</h2>
               <p>Year: {movie.Year}</p>
-              <p>Type: {movie.Type}</p>
               <img src={movie.Poster} alt={movie.Title} />
-              <h2>{movie.Title}</h2>
-              <p>{movie.Year}</p>
             </li>
           ))
         ) : (
