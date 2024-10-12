@@ -5,6 +5,6 @@
 
 Made with React JS, Router and Redux.
 
-Github pages: 
+Github pages: https://github.com/mattias012/ReactMovieStore
 
 
