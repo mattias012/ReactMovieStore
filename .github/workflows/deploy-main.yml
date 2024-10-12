@@ -1,41 +1,46 @@
 # .github/workflows/deploy-main.yml
 name: Deploy to GitHub Pages (Main)
 
+# Körs endast när en pull request mergas till `main`
 on:
   pull_request:
     branches:
       - main
     types:
-      - closed
+      - closed  # Trigga workflowet när en PR är stängd (vilket inkluderar merges)
 
 permissions:
-  contents: write
+  contents: write  # Behövs för att skriva till gh-pages branchen
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+
+    if: github.event.pull_request.merged == true  # Kör endast om PR:en verkligen mergades
 
     steps:
+      # Steg 1: Checka ut koden från repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Steg 2: Installera Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20'  # Använd Node.js version 20, som är kompatibel med GitHub Actions
 
+      # Steg 3: Installera projektets beroenden
       - name: Install dependencies
         run: npm install
 
+      # Steg 4: Bygg projektet med den uppdaterade `package.json`
       - name: Build the project
         run: npm run build
 
-      - name: List dist directory after build
-        run: ls -R ./dist
-
+      # Steg 5: Deploya byggfilerna till GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./dist  # Ange den rätta byggmappen (som är "dist" för Vite)
+          publish_branch: gh-pages  # Använd gh-pages branchen för deployment
