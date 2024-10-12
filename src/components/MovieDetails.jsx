@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState, useRef } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'; 
 import { fetchMovieById, addMovieToCart } from '../features/movieSlice'; 
@@ -11,8 +11,8 @@ const MovieDetails = () => {
   const movie = useSelector((state) => state.movies.selectedMovie); 
   const status = useSelector((state) => state.movies.status);
 
-  // State to track which reviews are expanded
-  const [expandedReviews, setExpandedReviews] = useState({});
+  // Ref for the scrollable cast container
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     if (!movie || movie.id !== Number(id)) {
@@ -77,7 +77,19 @@ const MovieDetails = () => {
   };
 
   // Extract and display cast (actors)
-  const cast = movie.credits && movie.credits.cast ? movie.credits.cast.slice(0, 4) : []; // Limit to 4 actors
+  const cast = movie.credits && movie.credits.cast ? movie.credits.cast.slice(0, 5) : []; 
+
+  const logos = movie.images?.logos ? movie.images.logos.slice(0, 1) : [];
+
+  const recommendations = movie.recommendations?.results || [];
+
+  // Scroll the cast container left or right
+  const handleScroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 200; // Amount of pixels to scroll
+      scrollContainerRef.current.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="movie-details-container">
@@ -93,23 +105,60 @@ const MovieDetails = () => {
         <button className="back-button" onClick={() => navigate(-1)}>
           Back
         </button>
-  
+
         {/* Left column for movie details */}
         <div className="movie-info">
           <h1>{movie.title}</h1>
           <p className="movie-meta">
             <span>{movie.release_date}</span> • <span>{hours}h {minutes}m</span>
           </p>
+
+          {/* Display Budget */}
+          {movie.budget && (
+            <p className="movie-budget">Budget: ${movie.budget.toLocaleString()} USD</p>
+          )}
+
+          {/* Display Popularity */}
+          {movie.popularity && (
+            <p className="movie-popularity">Popularity: {movie.popularity}</p>
+          )}
+
+          {/* Display Production Companies */}
+          {movie.production_companies && movie.production_companies.length > 0 && (
+            <div className="movie-production-companies">
+              <ul>
+                {movie.production_companies.map((company) => (
+                  <li key={company.id}>
+                    {company.logo_path ? (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
+                        alt={company.name}
+                        className="company-logo"
+                      />
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Display Homepage */}
+          {movie.homepage && (
+            <p className="movie-homepage">
+               <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a>
+            </p>
+          )}
+
           <p className="movie-price">Price: $15.99 USD</p>
           <div className="movie-rating-container">
             <div className="movie-rating">
               {movie.vote_average}
             </div>
-            <span className="rating-label">Rating</span>
             <button className="add-to-cart" onClick={handleAddToCart}>
               <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="cart icon" className="cart-icon" /> Add to cart
             </button>
           </div>
+
           <div className="movie-genre">
             {genres.map((g, index) => (
               <span key={index} className="genre-tag">{g}</span>
@@ -118,71 +167,80 @@ const MovieDetails = () => {
           <div className="movie-overview">
             <p>{movie.overview}</p>
           </div>
-  
+
           {/* Display Crew (Director and Writer) and Cast */}
           <div className="movie-cast">
             <h2>Director, Writer & Cast</h2>
-            <ul>
-              {/* Director */}
-              {director && (
-                <li key="director" className="actor-item">
-                  <img
-                    src={directorImage || 'https://via.placeholder.com/200x300?text=No+Image'}
-                    alt={director}
-                    className="actor-image"
-                  />
-                  <div className="actor-details">
-                    <strong>{director}</strong> <em>(Director)</em>
-                  </div>
-                </li>
-              )}
 
-              {/* Writer */}
-              {writer && (
-                <li key="writer" className="actor-item">
-                  <img
-                    src={writerImage || 'https://via.placeholder.com/200x300?text=No+Image'}
-                    alt={writer}
-                    className="actor-image"
-                  />
-                  <div className="actor-details">
-                    <strong>{writer}</strong> <em>(Writer)</em>
-                  </div>
-                </li>
-              )}
+            <div className="cast-carousel-container">
+              <button className="carousel-arrow left" onClick={() => handleScroll('left')}>
+                &#8249; {/* Left arrow symbol */}
+              </button>
 
-              {/* Cast */}
-              {cast.map((actor) => (
-                <li key={actor.id} className="actor-item">
-                  <img
-                    src={actor.profile_path
-                      ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
-                      : 'https://via.placeholder.com/200x300?text=No+Image'}
-                    alt={actor.name}
-                    className="actor-image"
-                  />
-                  <div className="actor-details">
-                    <strong>{actor.name}</strong> as <em>{actor.character || 'Unknown Character'}</em>
+              <div className="cast-carousel" ref={scrollContainerRef}>
+                {/* Director */}
+                {director && (
+                  <div key="director" className="actor-item">
+                    <img
+                      src={directorImage || 'https://via.placeholder.com/200x300?text=No+Image'}
+                      alt={director}
+                      className="actor-image"
+                    />
+                    <div className="actor-details">
+                      <strong>{director}</strong> <em>(Director)</em>
+                    </div>
                   </div>
-                </li>
-              ))}
-            </ul>
+                )}
+
+                {/* Writer */}
+                {writer && (
+                  <div key="writer" className="actor-item">
+                    <img
+                      src={writerImage || 'https://via.placeholder.com/200x300?text=No+Image'}
+                      alt={writer}
+                      className="actor-image"
+                    />
+                    <div className="actor-details">
+                      <strong>{writer}</strong> <em>(Writer)</em>
+                    </div>
+                  </div>
+                )}
+
+                {/* Cast */}
+                {cast.map((actor) => (
+                  <div key={actor.id} className="actor-item">
+                    <img
+                      src={actor.profile_path
+                        ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
+                        : 'https://via.placeholder.com/200x300?text=No+Image'}
+                      alt={actor.name}
+                      className="actor-image"
+                    />
+                    <div className="actor-details">
+                      <strong>{actor.name}</strong> as <em>{actor.character || 'Unknown Character'}</em>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button className="carousel-arrow right" onClick={() => handleScroll('right')}>
+                &#8250; {/* Right arrow symbol */}
+              </button>
+            </div>
           </div>
         </div>
-  
+
         {/* Right column for trailer and poster */}
         <div className="movie-poster-and-trailer">
           
           {/* Display one trailer */}
           {movie.videos && movie.videos.results.length > 0 && (
             <div className="movie-trailer">
-              <h2>Trailer</h2>
               {movie.videos.results
                 .filter((video) => video.site === 'YouTube')
                 .slice(0, 1)
                 .map((video) => (
                   <div key={video.id}>
-                    <p>{video.name}</p>
                     <iframe
                       width="560"
                       height="315"
@@ -195,7 +253,7 @@ const MovieDetails = () => {
                 ))}
             </div>
           )}
-  
+
           {/* Movie Poster */}
           <div className="movie-poster">
             {movie.poster_path ? (
@@ -207,6 +265,39 @@ const MovieDetails = () => {
               <div>No poster available</div>
             )}
           </div>
+          {/* Display Movie Logos */}
+          {logos.length > 0 && (
+            <div className="movie-logos">
+              <div className="logos-container">
+                {logos.map((logo, index) => (
+                  <img
+                    key={index}
+                    src={`https://image.tmdb.org/t/p/original${logo.file_path}`}
+                    alt="Movie Logo"
+                    className="movie-logo"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {recommendations.length > 0 && (
+          <div className="movie-recommendations">
+            <h2>Recommended Movies</h2>
+            <div className="recommendations-container">
+              {recommendations.slice(0, 5).map((recommendation) => (
+                <div key={recommendation.id} className="recommendation-item">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${recommendation.backdrop_path}`}
+                    alt={recommendation.title}
+                  />
+                  <p>{recommendation.title}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         </div>
       </div>
     </div>

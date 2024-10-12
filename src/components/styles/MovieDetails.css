@@ -192,26 +192,76 @@ p {
     flex-wrap: wrap; /* Allows items to wrap to the next line if needed */
 }
 
-.actor-item {
+/* Cast carousel */
+.cast-carousel-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin: 15px;
-    width: 120px;
-    text-align: center;
+    position: relative;
+    width: 580px;
+    
+  }
+  
+  .cast-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 580px;
+    gap: 20px;
+    padding: 20px 0;
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    scrollbar-width: none; /* For Firefox */
+  }
+  
+  .carousel-arrow {
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease, color 0.2s ease; /* Add smooth transitions for hover and press */
+    color: #333; /* Default arrow color */
 }
 
-.actor-image {
-    width: 100px;
-    height: auto;
+.carousel-arrow:hover {
+    transform: scale(1.2); /* Slightly increase the size on hover */
+    color: #7299C6; /* Change arrow color on hover */
+}
+
+.carousel-arrow:active {
+    transform: scale(1.1); /* Slightly smaller when pressed */
+    color: #48648a; /* Darker shade for pressed state */
+}
+  
+  .carousel-arrow.left {
+    margin-right: 10px;
+  }
+  
+  .carousel-arrow.right {
+    margin-left: 10px;
+  }
+  
+  .actor-item {
+    min-width: 150px;
+    text-align: center;
+  }
+  
+  .actor-image {
     border-radius: 10px;
-    margin-bottom: 10px;
+    width: 120px;
+    height: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
 }
 
-.actor-details {
-    font-size: 14px;
-    text-align: center;
+.actor-image:hover {
+    transform: scale(1.05); /* Slightly increase the size on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Add a subtle shadow effect */
 }
+  
+  .actor-details {
+    margin-top: 10px;
+  }
+  
 
 .crew-image {
     width: 100px;
@@ -262,6 +312,47 @@ p {
     border-radius: 8px;
     border: none;
 }
+
+
+.movie-logo {
+    width: 80px; /* Smaller width */
+    height: auto;
+    object-fit: contain; /* Ensures the logo maintains its aspect ratio */
+    margin: 10px; /* Optional: add margin for spacing */
+}
+
+
+.movie-recommendations {
+    margin-top: 40px;
+  }
+  
+  .recommendations-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+  }
+  
+  .recommendation-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .recommendation-item img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .recommendation-item p{
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: center;
+    color: #333;
+  }
+  
+
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
