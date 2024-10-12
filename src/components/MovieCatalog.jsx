@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
+import './styles/MovieCatalog.css';
 import { useNavigate } from 'react-router-dom';
+
 
 const MovieCatalog = ({ status, error }) => {
   //Get movies and search from redux here
@@ -29,6 +31,8 @@ const MovieCatalog = ({ status, error }) => {
               <p>Year: {movie.Year}</p>
               <p>Type: {movie.Type}</p>
               <img src={movie.Poster} alt={movie.Title} />
+              <h2>{movie.Title}</h2>
+              <p>{movie.Year}</p>
             </li>
           ))
         ) : (
