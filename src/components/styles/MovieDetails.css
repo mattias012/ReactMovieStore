@@ -1,17 +1,56 @@
+/* Full-width container that will be scrollable */
+.movie-details-container {
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+    padding-top: 100px; /* Add space for header */
+    position: relative; /* Allow positioning of the background and content */
+    
+}
 
-  
-.movie-details {
-    display: flex;
-    padding: 20px;
-    background-color: #f9f9f9;
+/* Background image that covers full width and half the viewport height */
+.movie-backdrop {
+    position: absolute;
+    top: 93px;
+    left: 0;
+    width: 100vw;
+    height: 20vh; /* Covers half the viewport height */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3; /* Apply high transparency */
+}
+
+/* Fade effect at the bottom of the backdrop */
+.backdrop-fade {
+    position: absolute;
+    bottom: 0;
     width: 100%;
-    height: calc(100vh - 130px); /* Assuming the header is 70px high */
-    margin-top: 100px; /* Push the details below the header */
-    flex-grow: 1;
-    overflow-y: auto; /* Allow scrolling if the content exceeds screen height */
+    height: 150px; /* Adjust the height to make the fade-out longer */
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%, /* Start with no color (fully transparent) */
+        rgba(255, 255, 255, 0.5) 30%, /* Very subtle opacity at 30% height */
+        rgba(255, 255, 255, 0.842) 60%, /* Slightly more opaque at 60% */
+        rgb(255, 255, 255) 100% /* End with light opacity at the bottom */
+    );
 }
 
 
+/* The rest of the content */
+.movie-details {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Two columns: left for details, right for poster and trailer */
+    gap: 20px; /* Space between columns */
+    width: 100%;
+    max-width: 1200px; /* Limit the maximum width of the content */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Add padding inside the main content */
+    box-sizing: border-box; /* Ensure padding doesn't affect overall width */
+    z-index: 3; /* Make sure it stays above the background and fade */
+    position: relative;
+}
 
 .back-button {
     background-color: #f0f0f0;
@@ -19,26 +58,46 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    position: absolute; 
-    top: 600px; 
-    left: 200px; 
+    position: fixed; 
+    top: 120px; 
+    left: 20px; 
+    z-index: 1000; 
 }
 
-.movie-poster img {
-    border-radius: 8px;
-    width: 220px;
-    height: 350px;
-    object-fit: cover;
+.movie-overview {
+    background-color: rgba(0, 0, 0, 0.05); /* Subtle background */
+    padding: 15px; /* Add padding for spacing */
+    border-radius: 10px; /* Rounded corners */
+    margin-top: 20px; /* Space between other sections */
+    font-size: 1em;
+    line-height: 1.5;
+    color: #333; /* Text color for readability */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow for depth */
+    width: 500px;
+    
 }
+
 
 .movie-info {
-    margin-left: 40px;
     display: flex;
     flex-direction: column;
+    padding: 20px; /* Space inside the left column */
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+}
+
+/* Right column for poster and trailer */
+.movie-poster-and-trailer {
+    display: flex;
+    flex-direction: column; /* Stack trailer on top of the poster */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px; /* Space inside the right column */
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+    
 }
 
 .movie-info h1 {
-    font-size: 1.8em;
+    font-size: 2em;
     margin: 0;
     color: #000000;
 }
@@ -46,13 +105,13 @@
 .movie-meta {
     font-size: 0.9em;
     color: #777;
-    margin: 2px 0;
+    margin: 10px 0;
 }
 
 .movie-price {
     font-size: 1.2em;
     color: #000;
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 .movie-rating-container {
@@ -78,17 +137,15 @@
 .rating-label {
     font-size: 1em;
     color: #000000; 
-    margin-right: 70px; 
-    
 }
 
 .cart-icon {
     width: 20px;
     height: 20px;
     margin-right: 8px; 
-  }
+}
 
-  .add-to-cart {
+.add-to-cart {
     display: flex;
     align-items: center;  
     padding: 5px 15px;
@@ -99,7 +156,6 @@
     border-radius: 35px;
     cursor: pointer;
 }
-
 
 .movie-genre {
     display: flex;
@@ -119,9 +175,7 @@
 }
 
 h2 {
-    margin-top: 0px;
-    margin-bottom: 0px; 
-    font-size: 1.3em;
+    font-size: 1.5em;
     color: #000000;
 }
 
@@ -131,34 +185,96 @@ p {
     font-size: 1em;
 }
 
-  
-
 .movie-cast ul {
     list-style-type: none;
     padding: 0;
     display: flex;
     flex-wrap: wrap; /* Allows items to wrap to the next line if needed */
-  }
-  
-  .actor-item {
+}
+
+.actor-item {
     display: flex;
-    flex-direction: column; /* Stack image and details vertically within each item */
+    flex-direction: column;
     align-items: center;
     margin: 15px;
-    width: 120px; /* You can adjust this width as needed */
+    width: 120px;
     text-align: center;
-  }
-  
-  .actor-image {
-    width: 100px; /* Adjust the size of the actor images */
+}
+
+.actor-image {
+    width: 100px;
     height: auto;
     border-radius: 10px;
     margin-bottom: 10px;
-  }
-  
-  .actor-details {
+}
+
+.actor-details {
     font-size: 14px;
     text-align: center;
-  }
-  
-  
+}
+
+.crew-image {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+
+
+/* Right column for poster and trailer */
+.movie-poster-and-trailer {
+    display: flex;
+    flex-direction: column; /* Stack trailer on top of the poster */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px; /* Space inside the right column */
+    box-sizing: border-box; /* Ensure padding doesn't affect the width */
+}
+
+.movie-poster {
+    margin-bottom: 20px;
+}
+
+/* Movie Poster with strong shadow */
+.movie-poster img {
+    border-radius: 8px;
+    width: 100%;
+    max-width: 300px; /* Adjust poster size */
+    height: auto;
+    object-fit: cover;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2); /* Add shadow for strong pop effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add smooth transitions for hover effect */
+}
+
+/* Hover effect to enhance pop */
+.movie-poster img:hover {
+    transform: scale(1.05); /* Slightly scale up on hover to create a 'pop' effect */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+}
+
+
+/* Trailer section */
+.movie-trailer iframe {
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    border-radius: 8px;
+    border: none;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .movie-details {
+        grid-template-columns: 1fr; /* Change to single column on smaller screens */
+    }
+
+    .movie-poster img {
+        max-width: 100%; /* Make poster responsive */
+    }
+
+    .movie-trailer iframe {
+        max-width: 100%; /* Make trailer responsive */
+        height: auto;
+    }
+}
