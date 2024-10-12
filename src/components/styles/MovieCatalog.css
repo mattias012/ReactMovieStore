@@ -1,6 +1,53 @@
-.movie-section {
+.movie-catalog {
+  width: 100%; /* Ensure it uses full width */
+  max-width: 1200px; /* Optional max width */
+  margin: 0 auto; /* Centering the catalog */
+  padding: 20px;
+}
 
-    padding: 20px;
+.movie-catalog ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); /* Slightly lower the min width */
+  gap: 20px; /* Spacing between grid items */
+  list-style: none;
+  padding: 0;
+}
+
+.movie-catalog li {
+  overflow: hidden;
+  text-align: center;
+  padding: 10px;
+  /* background-color: #f9f9f9; Removed the background color */
+}
+
+.movie-catalog img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+  border-radius: 10px; /* Rounded corners for the images */
+}
+
+.movie-catalog h2 {
+  font-size: 18px;
+  margin: 5px 0;
+  font-weight: bold;
+  text-align: left;
+}
+
+.movie-catalog p {
+  font-size: 14px;
+  margin: 5px 0;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .movie-catalog ul {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Adjust for smaller screens */
   }
+}
 
-  
+@media (max-width: 500px) {
+  .movie-catalog ul {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust for very small screens */
+  }
+}
