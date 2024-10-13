@@ -5,10 +5,10 @@ const tmdbApiKey = 'a986d7821a9ea8443749e7e796735aa3';
 const tmdbBaseUrl = 'https://api.themoviedb.org/3';
 
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
-  const response = await axios.get(`${tmdbBaseUrl}/search/movie`, {
+  const response = await axios.get(`${tmdbBaseUrl}/discover/movie`, {
     params: {
       api_key: tmdbApiKey,
-      query: 'batman', 
+      with_keywords: '9715', 
     },
   });
   return response.data.results;

@@ -19,7 +19,6 @@ const MovieDetails = () => {
     }
   }, [id, dispatch, movie]);
 
-
   if (status === 'loading') {
     return <div>Loading movie details...</div>;
   }
@@ -38,16 +37,15 @@ const MovieDetails = () => {
 
   const genres = movie.genres ? movie.genres.map((g) => g.name) : ['Unknown Genre'];
 
-
   let director = 'Unknown Director';
   let directorImage = null;
   let writer = 'Unknown Writer';
   let writerImage = null;
 
-  if (movie.credits && movie.credits.crew) {
+  if (movie.credits?.crew) {
     const crew = movie.credits.crew;
     const directorData = crew.find(member => member.job === 'Director');
-    const writerData = crew.find(member => member.job === 'Writer' || member.job === 'Screenplay' || member.job === 'Author');
+    const writerData = crew.find(member => ['Writer', 'Screenplay', 'Author'].includes(member.job));
 
     if (directorData) {
       director = directorData.name;
@@ -68,10 +66,9 @@ const MovieDetails = () => {
     dispatch(addMovieToCart(movie));
   };
 
-  const cast = movie.credits && movie.credits.cast ? movie.credits.cast.slice(0, 10) : []; 
+  const cast = movie.credits?.cast?.slice(0, 10) || []; 
 
-  const logos = movie.images?.logos ? movie.images.logos.slice(0, 1) : [];
-
+  const logos = movie.images?.logos?.slice(0, 1) || [];
 
   const handleScroll = (direction) => {
     if (scrollContainerRef.current) {
@@ -98,13 +95,13 @@ const MovieDetails = () => {
           <ul>
             {movie.production_companies.map((company) => (
               <li key={company.id}>
-                {company.logo_path ? (
+                {company.logo_path && (
                   <img
                     src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
                     alt={company.name}
                     className="company-logo"
                   />
-                ) : null}
+                )}
               </li>
             ))}
           </ul>
