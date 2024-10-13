@@ -1,18 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const tmdbApiKey = 'a986d7821a9ea8443749e7e796735aa3'; 
+const tmdbApiKey = 'a986d7821a9ea8443749e7e796735aa3'; // Replace with your actual TMDB API key
 const tmdbBaseUrl = 'https://api.themoviedb.org/3';
 
+// Fetch superhero movies using the Discover endpoint
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
   const response = await axios.get(`${tmdbBaseUrl}/discover/movie`, {
     params: {
       api_key: tmdbApiKey,
-      with_keywords: '9715', 
+      with_keywords: '9715', // Keyword ID for "superhero"
     },
   });
   return response.data.results;
-
+});
 
 export const fetchMovieById = createAsyncThunk(
   'movies/fetchMovieById',
@@ -25,7 +26,8 @@ export const fetchMovieById = createAsyncThunk(
       const response = await axios.get(`${tmdbBaseUrl}/movie/${movieId}`, {
         params: {
           api_key: tmdbApiKey,
-          append_to_response: 'credits,images,videos,reviews,keywords,similar,recommendations,release_dates,external_ids,translations',
+          append_to_response:
+            'credits,images,videos,reviews,keywords,similar,recommendations,release_dates,external_ids,translations',
         },
       });
       return response.data;
@@ -33,42 +35,38 @@ export const fetchMovieById = createAsyncThunk(
   }
 );
 
-// Create a movie slice using createSlice
 const movieSlice = createSlice({
   name: 'movies',
   initialState: {
-    movies: [], // Store movies here
+    movies: [],
     cart: [],
-    movieDetails: {}, // Cache for detailed data
-    status: 'idle', // Status of the API request ('idle', 'loading', 'succeeded', 'failed')
-    error: null, // In case of failure, stores error messages from API request
-    selectedMovie: null, // Add selectedMovie to the initial state
-  },
-  reducers: {
-    searchTerm: '',  // Add searchTerm to the state
+    movieDetails: {},
+    status: 'idle',
+    error: null,
+    selectedMovie: null,
+    searchTerm: '', // Moved searchTerm here
   },
   reducers: {
     setSelectedMovie: (state, action) => {
       state.selectedMovie = action.payload;
     },
     setSearchTerm: (state, action) => {
-      state.searchTerm = action.payload;  // Update search term in state
+      state.searchTerm = action.payload;
     },
     addMovieToCart: (state, action) => {
-      const exists = state.cart.find(movie => movie.id === action.payload.id);
+      const exists = state.cart.find((movie) => movie.id === action.payload.id);
       if (!exists) {
         state.cart.push(action.payload);
       }
     },
     removeMovieFromCart: (state, action) => {
-      state.cart = state.cart.filter(movie => movie.id !== action.payload.id);
+      state.cart = state.cart.filter((movie) => movie.id !== action.payload.id);
     },
     clearCart: (state) => {
       state.cart = [];
     },
   },
   extraReducers: (builder) => {
-    // Handle different states of the fetchMovies action
     builder
       .addCase(fetchMovies.pending, (state) => {
         state.status = 'loading';
@@ -88,7 +86,6 @@ const movieSlice = createSlice({
         state.status = 'succeeded';
         state.selectedMovie = action.payload;
         state.movieDetails[action.payload.id] = action.payload;
- 
       })
       .addCase(fetchMovieById.rejected, (state, action) => {
         state.status = 'failed';
@@ -97,7 +94,12 @@ const movieSlice = createSlice({
   },
 });
 
-// Export the reducer to include it in the store
-export const { setSelectedMovie, addMovieToCart, removeMovieFromCart, clearCart, setSearchTerm } = movieSlice.actions;
+export const {
+  setSelectedMovie,
+  setSearchTerm,
+  addMovieToCart,
+  removeMovieFromCart,
+  clearCart,
+} = movieSlice.actions;
 
 export default movieSlice.reducer;
