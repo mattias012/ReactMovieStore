@@ -322,34 +322,97 @@ p {
 }
 
 
-.movie-recommendations {
-    margin-top: 40px;
+.recommendations-carousel-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%; /* Adjust the width as needed */
+    margin: 20px 0;
   }
   
-  .recommendations-container {
+  .recommendations-carousel {
     display: flex;
-    gap: 20px;
     overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 20px 0;
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    scrollbar-width: none; /* For Firefox */
+  }
+  
+  .recommendations-carousel::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+  }
+  
+  .carousel-arrow {
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease, color 0.2s ease; /* Add smooth transitions for hover and press */
+    color: #333; /* Default arrow color */
+  }
+  
+  .carousel-arrow:hover {
+    transform: scale(1.2); /* Slightly increase the size on hover */
+    color: #7299C6; /* Change arrow color on hover */
+  }
+  
+  .carousel-arrow:active {
+    transform: scale(1.1); /* Slightly smaller when pressed */
+    color: #48648a; /* Darker shade for pressed state */
   }
   
   .recommendation-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    min-width: 150px;
+    text-align: center;
   }
   
   .recommendation-item img {
-    width: 150px;
-    height: 100px;
-    object-fit: cover;
+    width: 120px;
+    height: auto;
     border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .recommendation-item p{
-    margin-top: 10px;
+  .recommendation-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .recommendation-item p {
     font-size: 0.9em;
-    text-align: center;
     color: #333;
+    margin-top: 5px;
+  }
+  
+  
+
+  .movie-external-links {
+    margin-top: 20px;
+  }
+  
+  .external-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .external-links li {
+    display: inline-block;
+  }
+  
+  .external-icon {
+    width: 40px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+  
+  .external-icon:hover {
+    transform: scale(1.1); /* Slightly increase the size on hover */
   }
   
 

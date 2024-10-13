@@ -1,8 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'; 
+import axios from 'axios';
 import { fetchMovieById, addMovieToCart } from '../features/movieSlice'; 
 import './styles/MovieDetails.css';
+
+const tmdbApiKey = 'a986d7821a9ea8443749e7e796735aa3'; 
+const tmdbBaseUrl = 'https://api.themoviedb.org/3';
 
 const MovieDetails = () => {
   const { id } = useParams(); 
@@ -10,6 +14,9 @@ const MovieDetails = () => {
   const dispatch = useDispatch();
   const movie = useSelector((state) => state.movies.selectedMovie); 
   const status = useSelector((state) => state.movies.status);
+
+  const [isCollectionExpanded, setIsCollectionExpanded] = useState(false);
+  const [collectionMovies, setCollectionMovies] = useState([]);
 
   // Ref for the scrollable cast container
   const scrollContainerRef = useRef(null);
@@ -45,6 +52,8 @@ const MovieDetails = () => {
   // Extract genres
   const genres = movie.genres ? movie.genres.map((g) => g.name) : ['Unknown Genre'];
 
+  const collection = movie.belongs_to_collection || null;
+
   // Extract director and writer from crew
   let director = 'Unknown Director';
   let directorImage = null;
@@ -71,6 +80,8 @@ const MovieDetails = () => {
     }
   }
 
+  const externalIds = movie.external_ids || {};
+
   // Handle adding to cart
   const handleAddToCart = () => {
     dispatch(addMovieToCart(movie));
@@ -89,6 +100,46 @@ const MovieDetails = () => {
       const scrollAmount = 200; // Amount of pixels to scroll
       scrollContainerRef.current.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
     }
+  };
+
+
+  // Scroll the recommendations container left or right
+const handleRecommendationsScroll = (direction) => {
+  const recommendationsContainer = document.getElementById('recommendations-carousel');
+  if (recommendationsContainer) {
+    const scrollAmount = 200; // Amount of pixels to scroll
+    recommendationsContainer.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+  }
+};
+
+
+ // Handle expanding the collection and fetching collection details
+ const handleExpandCollection = async () => {
+  setIsCollectionExpanded(!isCollectionExpanded); // Toggle expand/collapse
+
+  if (!isCollectionExpanded && collection) {
+    try {
+      // Fetch collection details
+      const response = await axios.get(`${tmdbBaseUrl}/collection/${collection.id}`, {
+        params: {
+          api_key: tmdbApiKey,
+        },
+      });
+
+      // Log collection response
+      console.log('Collection details response:', response.data);
+
+      // Set collection movies
+      setCollectionMovies(response.data.parts); // `parts` contains the movies in the collection
+    } catch (error) {
+      console.error('Error fetching collection details:', error);
+    }
+  }
+};
+
+  // Handle clicking on a recommended movie
+  const handleMovieClick = (movieId) => {
+    navigate(`/movie/${movieId}`); // Navigate to the movie details page
   };
 
   return (
@@ -167,6 +218,82 @@ const MovieDetails = () => {
           <div className="movie-overview">
             <p>{movie.overview}</p>
           </div>
+
+          {/* External Links Section */}
+          <div className="movie-external-links">
+            <h2>Find us on:</h2>
+            <ul className="external-links">
+              {externalIds.imdb_id && (
+                <li>
+                  <a href={`https://www.imdb.com/title/${externalIds.imdb_id}`} target="_blank" rel="noopener noreferrer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg" alt="IMDb" className="external-icon" />
+                  </a>
+                </li>
+              )}
+              {externalIds.facebook_id && (
+                <li>
+                  <a href={`https://www.facebook.com/${externalIds.facebook_id}`} target="_blank" rel="noopener noreferrer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" className="external-icon" />
+                  </a>
+                </li>
+              )}
+              {externalIds.instagram_id && (
+                <li>
+                  <a href={`https://www.instagram.com/${externalIds.instagram_id}`} target="_blank" rel="noopener noreferrer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" className="external-icon" />
+                  </a>
+                </li>
+              )}
+              {externalIds.twitter_id && (
+                <li>
+                  <a href={`https://twitter.com/${externalIds.twitter_id}`} target="_blank" rel="noopener noreferrer">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/6/60/Twitter_Logo_as_of_2021.svg" alt="Twitter" className="external-icon" />
+                  </a>
+                </li>
+              )}
+              {externalIds.wikidata_id && (
+                <li>
+                  <a href={`https://www.wikidata.org/wiki/${externalIds.wikidata_id}`} target="_blank" rel="noopener noreferrer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Wikidata-logo.svg" alt="Wikidata" className="external-icon" />
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+
+           {/* Display Movie Collection */}
+           {collection && (
+            <div className="movie-collection">
+              <h2 onClick={handleExpandCollection} style={{ cursor: 'pointer' }}>
+                Part of the {collection.name} {isCollectionExpanded ? '▲' : '▼'}
+              </h2>
+              {collection.poster_path && (
+                <img 
+                  src={`https://image.tmdb.org/t/p/w200${collection.poster_path}`} 
+                  alt={`${collection.name} Poster`}
+                  className="collection-poster"
+                />
+              )}
+              {isCollectionExpanded && collectionMovies.length > 0 && (
+                <div className="collection-movies">
+                  {collectionMovies.map((movie) => (
+                    <div 
+                      key={movie.id} 
+                      className="collection-movie-item" 
+                      onClick={() => handleMovieClick(movie.id)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <img 
+                        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} 
+                        alt={movie.title}
+                      />
+                      <p>{movie.title}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Display Crew (Director and Writer) and Cast */}
           <div className="movie-cast">
@@ -281,22 +408,39 @@ const MovieDetails = () => {
             </div>
           )}
 
-          {recommendations.length > 0 && (
-          <div className="movie-recommendations">
-            <h2>Recommended Movies</h2>
-            <div className="recommendations-container">
-              {recommendations.slice(0, 5).map((recommendation) => (
-                <div key={recommendation.id} className="recommendation-item">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200${recommendation.backdrop_path}`}
-                    alt={recommendation.title}
-                  />
-                  <p>{recommendation.title}</p>
-                </div>
-              ))}
-            </div>
+          {/* Recommendations Section */}
+{recommendations.length > 0 && (
+  <div className="movie-recommendations">
+    <h2>Recommended Movies</h2>
+    <div className="recommendations-carousel-container">
+      <button className="carousel-arrow left" onClick={() => handleRecommendationsScroll('left')}>
+        &#8249; {/* Left arrow symbol */}
+      </button>
+
+      <div id="recommendations-carousel" className="recommendations-carousel">
+        {recommendations.slice(0, 5).map((recommendation) => (
+          <div 
+            key={recommendation.id} 
+            className="recommendation-item" 
+            onClick={() => handleMovieClick(recommendation.id)} // Navigate on click
+            style={{ cursor: 'pointer' }} // Add a pointer cursor
+          >
+            <img
+              src={`https://image.tmdb.org/t/p/w200${recommendation.backdrop_path}`}
+              alt={recommendation.title}
+            />
+            <p>{recommendation.title}</p>
           </div>
-        )}
+        ))}
+      </div>
+
+      <button className="carousel-arrow right" onClick={() => handleRecommendationsScroll('right')}>
+        &#8250; {/* Right arrow symbol */}
+      </button>
+    </div>
+  </div>
+)}
+
 
         </div>
       </div>
