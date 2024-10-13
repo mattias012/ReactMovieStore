@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { fetchMovies } from '../features/movieSlice'; 
 import './styles/MovieCatalog.css';
 
-const MovieCatalog = ({ status, error }) => {
-  //Get movies and search from redux here
+const MovieCatalog = () => {
+  // Get movies and search term from Redux store
   const movies = useSelector((state) => state.movies.movies);
   const searchTerm = useSelector((state) => state.movies.searchTerm);
+  const status = useSelector((state) => state.movies.status);
+  const error = useSelector((state) => state.movies.error);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -15,20 +17,14 @@ const MovieCatalog = ({ status, error }) => {
     dispatch(fetchMovies());
   }, [dispatch]);
 
-  // Log the movies data whenever it changes
-  useEffect(() => {
-    console.log('Movies data:', movies);
-  }, [movies]);
+  // Filter movies based on the search term
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleMovieClick = (movie) => {
     navigate(`/movie/${movie.id}`); 
-
   };
-
-  // Filtrera filmer baserat på sökordet
-  const filteredMovies = movies.filter((movie) =>
-    movie.Title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <div className="movie-catalog">
@@ -36,9 +32,9 @@ const MovieCatalog = ({ status, error }) => {
       {status === 'failed' && <p>Error: {error}</p>}
 
       <ul>
-        {movies && movies.length > 0 ? (
-          movies.map((movie, index) => (
-            <li key={movie.id || index} onClick={() => handleMovieClick(movie)}>  
+        {filteredMovies && filteredMovies.length > 0 ? (
+          filteredMovies.map((movie) => (
+            <li key={movie.id} onClick={() => handleMovieClick(movie)}>  
               <h2>{movie.title}</h2>
               <p>Release Date: {movie.release_date}</p>
               <p>{movie.overview}</p>
@@ -50,13 +46,6 @@ const MovieCatalog = ({ status, error }) => {
               ) : (
                 <p>No image available</p>
               )}
-
-        {filteredMovies && filteredMovies.length > 0 ? (
-          filteredMovies.map((movie, index) => (
-            <li key={movie.imdbID} onClick={() => handleMovieClick(movie)}>
-              <h2>{movie.Title}</h2>
-              <p>Year: {movie.Year}</p>
-              <img src={movie.Poster} alt={movie.Title} />
             </li>
           ))
         ) : (
