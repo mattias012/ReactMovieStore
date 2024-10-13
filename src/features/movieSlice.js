@@ -1,26 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Define the base URL for the TMDb API
-const tmdbApiKey = 'a986d7821a9ea8443749e7e796735aa3'; // Replace with your actual API key
+const tmdbApiKey = 'a986d7821a9ea8443749e7e796735aa3'; 
 const tmdbBaseUrl = 'https://api.themoviedb.org/3';
 
-// Async thunk for fetching movies from TMDb
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
   const response = await axios.get(`${tmdbBaseUrl}/search/movie`, {
     params: {
       api_key: tmdbApiKey,
-      query: 'batman', // You can make this dynamic later
+      query: 'batman', 
     },
   });
-
-  // Log the raw response data
-  console.log('TMDb fetchMovies response:', response.data);
-
   return response.data.results;
 });
 
-// Async thunk for fetching movie details by ID from TMDb
 export const fetchMovieById = createAsyncThunk(
   'movies/fetchMovieById',
   async (movieId, { getState }) => {
@@ -35,8 +28,6 @@ export const fetchMovieById = createAsyncThunk(
           append_to_response: 'credits,images,videos,reviews,keywords,similar,recommendations,release_dates,external_ids,translations',
         },
       });
-      // Log the full response data
-      console.log(`TMDb fetchMovieById response for movieId ${movieId}:`, response.data);
       return response.data;
     }
   }
