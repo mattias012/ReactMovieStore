@@ -1,16 +1,28 @@
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react'; 
+import { useSelector, useDispatch } from 'react-redux'; 
+import { useNavigate } from 'react-router-dom'; 
+import { fetchMovies } from '../features/movieSlice'; 
 import './styles/MovieCatalog.css';
-import { useNavigate } from 'react-router-dom';
-
 
 const MovieCatalog = ({ status, error }) => {
   //Get movies and search from redux here
   const movies = useSelector((state) => state.movies.movies);
   const searchTerm = useSelector((state) => state.movies.searchTerm);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMovies());
+  }, [dispatch]);
+
+  // Log the movies data whenever it changes
+  useEffect(() => {
+    console.log('Movies data:', movies);
+  }, [movies]);
 
   const handleMovieClick = (movie) => {
-    navigate(`/movie/${movie.imdbID}`);
+    navigate(`/movie/${movie.id}`); 
+
   };
 
   // Filtrera filmer baserat på sökordet
@@ -24,6 +36,21 @@ const MovieCatalog = ({ status, error }) => {
       {status === 'failed' && <p>Error: {error}</p>}
 
       <ul>
+        {movies && movies.length > 0 ? (
+          movies.map((movie, index) => (
+            <li key={movie.id || index} onClick={() => handleMovieClick(movie)}>  
+              <h2>{movie.title}</h2>
+              <p>Release Date: {movie.release_date}</p>
+              <p>{movie.overview}</p>
+              {movie.poster_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                  alt={movie.title}
+                />
+              ) : (
+                <p>No image available</p>
+              )}
+
         {filteredMovies && filteredMovies.length > 0 ? (
           filteredMovies.map((movie, index) => (
             <li key={movie.imdbID} onClick={() => handleMovieClick(movie)}>
