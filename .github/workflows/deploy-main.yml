@@ -1,6 +1,7 @@
 # .github/workflows/deploy-main.yml
 name: Deploy to GitHub Pages (Main)
 
+# Körs endast när en pull request mergas till `main`
 on:
   pull_request:
     branches:
@@ -14,28 +15,36 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     if: github.event.pull_request.merged == true
 
     steps:
+      # Steg 1: Checka ut koden
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Steg 2: Installera Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
+      # Steg 3: Installera projektets beroenden
       - name: Install dependencies
         run: npm install
 
+      # Steg 4: Bygg projektet
       - name: Build the project
         run: npm run build
 
-      - name: List dist directory after build
+      # Steg 4.5: Lista alla filer i dist-mappen för felsökning
+      - name: List dist directory
         run: ls -R ./dist
 
+      # Steg 5: Deploya byggfilerna till GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: gh-pages

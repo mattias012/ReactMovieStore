@@ -1,12 +1,13 @@
 {
   "name": "reactmoviestore",
   "private": true,
+  "homepage": "https://mattias012.github.io/ReactMovieStore",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -b gh-pages",
-    "deploy-dev": "gh-pages -d dist -b gh-pages-dev",
+
+    "deploy": "gh-pages -d dist",      
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",

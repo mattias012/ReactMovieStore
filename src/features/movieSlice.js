@@ -12,7 +12,7 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
     },
   });
   return response.data.results;
-});
+
 
 export const fetchMovieById = createAsyncThunk(
   'movies/fetchMovieById',
@@ -33,7 +33,6 @@ export const fetchMovieById = createAsyncThunk(
   }
 );
 
-
 // Create a movie slice using createSlice
 const movieSlice = createSlice({
   name: 'movies',
@@ -46,6 +45,15 @@ const movieSlice = createSlice({
     selectedMovie: null, // Add selectedMovie to the initial state
   },
   reducers: {
+    searchTerm: '',  // Add searchTerm to the state
+  },
+  reducers: {
+    setSelectedMovie: (state, action) => {
+      state.selectedMovie = action.payload;
+    },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;  // Update search term in state
+    },
     addMovieToCart: (state, action) => {
       const exists = state.cart.find(movie => movie.id === action.payload.id);
       if (!exists) {
@@ -80,6 +88,7 @@ const movieSlice = createSlice({
         state.status = 'succeeded';
         state.selectedMovie = action.payload;
         state.movieDetails[action.payload.id] = action.payload;
+ 
       })
       .addCase(fetchMovieById.rejected, (state, action) => {
         state.status = 'failed';
@@ -89,5 +98,6 @@ const movieSlice = createSlice({
 });
 
 // Export the reducer to include it in the store
-export const { addMovieToCart, removeMovieFromCart, clearCart } = movieSlice.actions;
+export const { setSelectedMovie, addMovieToCart, removeMovieFromCart, clearCart, setSearchTerm } = movieSlice.actions;
+
 export default movieSlice.reducer;

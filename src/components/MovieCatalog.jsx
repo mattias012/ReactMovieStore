@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react'; 
 import { useSelector, useDispatch } from 'react-redux'; 
 import { useNavigate } from 'react-router-dom'; 
-import { fetchMovies } from '../features/movieSlice'; // Ensure you're importing the correct action
+import { fetchMovies } from '../features/movieSlice'; 
+import './styles/MovieCatalog.css';
 
 const MovieCatalog = ({ status, error }) => {
-  const dispatch = useDispatch();
+  //Get movies and search from redux here
   const movies = useSelector((state) => state.movies.movies);
-  const navigate = useNavigate();  
+  const searchTerm = useSelector((state) => state.movies.searchTerm);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchMovies());
@@ -19,10 +22,16 @@ const MovieCatalog = ({ status, error }) => {
 
   const handleMovieClick = (movie) => {
     navigate(`/movie/${movie.id}`); 
+
   };
 
+  // Filtrera filmer baserat på sökordet
+  const filteredMovies = movies.filter((movie) =>
+    movie.Title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="movie-catalog">      
+    <div className="movie-catalog">
       {status === 'loading' && <p>Loading movies...</p>}
       {status === 'failed' && <p>Error: {error}</p>}
 
@@ -41,6 +50,13 @@ const MovieCatalog = ({ status, error }) => {
               ) : (
                 <p>No image available</p>
               )}
+
+        {filteredMovies && filteredMovies.length > 0 ? (
+          filteredMovies.map((movie, index) => (
+            <li key={movie.imdbID} onClick={() => handleMovieClick(movie)}>
+              <h2>{movie.Title}</h2>
+              <p>Year: {movie.Year}</p>
+              <img src={movie.Poster} alt={movie.Title} />
             </li>
           ))
         ) : (
