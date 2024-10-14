@@ -1,13 +1,14 @@
 import './styles/Header.css';
 import imageLink from '../assets/logo-nobackground.png';
 import { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeMovieFromCart } from '/Users/ina/CrossplatformDev/ReactMovieStore/src/features/movieSlice.js'; 
 
 function Header() {
   const [cartOpen, setCartOpen] = useState(false);
   const dropdownRef = useRef(null);
-  
-  // Get movies from redux store
+  const dispatch = useDispatch(); 
+
   const cartItems = useSelector((state) => state.movies.cart);
 
   const toggleCart = () => {
@@ -28,8 +29,12 @@ function Header() {
   }, [dropdownRef]);
 
   const handleCheckout = () => {
-    // TO DO: Go to cart
+    // TO DO: Gå till varukorg
     window.location.hash = "#cart";
+  };
+
+  const handleRemove = (id) => {
+    dispatch(removeMovieFromCart({ id })); 
   };
 
   return (
@@ -54,13 +59,29 @@ function Header() {
               <p>Cart is empty.</p>
             ) : (
               <ul>
-                {cartItems.map((item, index) => (
-                  <li key={item.id}>{item.Title}</li>
+                {cartItems.map((item) => (
+                  <li key={item.id} className="dropdown-cart-item">
+                    <div className="dropdown-cart-item-title">
+                      <strong>{item.Title}</strong>
+                    </div>
+                    <div className="dropdown-cart-item-quantity">
+                      <span>{item.quantity}   </span>
+                      <span 
+                        className="remove-icon" 
+                        onClick={() => handleRemove(item.id)} 
+                        role="button"
+                        aria-label={`Remove ${item.Title} from cart`}
+                      >
+                        ❌
+                      </span>
+                    </div>
+                    
+                  </li>
                 ))}
               </ul>
             )}
             <button className="checkout-button" onClick={handleCheckout}>
-              Go to Checkout
+              Checkout
             </button>
           </div>
         )}
