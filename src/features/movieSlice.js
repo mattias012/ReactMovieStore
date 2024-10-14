@@ -54,14 +54,25 @@ const movieSlice = createSlice({
       state.searchTerm = action.payload;
     },
     addMovieToCart: (state, action) => {
-      const exists = state.cart.find((movie) => movie.id === action.payload.id);
-      if (!exists) {
-        state.cart.push(action.payload);
+      const exists = state.cart.find((item) => item.id === action.payload.id);
+      
+      if (exists) {
+        exists.quantity += 1;
+      } else {
+        state.cart.push({ ...action.payload, quantity: 1 });
       }
     },
     removeMovieFromCart: (state, action) => {
-      state.cart = state.cart.filter((movie) => movie.id !== action.payload.id);
+      const movieToRemove = state.cart.find(movie => movie.id === action.payload.id);
+      if (movieToRemove) {
+        if (movieToRemove.quantity > 1) {
+          movieToRemove.quantity -= 1;
+        } else {
+          state.cart = state.cart.filter(movie => movie.id !== action.payload.id); 
+        }
+      }
     },
+    
     clearCart: (state) => {
       state.cart = [];
     },
