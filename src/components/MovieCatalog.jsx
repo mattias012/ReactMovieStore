@@ -27,9 +27,10 @@ const MovieCatalog = ({ status, error }) => {
         {filteredMovies && filteredMovies.length > 0 ? (
           filteredMovies.map((movie, index) => (
             <li key={movie.imdbID} onClick={() => handleMovieClick(movie)}>
-              <h2>{movie.Title}</h2>
-              <p>Year: {movie.Year}</p>
               <img src={movie.Poster} alt={movie.Title} />
+              <h2>{movie.Title}</h2>
+              <p>{movie.Year}</p>
+              
             </li>
           ))
         ) : (
