@@ -29,3 +29,27 @@ body, html {
   display: flex;
 
 }
+/* .cart-layout {
+  display: flex;
+  margin-top: 100px;
+  padding: 20px;
+
+} */
+.cart-layout {
+  display: flex;           
+  justify-content: space-between; 
+  align-items: flex-start; 
+  padding: 20px;
+}
+
+.cart-layout .cart {
+  flex: 3;               
+  margin-right: 20px;     
+}
+
+.cart-layout .order-summary {
+  flex: 1;              
+  background-color: #9eb7db;
+  padding: 20px;
+  border-radius: 10px;
+}

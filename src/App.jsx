@@ -9,6 +9,9 @@ import NotFound from './components/NotFound';
 import Thankyou from './components/Thankyou';
 import Checkout from './components/Checkout';
 import Details from './components/Details';
+import HeaderCart from './components/HeaderCart';
+import OrderSummary from './components/OrderSummary';
+import CheckoutInformation from './components/CheckoutInformation';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -32,28 +35,85 @@ function App() {
   }, [status, dispatch]);
 
   return (
+    // <Router>
+    //   <div className="app-container">
+    //     <Header />
+
+    //     <div className="search-container">
+    //       <SearchBar />
+    //     </div>
+
+    //     <div className="main-layout">
+    //       <Sidebar />
+    //       <Routes>
+    //         <Route exact path="/" element={<MovieCatalog status={status} error={error} />} />
+    //         <Route exact path="/cart" element={<Cart />} />
+    //         <Route exact path="/checkout" element={<Checkout />} />
+    //         <Route exact path="/thankyou" element={<Thankyou />} />
+    //         <Route exact path="/details" element={<Details />} />
+    //         <Route path="*" element={<NotFound />} />
+    //       </Routes>
+    //     </div>
+    //   </div>
+    // </Router>
     <Router>
-      <div className="app-container">
-        <Header />
+    <div className="app-container">
+      <Routes>
+     
+        <Route
+          path="/cart"
+          element={
+            <div className="app-container">
+              <HeaderCart /> 
+              <div className="cart-layout">
+                <Cart /> 
+                <OrderSummary />
+              </div>
+            </div>
+          }
+        />
 
-        <div className="search-container">
-          <SearchBar />
-        </div>
+             <Route
+          path="/checkoutinfromtaion"
+          element={
+            <div className="app-container">
+              <HeaderCart /> 
+              <div className="cart-layout">
+                <CheckoutInformation /> 
+              
+              </div>
+            </div>
+          }
+        />
 
-        <div className="main-layout">
-          <Sidebar />
-          <Routes>
-            <Route exact path="/" element={<MovieCatalog status={status} error={error} />} />
-            <Route exact path="/cart" element={<Cart />} />
-            <Route exact path="/checkout" element={<Checkout />} />
-            <Route exact path="/thankyou" element={<Thankyou />} />
-            <Route exact path="/details" element={<Details />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </div>
-    </Router>
+        <Route
+          path="/"
+          element={
+            <>
+              <div className="app-container">
+                <Header />
+                <div className="search-container">
+                  <SearchBar /> 
+                </div>
+                <div className="main-layout">
+                  <Sidebar /> 
+                  <MovieCatalog /> 
+                </div>
+              </div>
+            </>
+          }
+        />
+
+       
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  </Router>
+    
   );
 }
 
 export default App;
+
+
+
