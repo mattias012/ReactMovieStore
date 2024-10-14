@@ -15,10 +15,17 @@
 .category-sidebar a {
   color: #000; /* Default text color */
   text-decoration: none;
+  padding: 5px; /* Add some padding to create space for the border */
 }
 
 /* Change text color on hover */
 .category-sidebar li:hover a {
-  color: rgb(40, 127, 230); /* Text color changes to blue on hover */
-  text-decoration: underline;
+  color:rgb(40, 127, 230); /* Text color changes to blue on hover */
+}
+
+/* Change text color and add border when selected */
+.category-sidebar li.selected a {
+  color: rgb(22, 46, 65); /* Text color stays blue when selected */
+  border: 2px solid rgb(22, 46, 65); /* Add border around the text */
+  border-radius: 15px; /* Rounded corners */
 }
