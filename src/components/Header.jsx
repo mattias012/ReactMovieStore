@@ -55,7 +55,7 @@ function Header() {
             ) : (
               <ul>
                 {cartItems.map((item, index) => (
-                  <li key={item.imdbID}>{item.Title}</li>
+                  <li key={item.id}>{item.title}</li>
                 ))}
               </ul>
             )}
