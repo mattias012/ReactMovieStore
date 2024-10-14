@@ -59,7 +59,7 @@ const movieSlice = createSlice({
       if (exists) {
         exists.quantity += 1;
       } else {
-        state.cart.push({ ...action.payload, quantity: 1 });
+        state.cart.push({ ...action.payload, quantity: 1, price: 15.99 });
       }
     },
     removeMovieFromCart: (state, action) => {

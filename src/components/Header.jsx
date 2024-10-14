@@ -11,6 +11,10 @@ function Header() {
 
   const cartItems = useSelector((state) => state.movies.cart);
 
+  const totalPrice = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity; 
+  }, 0);
+
   const toggleCart = () => {
     setCartOpen(!cartOpen);
   };
@@ -80,6 +84,9 @@ function Header() {
                 ))}
               </ul>
             )}
+                        <div className="total-price">
+              <strong>Total: ${totalPrice.toFixed(2)}</strong> 
+            </div>
             <button className="checkout-button" onClick={handleCheckout}>
               Checkout
             </button>
