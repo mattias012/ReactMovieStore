@@ -27,42 +27,8 @@ function MainContent() {
   const isMovieDetailsPage = location.pathname.includes("/movie/");
 
   return (
-
     <div className="app-container">
-      <Routes>
-     
-        <Route
-          path="/cart"
-          element={
-            <div className="app-container">
-              <HeaderCart /> 
-              <div className="cart-layout">
-                <Cart /> 
-                <OrderSummary />
-              </div>
-            </div>
-          }
-        />
-
-             <Route
-          path="/checkoutinfromtaion"
-          element={
-            <div className="app-container">
-              <HeaderCart /> 
-              <div className="cart-layout">
-                <CheckoutInformation /> 
-              
-              </div>
-            </div>
-          }
-        />
-
-        <Route
-          path="/"
-          element={
-            <>
-              <div className="app-container">
-                      <Header />
+      <Header />
       {!isMovieDetailsPage && (
         <div className="search-container">
           <SearchBar />
@@ -70,19 +36,36 @@ function MainContent() {
       )}
       <div className="main-layout">
         {!isMovieDetailsPage && <Sidebar />}
+        
+        {/* Single Routes block */}
         <Routes>
-          <Route exact path="/" element={<MovieCatalog status={status} error={error} />} />
-          <Route exact path="/cart" element={<Cart />} />
-          <Route exact path="/checkout" element={<Checkout />} />
-          <Route exact path="/thankyou" element={<Thankyou />} />
-          <Route exact path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/" element={<MovieCatalog status={status} error={error} />} />
+          <Route path="/cart" element={
+            <div className="app-container">
+              <HeaderCart />
+              <div className="cart-layout">
+                <Cart />
+                <OrderSummary />
+              </div>
+            </div>
+          } />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/thankyou" element={<Thankyou />} />
+          <Route path="/checkoutinformation" element={
+            <div className="app-container">
+              <HeaderCart />
+              <div className="cart-layout">
+                <CheckoutInformation />
+              </div>
+            </div>
+          } />
+          <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+      </div>
     </div>
-    
   );
 }
-
 
 function App() {
   const dispatch = useDispatch();
@@ -97,11 +80,7 @@ function App() {
         <MainContent />
       </div>
     </Router>
-    
   );
 }
 
 export default App;
-
-
-
