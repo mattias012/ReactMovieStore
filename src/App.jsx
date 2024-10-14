@@ -8,6 +8,11 @@ import Cart from "./components/Cart";
 import NotFound from './components/NotFound';
 import Thankyou from './components/Thankyou';
 import Checkout from './components/Checkout';
+
+import HeaderCart from './components/HeaderCart';
+import OrderSummary from './components/OrderSummary';
+import CheckoutInformation from './components/CheckoutInformation';
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MovieDetails from './components/MovieDetails';
@@ -22,8 +27,42 @@ function MainContent() {
   const isMovieDetailsPage = location.pathname.includes("/movie/");
 
   return (
-    <>
-      <Header />
+
+    <div className="app-container">
+      <Routes>
+     
+        <Route
+          path="/cart"
+          element={
+            <div className="app-container">
+              <HeaderCart /> 
+              <div className="cart-layout">
+                <Cart /> 
+                <OrderSummary />
+              </div>
+            </div>
+          }
+        />
+
+             <Route
+          path="/checkoutinfromtaion"
+          element={
+            <div className="app-container">
+              <HeaderCart /> 
+              <div className="cart-layout">
+                <CheckoutInformation /> 
+              
+              </div>
+            </div>
+          }
+        />
+
+        <Route
+          path="/"
+          element={
+            <>
+              <div className="app-container">
+                      <Header />
       {!isMovieDetailsPage && (
         <div className="search-container">
           <SearchBar />
@@ -39,10 +78,11 @@ function MainContent() {
           <Route exact path="/movie/:id" element={<MovieDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
-    </>
+    </div>
+    
   );
 }
+
 
 function App() {
   const dispatch = useDispatch();
@@ -57,7 +97,11 @@ function App() {
         <MainContent />
       </div>
     </Router>
+    
   );
 }
 
 export default App;
+
+
+

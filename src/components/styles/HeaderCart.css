@@ -6,10 +6,10 @@
     background-color: #7299C6;
     color: white;
     width: 100%;
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 1001;
     box-sizing: border-box;
   }
   
@@ -29,7 +29,7 @@
     width: 120px;
   }
   
-  .nav-right {
+  .nav-right-cart {
     flex: 1; 
   }
   
