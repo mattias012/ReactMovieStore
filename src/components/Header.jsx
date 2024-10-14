@@ -2,7 +2,7 @@ import './styles/Header.css';
 import imageLink from '../assets/logo-nobackground.png';
 import { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeMovieFromCart } from '/Users/ina/CrossplatformDev/ReactMovieStore/src/features/movieSlice.js'; 
+import { removeMovieFromCart } from '../features/movieSlice.js'; 
 
 function Header() {
   const [cartOpen, setCartOpen] = useState(false);
