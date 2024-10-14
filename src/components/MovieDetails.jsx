@@ -63,7 +63,17 @@ const MovieDetails = () => {
   }
 
   const handleAddToCart = () => {
-    dispatch(addMovieToCart(movie));
+    const movieData = {
+      id: movie.id, 
+      Title: movie.title,
+      Year: movie.release_date.substring(0, 4),
+      Poster: movie.poster_path
+        ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+        : 'N/A',
+      Price: 15.99 
+    };
+    
+    dispatch(addMovieToCart(movieData)); // Dispatching the new movieData
   };
 
   const cast = movie.credits?.cast?.slice(0, 10) || []; 

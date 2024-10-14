@@ -49,25 +49,25 @@ import './styles/Cart.css';
 import { removeMovieFromCart, clearCart } from '../features/movieSlice';
 import trashIcon from '../assets/trashcan1.png';
 
-
 function Cart() {
   const cartItems = useSelector((state) => state.movies.cart); 
   const dispatch = useDispatch();
 
-  const handleRemoveMovie = (imdbID) => {
-    dispatch(removeMovieFromCart({ imdbID })); 
+  const handleRemoveMovie = (id) => {
+    dispatch(removeMovieFromCart({ id })); 
   };
 
   const handleClearCart = () => {
     dispatch(clearCart()); 
   };
 
+  // Handle increment and decrement functions (you can implement them later)
   const increment = (movie) => {
-   // to do later
+   // Implement increment logic if needed
   };
 
   const decrement = (movie) => {
-     // to do later
+     // Implement decrement logic if needed
   };
 
   return (
@@ -78,7 +78,7 @@ function Cart() {
       ) : (
         <div>
           {cartItems.map((item) => (
-            <div key={item.imdbID} className="cart-item">
+            <div key={item.id} className="cart-item"> {/* Use 'id' here */}
               <img
                 className="poster"
                 src={item.Poster !== 'N/A' ? item.Poster : 'https://via.placeholder.com/80x120?text=No+Image'}
@@ -95,10 +95,9 @@ function Cart() {
                 </div>
               </div>
               <div className="actions">
-                <button className="remove-btn" onClick={() => handleRemoveMovie(item.imdbID)}>Remove</button>
+                <button className="remove-btn" onClick={() => handleRemoveMovie(item.id)}>Remove</button> {/* Use 'id' here */}
                 <button className="trash-btn">
-                <img src={trashIcon} alt="trash icon" className="trash-icon" />
-                  
+                  <img src={trashIcon} alt="trash icon" className="trash-icon" />
                 </button>
               </div>
             </div>
@@ -117,3 +116,4 @@ function Cart() {
 }
 
 export default Cart;
+
