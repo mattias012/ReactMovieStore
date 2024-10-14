@@ -20,7 +20,7 @@ import { fetchMovies } from "./features/movieSlice";
 
 
 function MainContent() {
-  const location = useLocation(); 
+  const location = useLocation();
   const status = useSelector((state) => state.movies.status);
   const error = useSelector((state) => state.movies.error);
 
@@ -37,28 +37,9 @@ function MainContent() {
       <div className="main-layout">
         {!isMovieDetailsPage && <Sidebar />}
 
-        {/* Single Routes block */}
         <Routes>
+          {/* Normal routes for non-checkout/cart pages */}
           <Route path="/" element={<MovieCatalog status={status} error={error} />} />
-          <Route path="/cart" element={
-            <div className="app-container">
-              <HeaderCart />
-              <div className="cart-layout">
-                <Cart />
-                <OrderSummary />
-              </div>
-            </div>
-          } />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/thankyou" element={<Thankyou />} />
-          <Route path="/checkoutinformation" element={
-            <div className="app-container">
-              <HeaderCart />
-              <div className="cart-layout">
-                <CheckoutInformation />
-              </div>
-            </div>
-          } />
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -70,16 +51,59 @@ function MainContent() {
 function App() {
   const dispatch = useDispatch();
 
-  // Fetch movies on component mount
   useEffect(() => {
     dispatch(fetchMovies());
   }, [dispatch]);
 
   return (
     <Router>
-      <div className="app-container">
-        <MainContent />
-      </div>
+      <Routes>
+        {/* Full-page routes */}
+        <Route
+          path="/cart"
+          element={
+            <div className="fullpage-layout">
+              <HeaderCart />
+              <div className="cart-layout">
+                <Cart />
+                <OrderSummary />
+              </div>
+            </div>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <div className="fullpage-layout">
+              <HeaderCart />
+              <Checkout />
+            </div>
+          }
+        />
+        <Route
+          path="/thankyou"
+          element={
+            <div className="fullpage-layout">
+              <HeaderCart />
+              <Thankyou />
+            </div>
+          }
+        />
+        <Route
+          path="/checkoutinformation"
+          element={
+            <div className="fullpage-layout">
+              <HeaderCart />
+              <div className="cart-layout">
+                <CheckoutInformation />
+              </div>
+            </div>
+          }
+        />
+
+        {/* Main content, all other pages */}
+        <Route path="/*" element={<MainContent />} />
+      </Routes>
     </Router>
   );
 }
