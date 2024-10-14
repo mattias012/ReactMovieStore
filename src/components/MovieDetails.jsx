@@ -73,7 +73,7 @@ const MovieDetails = () => {
       Price: 15.99 
     };
     
-    dispatch(addMovieToCart(movieData)); // Dispatching the new movieData
+    dispatch(addMovieToCart(movieData)); 
   };
 
   const cast = movie.credits?.cast?.slice(0, 10) || []; 

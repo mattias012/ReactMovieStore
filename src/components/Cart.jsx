@@ -1,48 +1,4 @@
-// import React, { useState } from 'react';
-// import './styles/Cart.css';
 
-
-// function CartItem({ title, year, price }) {
-//   const [quantity, setQuantity] = useState(1);
-
-//   const increment = () => setQuantity(prev => prev + 1);
-//   const decrement = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
-
-//   return (
-//     <div className="cart-item">
-//       <img className="poster" src={moviePoster} alt={title} />
-//       <div className="details">
-//         <h3>{title}</h3>
-//         <p>{year}</p>
-//         <p>Price: {price.toFixed(2)} USD</p>
-//         <div className="quantity-controls">
-//           <button onClick={decrement}>-</button>
-//           <span>{quantity}</span>
-//           <button onClick={increment}>+</button>
-//         </div>
-//       </div>
-//       <div className="actions">
-//         <button className="remove-btn">Remove</button>
-//         <button className="trash-btn">
-//           {/* trash button here */}
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
-// function Cart() {
-//   return (
-//     <div className="cart">
-//       <h2>In your cart right now</h2>
-//       {/* cart item here!!!!!!! */}
-//       {/* fix when cart is empty */}
-     
-//     </div>
-//   );
-// }
-
-// export default Cart;
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './styles/Cart.css';
@@ -61,24 +17,24 @@ function Cart() {
     dispatch(clearCart()); 
   };
 
-  // Handle increment and decrement functions (you can implement them later)
+  
   const increment = (movie) => {
-   // Implement increment logic if needed
+ 
   };
 
   const decrement = (movie) => {
-     // Implement decrement logic if needed
+  
   };
 
   return (
     <div className="cart">
       <h2>In your cart right now</h2>
-      {cartItems.length === 0 ? (
+      {cartItems.length === 0 ? ( 
         <p>Your cart is empty.</p>
       ) : (
         <div>
           {cartItems.map((item) => (
-            <div key={item.id} className="cart-item"> {/* Use 'id' here */}
+            <div key={item.id} className="cart-item"> 
               <img
                 className="poster"
                 src={item.Poster !== 'N/A' ? item.Poster : 'https://via.placeholder.com/80x120?text=No+Image'}
@@ -95,7 +51,7 @@ function Cart() {
                 </div>
               </div>
               <div className="actions">
-                <button className="remove-btn" onClick={() => handleRemoveMovie(item.id)}>Remove</button> {/* Use 'id' here */}
+                <button className="remove-btn" onClick={() => handleRemoveMovie(item.id)}>Remove</button> 
                 <button className="trash-btn">
                   <img src={trashIcon} alt="trash icon" className="trash-icon" />
                 </button>
