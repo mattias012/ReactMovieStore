@@ -1,27 +1,51 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { addMovieToCart } from '../features/movieSlice';
+import React, { useEffect } from 'react'; 
+import { useSelector, useDispatch } from 'react-redux'; 
+import { useNavigate } from 'react-router-dom'; 
+import { fetchMovies } from '../features/movieSlice'; 
+import './styles/MovieCatalog.css';
 
-const MovieCatalog = ({ status, error }) => {
-  // Get movies from redux
+const MovieCatalog = () => {
+  // Get movies and search term from Redux store
   const movies = useSelector((state) => state.movies.movies);
+  const searchTerm = useSelector((state) => state.movies.searchTerm);
+  const status = useSelector((state) => state.movies.status);
+  const error = useSelector((state) => state.movies.error);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchMovies());
+  }, [dispatch]);
+
+  // Filter movies based on the search term
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleMovieClick = (movie) => {
+    navigate(`/movie/${movie.id}`); 
+  };
+
   return (
-    <div className="movie-catalog">      
+    <div className="movie-catalog">
       {status === 'loading' && <p>Loading movies...</p>}
       {status === 'failed' && <p>Error: {error}</p>}
 
       <ul>
-        {movies && movies.length > 0 ? (
-          movies.map((movie) => (
-            <li key={movie.imdbID}>
-              <h2>{movie.Title}</h2>
-              <p>Year: {movie.Year}</p>
-              <p>Type: {movie.Type}</p>
-              <img src={movie.Poster} alt={movie.Title} />
-              <button onClick={() => dispatch(addMovieToCart(movie))}>
-                Add to Cart
-              </button>
+        {filteredMovies && filteredMovies.length > 0 ? (
+          filteredMovies.map((movie) => (
+            <li key={movie.id} onClick={() => handleMovieClick(movie)}>  
+              <h2>{movie.title}</h2>
+              <p>Release Date: {movie.release_date}</p>
+              <p>{movie.overview}</p>
+              {movie.poster_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                  alt={movie.title}
+                />
+              ) : (
+                <p>No image available</p>
+              )}
             </li>
           ))
         ) : (

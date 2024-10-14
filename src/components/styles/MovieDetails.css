@@ -1,39 +1,124 @@
-.movie-details {
-    display: flex;
-    padding: 20px;
-    background-color: #f9f9f9;
-    max-width: 900px;
-    margin: 20px auto;
+.movie-details-container {
+    width: 100vw; 
+    height: 100vh; 
+    overflow-x: hidden; 
+    box-sizing: border-box; 
+    padding-top: 120px; /* Adjusted to start below the header */
+    position: relative; 
 }
 
-.movie-poster img {
-    border-radius: 8px;
-    width: 220px;
-    height: 350px;
-    object-fit: cover;
+.movie-backdrop {
+    position: absolute;
+    top: 93px;
+    left: 0;
+    width: 100vw;
+    height: 70vh; 
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3; 
+}
+
+.backdrop-fade {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 250px; 
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.5) 30%, 
+        rgba(255, 255, 255, 0.842) 60%, 
+        rgb(255, 255, 255) 100% 
+    );
+}
+
+.movie-details {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    gap: 20px; 
+    width: 100%;
+    max-width: 1200px; 
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; 
+    box-sizing: border-box;
+    z-index: 3; 
+    position: relative;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 40%, rgba(255, 255, 255, 1) 100%); 
+    border-radius: 10px;
+}
+
+.back-button {
+    background-color: #7299C6;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    position: fixed;
+    border-radius: 35px; 
+    color: white;
+    top: 120px; /* Adjusted to start below the header */
+    left: 20px; 
+    z-index: 1000; 
+}
+
+.movie-homepage {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 3;
+}
+
+.movie-homepage a {
+    font-size: 1em;
+    color: #7299C6;
+    text-decoration: none;
+}
+
+.movie-homepage a:hover {
+    text-decoration: underline;
+}
+
+.movie-overview {
+    background-color: rgba(0, 0, 0, 0.05); 
+    padding: 15px; 
+    border-radius: 10px; 
+    margin-top: 10px; 
+    font-size: 1em;
+    line-height: 1.5;
+    color: #333; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+    width: 370px;
+    position: relative; 
+    display: flex;
+    flex-direction: column; 
+}
+
+.movie-budget {
+    margin-top: 10px; 
+    margin-right: 20px;
+    align-self: flex-end; 
+    font-size: 0.9em;
+    color: #555;
 }
 
 .movie-info {
-    margin-left: 40px;
+    position: relative;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box; 
 }
 
 .movie-info h1 {
-    font-size: 1.8em;
+    font-size: 3em;
     margin: 0;
     color: #000000;
 }
 
 .movie-meta {
-    font-size: 0.9em;
+    font-size: 1.1em;
     color: #777;
-    margin: 2px 0;
-}
-
-.movie-price {
-    font-size: 1.2em;
-    color: #000;
     margin: 5px 0;
 }
 
@@ -60,51 +145,53 @@
 .rating-label {
     font-size: 1em;
     color: #000000; 
-    margin-right: 70px; 
-    
 }
 
 .cart-icon {
     width: 20px;
     height: 20px;
     margin-right: 8px; 
-  }
-
-  .add-to-cart {
-    display: flex;
-    align-items: center;  
-    padding: 5px 15px;
-    background-color: #7299C6;
-    font-size: 1em;
-    color: white;
-    border: none;
-    border-radius: 35px;
-    cursor: pointer;
 }
 
+.production-logos {
+    position: fixed;
+    top: 120px; /* Adjusted to start below the header */
+    right: 40px;
+    z-index: 10;
+}
+
+.production-logos ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+}
+
+.production-logos li {
+    display: inline-block;
+}
+
+.company-logo {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+}
 
 .movie-genre {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 5px; 
-    margin-bottom: 10px; 
+    margin: 15px 0;
 }
 
 .genre-tag {
     background-color: #7299C6;
     border-radius: 35px;
     padding: 5px 10px;
-    margin-right: 10px;
+    margin-right: 5px;
     margin-bottom: 10px;
     font-size: 0.8em;
     color: #ffffff;
-}
-
-h2 {
-    margin-top: 0px;
-    margin-bottom: 0px; 
-    font-size: 1.3em;
-    color: #000000;
 }
 
 p {
@@ -113,22 +200,148 @@ p {
     font-size: 1em;
 }
 
-.movie-credits {
+.cast-carousel-container {
     display: flex;
-    justify-content: space-between;
-    margin-top: 5px;
-    margin-right: 300px;
-    
+    align-items: center;
+    position: relative;
+    width: 580px;
 }
 
-.credit-item {
+.cast-carousel {
     display: flex;
-    flex-direction: column;
-    
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 470px;
+    gap: 20px;
+    padding: 20px 0;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
 }
 
-
-.role {
-    margin-top: 0px;
+.carousel-arrow {
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease, color 0.2s ease; 
+    color: #333; 
 }
 
+.carousel-arrow:hover {
+    transform: scale(1.2);
+    color: #7299C6; 
+}
+
+.carousel-arrow:active {
+    transform: scale(1.1); 
+    color: #48648a; 
+}
+
+.carousel-arrow.left {
+    margin-right: 10px;
+    margin-bottom: 90px;
+}
+
+.carousel-arrow.right {
+    margin-left: 10px;
+    margin-bottom: 90px;
+}
+
+.actor-item {
+    text-align: center;
+}
+
+.actor-image {
+    border-radius: 10px;
+    width: 100px;
+    height: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.actor-image:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.actor-details {
+    margin-top: 10px;
+}
+
+.movie-logo-container {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3000;
+}
+
+.movie-logo {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+.movie-poster-and-cart-container {
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 20px;
+}
+
+.movie-poster-and-cart {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    padding: 20px;
+}
+
+.movie-price {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.6em;
+    color: #000;
+    margin-right: 20px;
+    margin-top: 100px;
+}
+
+.add-to-cart {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    background-color: #7299C6;
+    font-size: 1.8em;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    margin-left: -40px; 
+}
+
+.movie-poster img {
+    border-radius: 8px;
+    width: 100%;
+    max-width: 300px; 
+    height: auto;
+    object-fit: cover;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.movie-poster img:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.3); 
+}
+
+.movie-trailer {
+    margin: 20px 0; 
+    display: flex;
+    justify-content: center; 
+    margin-right: 20px;
+}
+
+.movie-trailer iframe {
+    border-radius: 10px; 
+    overflow: hidden;
+}

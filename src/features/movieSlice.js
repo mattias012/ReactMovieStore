@@ -1,31 +1,66 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const apiUrl = 'https://www.omdbapi.com/?s=batman&&plot=full&apikey=8eec2a77&page=1';
+const tmdbApiKey = 'a986d7821a9ea8443749e7e796735aa3'; // Replace with your actual TMDB API key
+const tmdbBaseUrl = 'https://api.themoviedb.org/3';
 
+// Fetch superhero movies using the Discover endpoint
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
-  const response = await axios.get(apiUrl);
-  return response.data.Search;
+  const response = await axios.get(`${tmdbBaseUrl}/discover/movie`, {
+    params: {
+      api_key: tmdbApiKey,
+      with_keywords: '9715', // Keyword ID for "superhero"
+    },
+  });
+  return response.data.results;
 });
+
+export const fetchMovieById = createAsyncThunk(
+  'movies/fetchMovieById',
+  async (movieId, { getState }) => {
+    const state = getState();
+    const cachedMovie = state.movies.movieDetails[movieId];
+    if (cachedMovie) {
+      return cachedMovie;
+    } else {
+      const response = await axios.get(`${tmdbBaseUrl}/movie/${movieId}`, {
+        params: {
+          api_key: tmdbApiKey,
+          append_to_response:
+            'credits,images,videos,reviews,keywords,similar,recommendations,release_dates,external_ids,translations',
+        },
+      });
+      return response.data;
+    }
+  }
+);
 
 const movieSlice = createSlice({
   name: 'movies',
   initialState: {
     movies: [],
     cart: [],
+    movieDetails: {},
     status: 'idle',
     error: null,
+    selectedMovie: null,
+    searchTerm: '', // Moved searchTerm here
   },
   reducers: {
+    setSelectedMovie: (state, action) => {
+      state.selectedMovie = action.payload;
+    },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    },
     addMovieToCart: (state, action) => {
-      // Control if movie is already in cart
-      const exists = state.cart.find(movie => movie.imdbID === action.payload.imdbID);
+      const exists = state.cart.find((movie) => movie.id === action.payload.id);
       if (!exists) {
         state.cart.push(action.payload);
       }
     },
     removeMovieFromCart: (state, action) => {
-      state.cart = state.cart.filter(movie => movie.imdbID !== action.payload.imdbID);
+      state.cart = state.cart.filter((movie) => movie.id !== action.payload.id);
     },
     clearCart: (state) => {
       state.cart = [];
@@ -43,9 +78,28 @@ const movieSlice = createSlice({
       .addCase(fetchMovies.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(fetchMovieById.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchMovieById.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.selectedMovie = action.payload;
+        state.movieDetails[action.payload.id] = action.payload;
+      })
+      .addCase(fetchMovieById.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
       });
   },
 });
 
-export const { addMovieToCart, removeMovieFromCart, clearCart } = movieSlice.actions;
+export const {
+  setSelectedMovie,
+  setSearchTerm,
+  addMovieToCart,
+  removeMovieFromCart,
+  clearCart,
+} = movieSlice.actions;
+
 export default movieSlice.reducer;

@@ -1,12 +1,16 @@
 # .github/workflows/deploy-main.yml
 name: Deploy to GitHub Pages (Main)
 
+# Körs endast när en pull request mergas till `main`
 on:
   pull_request:
     branches:
       - main
     types:
       - closed
+
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -15,27 +19,32 @@ jobs:
     if: github.event.pull_request.merged == true
 
     steps:
+      # Steg 1: Checka ut koden
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Steg 2: Installera Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Uppdatera till Node.js 20
+          node-version: '20'
 
+      # Steg 3: Installera projektets beroenden
       - name: Install dependencies
         run: npm install
 
-      - name: Set homepage for main
-        run: |
-          echo '"homepage": "https://mattias012.github.io/ReactMovieStore"' > homepage.json
-          jq -s '.[0] * .[1]' package.json homepage.json > temp.json && mv temp.json package.json
-
+      # Steg 4: Bygg projektet
       - name: Build the project
         run: npm run build
 
+      # Steg 4.5: Lista alla filer i dist-mappen för felsökning
+      - name: List dist directory
+        run: ls -R ./dist
+
+      # Steg 5: Deploya byggfilerna till GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          publish_branch: gh-pages
