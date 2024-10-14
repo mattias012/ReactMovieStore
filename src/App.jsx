@@ -27,10 +27,8 @@ function MainContent() {
   const isMovieDetailsPage = location.pathname.includes("/movie/");
 
   return (
-
     <div className="app-container">
       <Routes>
-     
         <Route
           path="/cart"
           element={
@@ -44,14 +42,13 @@ function MainContent() {
           }
         />
 
-             <Route
-          path="/checkoutinfromtaion"
+        <Route
+          path="/checkoutinformation"
           element={
             <div className="app-container">
               <HeaderCart /> 
               <div className="cart-layout">
                 <CheckoutInformation /> 
-              
               </div>
             </div>
           }
@@ -62,31 +59,37 @@ function MainContent() {
           element={
             <>
               <div className="app-container">
-                      <Header />
-      {!isMovieDetailsPage && (
-        <div className="search-container">
-          <SearchBar />
-        </div>
-      )}
-      <div className="main-layout">
-        {!isMovieDetailsPage && <Sidebar />}
-        <Routes>
-          <Route exact path="/" element={<MovieCatalog status={status} error={error} />} />
-          <Route exact path="/cart" element={<Cart />} />
-          <Route exact path="/checkout" element={<Checkout />} />
-          <Route exact path="/thankyou" element={<Thankyou />} />
-          <Route exact path="/movie/:id" element={<MovieDetails />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+                <Header />
+                {!isMovieDetailsPage && (
+                  <div className="search-container">
+                    <SearchBar />
+                  </div>
+                )}
+                <div className="main-layout">
+                  {!isMovieDetailsPage && <Sidebar />}
+                
+                  <Routes>
+                    <Route exact path="/" element={<MovieCatalog status={status} error={error} />} />
+                    <Route exact path="/cart" element={<Cart />} />
+                    <Route exact path="/checkout" element={<Checkout />} />
+                    <Route exact path="/thankyou" element={<Thankyou />} />
+                    <Route exact path="/movie/:id" element={<MovieDetails />} />
+                    <Route path="" element={<NotFound />} />
+                  </Routes>
+                </div>
+              </div>
+            </>
+          }
+        />
+      </Routes>
     </div>
-    
   );
 }
-
 
 function App() {
   const dispatch = useDispatch();
 
+  // Fetch movies on component mount
   useEffect(() => {
     dispatch(fetchMovies());
   }, [dispatch]);
@@ -97,11 +100,7 @@ function App() {
         <MainContent />
       </div>
     </Router>
-    
   );
 }
 
 export default App;
-
-
-
