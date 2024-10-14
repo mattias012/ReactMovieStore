@@ -28,60 +28,41 @@ function MainContent() {
 
   return (
     <div className="app-container">
-      <Routes>
-        <Route
-          path="/cart"
-          element={
+      <Header />
+      {!isMovieDetailsPage && (
+        <div className="search-container">
+          <SearchBar />
+        </div>
+      )}
+      <div className="main-layout">
+        {!isMovieDetailsPage && <Sidebar />}
+
+        {/* Single Routes block */}
+        <Routes>
+          <Route path="/" element={<MovieCatalog status={status} error={error} />} />
+          <Route path="/cart" element={
             <div className="app-container">
-              <HeaderCart /> 
+              <HeaderCart />
               <div className="cart-layout">
-                <Cart /> 
+                <Cart />
                 <OrderSummary />
               </div>
             </div>
-          }
-        />
-
-        <Route
-          path="/checkoutinformation"
-          element={
+          } />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/thankyou" element={<Thankyou />} />
+          <Route path="/checkoutinformation" element={
             <div className="app-container">
-              <HeaderCart /> 
+              <HeaderCart />
               <div className="cart-layout">
-                <CheckoutInformation /> 
+                <CheckoutInformation />
               </div>
             </div>
-          }
-        />
-
-        <Route
-          path="/"
-          element={
-            <>
-              <div className="app-container">
-                <Header />
-                {!isMovieDetailsPage && (
-                  <div className="search-container">
-                    <SearchBar />
-                  </div>
-                )}
-                <div className="main-layout">
-                  {!isMovieDetailsPage && <Sidebar />}
-                
-                  <Routes>
-                    <Route exact path="/" element={<MovieCatalog status={status} error={error} />} />
-                    <Route exact path="/cart" element={<Cart />} />
-                    <Route exact path="/checkout" element={<Checkout />} />
-                    <Route exact path="/thankyou" element={<Thankyou />} />
-                    <Route exact path="/movie/:id" element={<MovieDetails />} />
-                    <Route path="" element={<NotFound />} />
-                  </Routes>
-                </div>
-              </div>
-            </>
-          }
-        />
-      </Routes>
+          } />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
     </div>
   );
 }
