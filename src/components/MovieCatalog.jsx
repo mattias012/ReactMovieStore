@@ -33,19 +33,21 @@ const MovieCatalog = () => {
 
       <ul>
         {filteredMovies && filteredMovies.length > 0 ? (
+
           filteredMovies.map((movie) => (
             <li key={movie.id} onClick={() => handleMovieClick(movie)}>  
-              <h2>{movie.title}</h2>
-              <p>Release Date: {movie.release_date}</p>
-              <p>{movie.overview}</p>
               {movie.poster_path ? (
                 <img
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                   alt={movie.title}
                 />
+                 <h2>{movie.title}</h2>
+              <p>Release Date: {movie.release_date}</p>
+              <p>{movie.overview}</p>
               ) : (
                 <p>No image available</p>
               )}
+
             </li>
           ))
         ) : (
