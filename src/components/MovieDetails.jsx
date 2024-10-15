@@ -103,7 +103,7 @@ const MovieDetails = () => {
       {movie.production_companies && movie.production_companies.length > 0 && (
         <div className="production-logos">
           <ul>
-            {movie.production_companies.map((company) => (
+          {movie.production_companies.slice(0, 4).map((company) => (
               <li key={company.id}>
                 {company.logo_path && (
                   <img
@@ -127,140 +127,141 @@ const MovieDetails = () => {
           />
         </div>
       )}
-
-      <div className="movie-details">
-        <button className="back-button" onClick={() => navigate(-1)}>
-          Back
-        </button>
-
-        <div className="movie-info">
-          <p className="movie-price">$15.99 USD</p>
-
-          <h1>{movie.title}</h1>
-
-          <p className="movie-meta">
-            <span>{releaseYear}</span> • <span>{hours}h {minutes}m</span>
-          </p>
-
-          <div className="movie-overview">
-            <p>{movie.overview}</p>
-            {movie.budget && (
-              <p className="movie-budget">Budget: ${movie.budget.toLocaleString()} USD</p>
-            )}
-          </div>
-
-          <div className="movie-genre">
-            {genres.map((g, index) => (
-              <span key={index} className="genre-tag">{g}</span>
-            ))}
-          </div>
-
-          <div className="movie-cast">
-            <div className="cast-carousel-container">
-              <button className="carousel-arrow left" onClick={() => handleScroll('left')}>
-                &#8249;
-              </button>
-              <div className="cast-carousel" ref={scrollContainerRef}>
-                {director && (
-                  <div key="director" className="actor-item">
-                    <img
-                      src={directorImage || 'https://via.placeholder.com/200x300?text=No+Image'}
-                      alt={director}
-                      className="actor-image"
-                    />
-                    <div className="actor-details">
-                      <strong>{director}</strong> <em>(Director)</em>
-                    </div>
-                  </div>
-                )}
-                {writer && (
-                  <div key="writer" className="actor-item">
-                    <img
-                      src={writerImage || 'https://via.placeholder.com/200x300?text=No+Image'}
-                      alt={writer}
-                      className="actor-image"
-                    />
-                    <div className="actor-details">
-                      <strong>{writer}</strong> <em>(Writer)</em>
-                    </div>
-                  </div>
-                )}
-
-                {cast.map((actor) => (
-                  <div key={actor.id} className="actor-item">
-                    <img
-                      src={
-                        actor.profile_path
-                          ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
-                          : 'https://via.placeholder.com/200x300?text=No+Image'
-                      }
-                      alt={actor.name}
-                      className="actor-image"
-                    />
-                    <div className="actor-details">
-                      <strong>{actor.name}</strong> as <em>{actor.character || 'Unknown Character'}</em>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <button className="carousel-arrow right" onClick={() => handleScroll('right')}>
-                &#8250;
-              </button>
-            </div>
-          </div>
-
-          {movie.homepage && (
+      {movie.homepage && (
             <p className="movie-homepage">
               <a href={movie.homepage} target="_blank" rel="noopener noreferrer">
                 {movie.homepage}
               </a>
             </p>
           )}
-        </div>
+        
+      <div className="movie-details">
+        <button className="back-button" onClick={() => navigate(-1)}>
+          Back
+        </button>
 
-        <div className="movie-poster-and-cart-container">
-          <div className="movie-trailer">
-            {movie.videos && movie.videos.results.length > 0 && (
-              movie.videos.results
-                .filter((video) => video.site === 'YouTube')
-                .slice(0, 1)
-                .map((video) => (
-                  <div key={video.id}>
-                    <iframe
-                      width="500"
-                      height="265"
-                      src={`https://www.youtube.com/embed/${video.key}`}
-                      title={video.name}
-                      frameBorder="0"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                ))
-            )}
-          </div>
+        <div className="movie-left-container">
+          <div className="movie-info">
+            <h1>{movie.title}</h1>
+            <p className="movie-meta">
+              <span>{releaseYear}</span> • <span>{hours}h {minutes}m</span>
+            </p>
 
-          <div className="movie-poster-and-cart">
-            <div className="movie-price-and-cart">
-              <button className="add-to-cart" onClick={handleAddToCart}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
-                  alt="cart icon"
-                  className="cart-icon"
-                />
-                Add to cart
-              </button>
-            </div>
-
-            <div className="movie-poster">
-              {movie.poster_path ? (
-                <img
-                  src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                  alt={`${movie.title} poster`}
-                />
-              ) : (
-                <div>No poster available</div>
+            <div className="overview-and-cart-container">
+            <div className="movie-overview">
+              <p className='movie-overview-p'>{movie.overview}</p>
+              {movie.budget && (
+                <p className="movie-budget">Budget: ${movie.budget.toLocaleString()}</p>
               )}
             </div>
+            <div className="movie-add-to-cart-section">
+    <p className="movie-price">$15.99</p> 
+    
+    <button className="add-to-cart" onClick={handleAddToCart}>
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
+        alt="cart icon"
+        className="cart-icon"
+      />
+      Add to cart
+    </button>
+  </div>
+</div>
+
+            
+            <div className="movie-genre">
+              {genres.map((g, index) => (
+                <span key={index} className="genre-tag">{g}</span>
+              ))}
+            </div>
+            <div className="movie-cast">
+              <div className="cast-carousel-container">
+                <button className="carousel-arrow left" onClick={() => handleScroll('left')}>
+                  &#8249;
+                </button>
+                <div className="cast-carousel" ref={scrollContainerRef}>
+                  {director && (
+                    <div key="director" className="actor-item">
+                      <img
+                        src={directorImage || 'https://via.placeholder.com/200x300?text=No+Image'}
+                        alt={director}
+                        className="actor-image"
+                      />
+                      <div className="actor-details">
+                        <strong>{director}</strong> <em>(Director)</em>
+                      </div>
+                    </div>
+                  )}
+                  {writer && (
+                    <div key="writer" className="actor-item">
+                      <img
+                        src={writerImage || 'https://via.placeholder.com/200x300?text=No+Image'}
+                        alt={writer}
+                        className="actor-image"
+                      />
+                      <div className="actor-details">
+                        <strong>{writer}</strong> <em>(Writer)</em>
+                      </div>
+                    </div>
+                  )}
+                  {cast.map((actor) => (
+                    <div key={actor.id} className="actor-item">
+                      <img
+                        src={
+                          actor.profile_path
+                            ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
+                            : 'https://via.placeholder.com/200x300?text=No+Image'
+                        }
+                        alt={actor.name}
+                        className="actor-image"
+                      />
+                      <div className="actor-details">
+                        <strong>{actor.name}</strong> as <em>{actor.character || 'Unknown Character'}</em>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button className="carousel-arrow right" onClick={() => handleScroll('right')}>
+                  &#8250;
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right-side container (poster and trailer) */}
+        <div className="movie-poster-and-cart-container">
+  <div className="movie-trailer">
+    {movie.videos && movie.videos.results.length > 0 ? (
+      movie.videos.results
+        .filter((video) => video.site === 'YouTube')
+        .slice(0, 1)
+        .map((video) => (
+          <div key={video.id}>
+            <iframe
+              width="410"
+              height="225"
+              src={`https://www.youtube.com/embed/${video.key}`}
+              title={video.name}
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
+          </div>
+        ))
+    ) : (
+      <div className="trailer-placeholder">
+          </div>
+          )}
+        </div>
+          <div className="movie-poster">
+            {movie.poster_path ? (
+              <img
+                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                alt={`${movie.title} poster`}
+              />
+            ) : (
+              <div>No poster available</div>
+            )}
           </div>
         </div>
       </div>
