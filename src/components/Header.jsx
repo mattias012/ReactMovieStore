@@ -11,6 +11,11 @@ function Header() {
 
   const cartItems = useSelector((state) => state.movies.cart);
 
+  const totalQuantity = cartItems.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
+
+
   const totalPrice = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity; 
   }, 0);
@@ -55,6 +60,9 @@ function Header() {
       <div className="nav-right">
         <button className="cart-link" onClick={toggleCart}>
           🛒
+          {cartItems.length > 0 && (
+            <span className="cart-item-count">{totalQuantity}</span>
+          )}
         </button>
 
         {cartOpen && (

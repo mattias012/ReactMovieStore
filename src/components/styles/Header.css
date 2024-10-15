@@ -47,6 +47,19 @@
   font-size: 40px;
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.cart-item-count {
+  background-color: red;
+  color: white;
+  border-radius: 30%;
+  padding: 2px 6px;
+  position: absolute;
+  top: 20px;
+  right: -15px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .cart-link:hover {
