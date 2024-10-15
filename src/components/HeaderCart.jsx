@@ -2,6 +2,7 @@
 import './styles/HeaderCart.css'
 import logo from '/src/assets/logo-nobackground.png';
 
+
 function HeaderCart() {
   return (
     <header className="header-cart">
@@ -16,7 +17,7 @@ function HeaderCart() {
         <img alt="logo" src={logo} />
       </div>
 
-      <div className="nav-right">
+      <div className="nav-right-cart">
         {}
       </div>
 

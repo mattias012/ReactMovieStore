@@ -1,17 +1,31 @@
 .category-sidebar {
-    width: 150px;
-    padding: 20px;
-    border-right: 1px solid #000;
-  }
-  
-  .category-sidebar li {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-  }
-  .category-sidebar a {
-    color: #000;
-    font-style: none;;
-  }
-  
+  width: 150px;
+  padding: 20px;
+  border-right: 1px solid #000;
+}
+
+.category-sidebar li {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  cursor: pointer; /* Show that the item is clickable */
+}
+
+.category-sidebar a {
+  color: #000; /* Default text color */
+  text-decoration: none;
+  padding: 5px; /* Add some padding to create space for the border */
+}
+
+/* Change text color on hover */
+.category-sidebar li:hover a {
+  color:rgb(40, 127, 230); /* Text color changes to blue on hover */
+}
+
+/* Change text color and add border when selected */
+.category-sidebar li.selected a {
+  color: rgb(22, 46, 65); /* Text color stays blue when selected */
+  border: 2px solid rgb(22, 46, 65); /* Add border around the text */
+  border-radius: 15px; /* Rounded corners */
+}
