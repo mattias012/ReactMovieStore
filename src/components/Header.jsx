@@ -53,7 +53,7 @@ function Header() {
           <img alt="logo" src={imageLink} />
         </div>
         <nav className="nav">
-          <a href="#movies">Movies</a>
+          <a href="/">Movies</a>
         </nav>
       </div>
 
