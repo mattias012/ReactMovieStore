@@ -54,4 +54,28 @@
   .sum-pay-button:hover {
     background-color: rgba(31, 76, 113, 0.95);
   }
-  
+  @media (max-width: 768px) {
+    .sum-order-summary {
+        max-width: 90%; 
+        padding: 15px;  
+    }
+
+    h3 {
+        font-size: 1rem; 
+        text-align: center; 
+    }
+
+    .sum-shipping-section, .sum-to-pay-section {
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+
+    .sum-shipping-section p, .sum-to-pay-section p {
+        margin-bottom: 5px; 
+    }
+
+    .sum-pay-button {
+        padding: 8px 15px; 
+        font-size: 0.9rem; 
+    }
+}

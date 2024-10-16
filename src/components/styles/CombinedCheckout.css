@@ -43,5 +43,27 @@
     text-align: center;
     margin-top: 20px; 
     margin-bottom: 10px; 
-    
   }
+  @media (max-width: 768px) {
+    .checkout-forms-container {
+        flex-direction: column; 
+        gap: 20px;             
+        align-items: center;    
+    }
+
+    .checkout-information,
+    .card-checkout-information {
+        max-width: 90%;  
+        width: 100%;     
+    }
+
+    .pay-button {
+        width: 100%;   
+        max-width: 300px; 
+        font-size: 0.9rem; 
+    }
+
+    .total-cost {
+        font-size: 1rem;
+    }
+}
