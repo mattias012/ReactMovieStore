@@ -30,8 +30,9 @@ function SearchBar() {
 
   return (
     <div className="search-bar">
-      <h1>Welcome</h1>
-      <p>Millions of movies, TV shows to discover</p>
+      <div className="background-searchbar-title">
+        <p>With great power comes - React Movie Store</p>
+        
       <div className="search-input">
         <input
           type="text"
@@ -44,6 +45,7 @@ function SearchBar() {
           onKeyPress={handleKeyPress}  //Trigger search on Enter key press
         />
         <button className="search-button" onClick={handleSearch}>🔍</button> 
+        </div>
       </div>
     </div>
   );
