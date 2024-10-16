@@ -14,6 +14,7 @@ import OrderSummary from './components/OrderSummary';
 import CheckoutInformation from './components/CheckoutInformation';
 import CheckoutCardDetails from './components/CheckoutCardDetails';
 import CombinedCheckout from './components/CombinedCheckout';
+import HeaderPayment from './components/HeaderPayment';
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -96,7 +97,7 @@ function App() {
   path="/checkoutinfromtaion"
   element={
     <div className="app-container">
-      <HeaderCart />
+      <HeaderPayment />
       <div className="cart-layout">
         <CombinedCheckout /> 
       </div>

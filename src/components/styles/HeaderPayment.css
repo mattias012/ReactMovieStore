@@ -1,0 +1,36 @@
+.header-payment {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 20px;
+    background-color: #7299C6;
+    color: white;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    box-sizing: border-box;
+  }
+  
+  .nav-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .go-back {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+  .logo {
+    width: 120px;
+  }
+  
+  .nav-right-cart {
+    flex: 1; 
+  }
+  
+  
