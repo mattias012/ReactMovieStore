@@ -156,7 +156,6 @@ const MovieDetails = () => {
             </div>
             <div className="movie-add-to-cart-section">
     <p className="movie-price">$15.99</p> 
-    
     <button className="add-to-cart" onClick={handleAddToCart}>
       <img
         src="https://cdn-icons-png.flaticon.com/512/263/263142.png"

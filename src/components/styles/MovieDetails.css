@@ -369,109 +369,86 @@ transform: scale(1.05);
     transform: scale(1.05); 
   }
 
-@media (max-width: 768px) {
 
-    .add-to-cart {
+  @media (max-width: 480px) {
+    .movie-details-container {
+        padding-top: 93px;
+      }
+      
+    .movie-details {
+        display: flex;
+        flex-direction: column; 
+        width: 100vw;
+        border-radius: 0px;
+        padding: 10px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.158) 20%, rgba(255, 255, 255, 1) 100%); 
+    }
+
+    .movie-info h1 {
+        margin-top: 20px;    
+        } 
+
+    .backdrop-fade {
+        height: 20vh; 
+    }
+    .overview-and-cart-container {
+        width: 60vw;
+        margin-top: 5px;
+      }
+    
+      .cast-carousel-container {
+        width: 370px;
+        gap: 10px;
+    }
+    
+    .cast-carousel {
+        width: 380px;
+        gap: 20px;
+        padding: 0px 0;
+        margin-top: 20px;
+    }    
+    
+    .movie-trailer {
+        margin: 0px 0; 
+        margin-right: 60px;
+    }
+    
+    
+    .movie-trailer iframe {
+        border-radius: 10px; 
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    }
+
+    .trailer-placeholder {
+        width: 410px;
+        height: 225px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        font-size: 1em;
+        text-align: center;
+      }
+
+      .add-to-cart {
         position: fixed;
         top: 100px;
         right: 20px;
         bottom: auto;
         z-index: 1000;
-        
         width: 150px;
         font-size: 14px;
         padding: 8px 12px;        
     }
 
-    .add-to-cart button {
-        /*padding: 12px 24px;*/
-        font-size: 14px;
-        background-color: #007bff; 
-        color: white;
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    .back-button, .movie-homepage, .production-logos {
+      font-size: 14px;
+      padding: 8px 12px;
+      top: 100px;
+      left: 10px;
     }
 
-
-    .back-button {
-        font-size: 14px;
-        padding: 8px 12px;
-        top: 100px;
-        left: 10px;
-    }
-
-    .header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 80px;
-        z-index: 1000;
-        
-    }
-    .movie-details-container {
-      padding-top: 150px;
-      /* height: auto; */
-    }
-  
-    .movie-price {
-        font-size: 1.2em;
-        position: relative;
-        margin-top: 10px;
-        margin-right: 10px;
-        right: auto;
-    }
-
-    .production-logos {
-        display:none;
-        top: 70px;
-        right: 10px;
-    }
-
-    .movie-details {
-      grid-template-columns: 1fr;
-      gap: 0;
-      padding: 10px;
-      /* display: grid;
-      grid-template-columns: 2fr 1fr; */
-    }
-  
-    .movie-backdrop {
-      height: 40vh;
-      max-height: 250px;
-    }
-  
-    .movie-overview {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      margin-top: 10px;
-      font-size: 0.9rem;
-    }
-  
-    .cast-carousel-container {
-      width: 100%;
-      gap: 10px;
-    }
-
-    .movie-poster-and-cart {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .movie-info h1 {
-        font-size: 1.5rem;
-    }
-
-    .movie-poster img {
-      max-width: 100%;
-    }
-
-
-    .production-logos ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
 
     .company-logo {
         width: 40px;
@@ -483,36 +460,6 @@ transform: scale(1.05);
     .genre-tag {
         font-size: 0.7em;
       }
-    .movie-info-container {
-        padding: 15px;
-    }
-    
-    .movie-logo-container {
-        position: fixed;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 3000;
-    }
-  }
-
-
-  @media (max-width: 480px) {
-    .back-button, .movie-homepage, .production-logos {
-      font-size: 14px;
-      padding: 8px 12px;
-      top: 100px;
-      left: 10px;
-    }
-  
-    .movie-rating {
-      width: 25px;
-      height: 25px;
-    }
-  
-    .movie-details {
-      padding: 5px;
-    }
   
     .movie-overview {
       font-size: 0.9em;
@@ -540,569 +487,4 @@ transform: scale(1.05);
       }
   }
 
-  /*
-  .movie-details-container {
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
-    box-sizing: border-box;
-    padding-top: 120px;
-    position: relative;
-}
-
-.movie-backdrop {
-    position: absolute;
-    top: 93px;
-    left: 0;
-    width: 100vw;
-    height: 70vh;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.3;
-}
-
-.backdrop-fade {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 250px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 30%, rgba(255, 255, 255, 0.842) 60%, rgb(255, 255, 255) 100%);
-}
-
-.movie-details {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-    box-sizing: border-box;
-    z-index: 3;
-    position: relative;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 40%, rgba(255, 255, 255, 1) 100%);
-    border-radius: 10px;
-}
-
-.back-button {
-    background-color: #7299C6;
-    border: 1px solid #ccc;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    position: fixed;
-    border-radius: 35px;
-    color: white;
-    top: 120px;
-    left: 20px;
-    z-index: 1000;
-}
-
-.movie-homepage {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    z-index: 3;
-}
-
-.movie-homepage a {
-    font-size: 1em;
-    color: #7299C6;
-    text-decoration: none;
-}
-
-.movie-homepage a:hover {
-    text-decoration: underline;
-}
-
-.movie-overview {
-    background-color: rgba(0, 0, 0, 0.05);
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 10px;
-    font-size: 1em;
-    line-height: 1.5;
-    color: #333;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    width: 370px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-.movie-budget {
-    margin-top: 10px;
-    margin-right: 20px;
-    align-self: flex-end;
-    font-size: 0.9em;
-    color: #555;
-}
-
-.movie-info {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.movie-info h1 {
-    font-size: 3em;
-    margin: 0;
-    color: #000000;
-}
-
-.movie-meta {
-    font-size: 1.1em;
-    color: #777;
-    margin: 5px 0;
-}
-
-.movie-rating-container {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.movie-rating {
-    background-color: #7299C6;
-    border-radius: 50%;
-    padding: 10px;
-    font-size: 1em;
-    color: #fff;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 5px;
-}
-
-.rating-label {
-    font-size: 1em;
-    color: #000000;
-}
-
-.cart-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-}
-
-.production-logos {
-    position: fixed;
-    top: 120px;
-    right: 40px;
-    z-index: 10;
-}
-
-.production-logos ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 10px;
-}
-
-.production-logos li {
-    display: inline-block;
-}
-
-.company-logo {
-    width: 60px;
-    height: auto;
-    object-fit: contain;
-}
-
-.movie-genre {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 15px 0;
-}
-
-.genre-tag {
-    background-color: #7299C6;
-    border-radius: 35px;
-    padding: 5px 10px;
-    margin-right: 5px;
-    margin-bottom: 10px;
-    font-size: 0.8em;
-    color: #ffffff;
-}
-
-p {
-    margin: 5px 0;
-    color: #000000;
-    font-size: 1em;
-}
-
-.cast-carousel-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 580px;
-}
-
-.cast-carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    width: 470px;
-    gap: 20px;
-    padding: 20px 0;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.carousel-arrow {
-    background: none;
-    border: none;
-    font-size: 2em;
-    cursor: pointer;
-    position: relative;
-    z-index: 2;
-    transition: transform 0.2s ease, color 0.2s ease;
-    color: #333;
-}
-
-.carousel-arrow:hover {
-    transform: scale(1.2);
-    color: #7299C6;
-}
-
-.carousel-arrow:active {
-    transform: scale(1.1);
-    color: #48648a;
-}
-
-.carousel-arrow.left {
-    margin-right: 10px;
-    margin-bottom: 90px;
-}
-
-.carousel-arrow.right {
-    margin-left: 10px;
-    margin-bottom: 90px;
-}
-
-.actor-item {
-    text-align: center;
-}
-
-.actor-image {
-    border-radius: 10px;
-    width: 100px;
-    height: auto;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.actor-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.actor-details {
-    margin-top: 10px;
-}
-
-.movie-logo-container {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3000;
-}
-
-.movie-logo {
-    width: 150px;
-    height: auto;
-    object-fit: contain;
-}
-
-.movie-poster-and-cart-container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.movie-poster-and-cart {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-}
-
-.movie-price {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 1.6em;
-    color: #000;
-    margin-right: 20px;
-    margin-top: 100px;
-}
-
-.add-to-cart {
-    display: flex;
-    align-items: center;
-    padding: 5px 15px;
-    background-color: #7299C6;
-    font-size: 1.8em;
-    color: white;
-    border: none;
-    border-radius: 35px;
-    cursor: pointer;
-    margin-left: -40px;
-
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.movie-poster img {
-    border-radius: 8px;
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    object-fit: cover;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.movie-poster img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.3);
-}
-
-.movie-trailer {
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    margin-right: 20px;
-}
-
-.movie-trailer iframe {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-
-}
-
-.trailer-placeholder {
-    width: 410px;
-    height: 225px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    font-size: 1em;
-    text-align: center;
-  }
-
-.movie-add-to-cart-container {
-    display: flex;
-    justify-content: flex-end; 
-    margin-right: 60px;
-  }
   
-  .add-to-cart {
-    display: flex;
-    align-items: center;
-    padding: 5px 15px;
-    background-color: #7299C6;
-    font-size: 1.6em;
-    color: white;
-    border: none;
-    border-radius: 35px;
-    cursor: pointer;
-    margin-left: 0;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  }
-  
-  .add-to-cart:hover {
-    background-color: #48648a; 
-    transform: scale(1.05); 
-  }
-
-@media (max-width: 768px) {
-
-    .container {
-        flex-direction: column;
-    }
-
-    .video-container,
-    .pictures {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .price-and-button {
-        align-self: flex-start;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-    }
-
-    .movie-details-container {
-        padding-top: 150px;
-        height: auto;
-    }
-    
-    .movie-backdrop {
-        height: 40vh;
-        max-height: 300px;
-    }
-    
-    .movie-details {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 10px;
-    }
-    
-    .back-button {
-        font-size: 14px;
-        padding: 8px 12px;
-        top: 100px;
-        left: 10px;
-    }
-    
-    .add-to-cart {
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        z-index: 1000;
-        width: 150px;
-        font-size: 14px;
-        padding: 8px 12px;
-    }
-    
-    .movie-overview {
-        width: 100%;
-        margin-top: 10px;
-    }
-    
-    .movie-poster-and-cart {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .movie-poster img {
-        max-width: 100%;
-    }
-    
-    .movie-price {
-        font-size: 1.2em;
-        position: relative;
-        margin-top: 10px;
-        margin-right: 0;
-    }
-    
-    .production-logos {
-        display: none;
-    }
-    
-    .cast-carousel-container {
-        width: 100%;
-    }
-    
-    .cast-carousel {
-        width: 100%;
-        padding: 10px 0;
-    }
-    
-    @media (max-width: 480px) {
-        .price-and-button {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-    
-        .price {
-            margin-bottom: 5px;
-        }
-    
-        .add-to-cart {
-            position: fixed;
-            top: 90px;
-            right: 10px;
-            width: 130px;
-            font-size: 12px;
-            padding: 6px 10px;
-        }
-    
-        .back-button {
-            font-size: 12px;
-            padding: 6px 10px;
-            top: 90px;
-            left: 5px;
-        }
-    
-        .header {
-            height: 60px;
-        }
-    
-        .movie-details-container {
-            padding-top: 160px;
-        }
-    
-        .movie-info h1 {
-            font-size: 1.8rem;
-        }
-    
-        .movie-meta {
-            font-size: 0.9em;
-        }
-    
-        .movie-rating {
-            font-size: 0.8em;
-            width: 30px;
-            height: 30px;
-            padding: 8px;
-        }
-    
-        .movie-genre .genre-tag {
-            font-size: 0.7em;
-            padding: 4px 8px;
-        }
-    
-        .movie-overview {
-            font-size: 0.9em;
-        }
-    
-        .production-logos {
-            top: 60px;
-            right: 5px;
-        }
-    
-        .cast-carousel-container {
-            width: 100%;
-        }
-    
-        .cast-carousel {
-            width: 100%;
-            gap: 10px;
-        }
-    
-        .actor-image {
-            width: 80px;
-        }
-    
-        .movie-poster img {
-            max-width: 100%;
-            height: auto;
-        }
-    
-        .movie-price {
-            font-size: 1.1em;
-        }
-    
-        .movie-trailer iframe {
-            width: 100%;
-            height: auto;
-        }
-    }
-        */
-
-  
-
