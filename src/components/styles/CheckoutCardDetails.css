@@ -1,7 +1,7 @@
  .card-checkout-information {
     padding: 20px;
     font-family: Arial, sans-serif;
-    background-color: #9eb7db;
+    background-color: rgba(26, 67, 100, 0.95);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px; 

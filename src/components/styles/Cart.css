@@ -7,7 +7,6 @@
     color: white;
   }
   
-  
   h2 {
     color: white;
     text-align: left;
@@ -106,14 +105,3 @@
     height: auto; 
     margin-left: 8px; 
   }
-  .fullscreen-bg {
-    background-image: url('path-to-your-image.jpg'); /* Replace with your image path */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    min-height: 100vh;  /* Ensures the background takes up the full screen height */
-    display: flex;      /* Center the cart horizontally and vertically */
-    justify-content: center;
-    align-items: center;
-}

@@ -23,7 +23,7 @@
   .track-order-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #7299C6;
+    background-color:  rgba(26, 67, 100, 0.95);;
     color: white;
     text-decoration: none;
     font-size: 1rem;
