@@ -13,7 +13,6 @@
     left: 0;
     width: 100vw;
     height: 70vh; 
-    max-height: 400px;
     background-size: cover;
     background-position: center;
     opacity: 0.5; 
@@ -75,29 +74,7 @@ background-color: #48648a;
 transform: scale(1.05); 
 }
 
-.add-to-cart {
-    position: fixed;
-    top: 120px;
-    left: 620px;
-    z-index: 1000;
-    width: 200px;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    padding: 10px 20px;
-    background-color: #7299C6;
-    font-size: 1.2em;
-    color: white;
-    border: none;
-    border-radius: 35px;
-    cursor: pointer;
-    
-    /*margin-left: -40px;
-    margin-top: 20px;*/ 
-    height: auto;
-}
 .movie-homepage {
     position: absolute;
     bottom: 5px;
@@ -186,13 +163,10 @@ transform: scale(1.05);
     margin: 5px 0;
 }
 
-
-
 .cart-icon {
     width: 25px;
     height: 25px;
     margin-right: 8px; 
-
 }
 
 .production-logos {
@@ -200,7 +174,6 @@ transform: scale(1.05);
     top: 120px; 
     right: 20px;
     z-index: 10;
-    
 }
 
 .production-logos ul {
@@ -208,8 +181,7 @@ transform: scale(1.05);
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 10px;
-    
+    gap: 10px; 
 }
 
 .production-logos li {
@@ -221,7 +193,6 @@ transform: scale(1.05);
     width: 60px;
     height: auto;
     object-fit: contain;
-    
 }
 
 .movie-genre {
@@ -327,28 +298,9 @@ transform: scale(1.05);
 .movie-poster-and-cart-container {
     display: flex;
     flex-direction: column; 
-    align-items: flex-start;
-    padding: 20px;
-    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
-
-.movie-poster-and-cart {
-    display: flex;
-    justify-content: space-between; 
-    align-items: flex-start; 
-    padding: 20px;
-}
-
-.movie-price {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 1.6em;
-    color: #000;
-    margin-right: 20px;
-    margin-top: 100px;
-}
-
 
 .movie-poster img {
     border-radius: 8px;
@@ -369,13 +321,53 @@ transform: scale(1.05);
     margin: 20px 0; 
     display: flex;
     justify-content: center; 
-    margin-right: 20px;
 }
+
 
 .movie-trailer iframe {
     border-radius: 10px; 
     overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
+
+
+.trailer-placeholder {
+    width: 410px;
+    height: 225px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 1em;
+    text-align: center;
+  }
+
+.movie-add-to-cart-container {
+    display: flex;
+    justify-content: flex-end; 
+    margin-right: 60px;
+  }
+  
+  .add-to-cart {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    background-color: #7299C6;
+    font-size: 1.6em;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    margin-left: 0;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+
+  
+  .add-to-cart:hover {
+    background-color: #48648a; 
+    transform: scale(1.05); 
+  }
 
 @media (max-width: 768px) {
 
@@ -502,45 +494,8 @@ transform: scale(1.05);
         transform: translateX(-50%);
         z-index: 3000;
     }
-
   }
 
-.trailer-placeholder {
-    width: 410px;
-    height: 225px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    font-size: 1em;
-    text-align: center;
-  }
-
-.movie-add-to-cart-container {
-    display: flex;
-    justify-content: flex-end; 
-    margin-right: 60px;
-  }
-  
-  .add-to-cart {
-    display: flex;
-    align-items: center;
-    padding: 5px 15px;
-    background-color: #7299C6;
-    font-size: 1.6em;
-    color: white;
-    border: none;
-    border-radius: 35px;
-    cursor: pointer;
-    margin-left: 0;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  }
-  
-  .add-to-cart:hover {
-    background-color: #48648a; 
-    transform: scale(1.05); 
-  }
 
   @media (max-width: 480px) {
     .back-button, .movie-homepage, .production-logos {
