@@ -47,6 +47,12 @@ const movieSlice = createSlice({
     searchTerm: '', // Moved searchTerm here
   },
   reducers: {
+    updateMovieQuantity: (state, action) => {
+      const movie = state.cart.find((item) => item.id === action.payload.id);
+      if (movie) {
+        movie.quantity = action.payload.quantity;
+      }
+    },
     setSelectedMovie: (state, action) => {
       state.selectedMovie = action.payload;
     },
@@ -77,6 +83,7 @@ const movieSlice = createSlice({
       state.cart = [];
     },
   },
+  
   extraReducers: (builder) => {
     builder
       .addCase(fetchMovies.pending, (state) => {
@@ -110,6 +117,7 @@ export const {
   setSearchTerm,
   addMovieToCart,
   removeMovieFromCart,
+  updateMovieQuantity,
   clearCart,
 } = movieSlice.actions;
 
