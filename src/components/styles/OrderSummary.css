@@ -1,4 +1,4 @@
-.order-summary {
+.sum-order-summary {
     background-color: #9eb7db; 
     padding: 20px;
     border-radius: 10px;
@@ -14,9 +14,9 @@
     text-align: left;
   }
   
-  .cost-section, .shipping-section, .to-pay-section {
+  .sum-shipping-section {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     margin-bottom: 10px;
   }
   
@@ -25,21 +25,21 @@
     margin: 20px 0;
   }
   
-  .to-pay-section {
+  .sum-to-pay-section {
     background-color: #7299C6; 
     padding: 10px;
     border-radius: 8px;
   }
   
-  .questions-section {
+  .sum-questions-section {
     margin-top: 20px;
   }
   
-  .questions-section p {
+  .sum-questions-section p {
     margin: 5px 0;
   }
   
-  .pay-button {
+  .sum-pay-button {
     background-color: #7299C6; 
     color: white;
     border: none;
@@ -51,7 +51,7 @@
     margin-top: 20px;
   }
   
-  .pay-button:hover {
+  .sum-pay-button:hover {
     background-color: #5a87b1; 
   }
   

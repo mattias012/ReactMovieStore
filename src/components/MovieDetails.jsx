@@ -68,7 +68,9 @@ const MovieDetails = () => {
       Poster: movie.poster_path
         ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
         : 'N/A',
-      Price: 15.99
+
+      Price: 15.99 ,
+      quantity: 1
     };
 
     dispatch(addMovieToCart(movieData));

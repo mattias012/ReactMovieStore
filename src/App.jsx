@@ -12,11 +12,14 @@ import Checkout from './components/Checkout';
 import HeaderCart from './components/HeaderCart';
 import OrderSummary from './components/OrderSummary';
 import CheckoutInformation from './components/CheckoutInformation';
+import CheckoutCardDetails from './components/CheckoutCardDetails';
+import CombinedCheckout from './components/CombinedCheckout';
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MovieDetails from './components/MovieDetails';
 import { fetchMovies } from "./features/movieSlice";
+import ThankYouPage from './components/ThankYouPage';
 
 
 function MainContent() {
@@ -57,13 +60,15 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route
+
+         <Route
+
           path="/cart"
           element={
-            <div className="fullpage-layout">
-              <HeaderCart />
+            <div className="app-container">
+              <HeaderCart /> 
               <div className="cart-layout">
-                <Cart />
+                <Cart /> 
                 <OrderSummary />
               </div>
             </div>
@@ -79,25 +84,25 @@ function App() {
           }
         />
         <Route
-          path="/thankyou"
+          path="/ThankYouPage"
           element={
             <div className="fullpage-layout">
               <HeaderCart />
-              <Thankyou />
+              <ThankYouPage />
             </div>
           }
         />
         <Route
-          path="/checkoutinformation"
-          element={
-            <div className="fullpage-layout">
-              <HeaderCart />
-              <div className="cart-layout">
-                <CheckoutInformation />
-              </div>
-            </div>
-          }
-        />
+  path="/checkoutinfromtaion"
+  element={
+    <div className="app-container">
+      <HeaderCart />
+      <div className="cart-layout">
+        <CombinedCheckout /> 
+      </div>
+    </div>
+  }
+/>
 
         <Route path="/*" element={<MainContent />} />
       </Routes>

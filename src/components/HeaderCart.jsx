@@ -8,7 +8,7 @@ function HeaderCart() {
     <header className="header-cart">
 
       <div className="nav-left">
-        <a href="#shop" className="continue-shopping">
+        <a href="#/" className="continue-shopping">
           <span>&larr;</span> Continue shopping
         </a>
       </div>
@@ -18,7 +18,7 @@ function HeaderCart() {
       </div>
 
       <div className="nav-right-cart">
-        {}
+       
       </div>
 
     </header>
