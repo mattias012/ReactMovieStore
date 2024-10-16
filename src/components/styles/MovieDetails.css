@@ -16,7 +16,7 @@
     max-height: 400px;
     background-size: cover;
     background-position: center;
-    opacity: 0.3; 
+    opacity: 0.5; 
 }
 
 .backdrop-fade {
@@ -45,22 +45,34 @@
     box-sizing: border-box;
     z-index: 3; 
     position: relative;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 40%, rgba(255, 255, 255, 1) 100%); 
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.158) 40%, rgba(255, 255, 255, 1) 100%); 
     border-radius: 10px;
 }
 
+.movie-left-container {
+    display: flex;
+    flex-direction: column;
+  }
+
 .back-button {
     background-color: #7299C6;
-    border: 1px solid #ccc;
+    border: 0px solid #ccc;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     position: fixed;
     border-radius: 35px; 
     color: white;
-    top: 120px; /* Adjusted to start below the header */
+    top: 120px; 
     left: 20px; 
     z-index: 1000; 
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.back-button:hover {
+background-color: #48648a; 
+transform: scale(1.05); 
 }
 
 .add-to-cart {
@@ -87,8 +99,8 @@
     height: auto;
 }
 .movie-homepage {
-    position: fixed;
-    bottom: 10px;
+    position: absolute;
+    bottom: 5px;
     left: 10px;
     z-index: 3;
 }
@@ -103,20 +115,47 @@
     text-decoration: underline;
 }
 
+.overview-and-cart-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-end; 
+    width: 100%;
+    margin-top: 10px;
+  }
+
 .movie-overview {
-    background-color: rgba(0, 0, 0, 0.05); 
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.185); 
     padding: 15px; 
     border-radius: 10px; 
-    margin-top: 10px; 
+    margin-right: 7px;
     font-size: 1em;
     line-height: 1.5;
     color: #333; 
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
-    /* width: 370px; */
     position: relative; 
     display: flex;
     flex-direction: column; 
 }
+.movie-overview-p{
+    margin: 5px 0;
+    color: #000000;
+    font-size: 1em;
+
+}
+
+.movie-add-to-cart-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; 
+    justify-content: flex-start; 
+  }
+  .movie-price {
+    font-size: 1.6em;
+    color: #000;
+    margin-bottom: 10px; 
+    margin-right: 102px;
+  }
 
 .movie-budget {
     margin-top: 10px; 
@@ -132,6 +171,7 @@
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box; 
+
 }
 
 .movie-info h1 {
@@ -146,42 +186,21 @@
     margin: 5px 0;
 }
 
-.movie-rating-container {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-}
 
-.movie-rating {
-    background-color: #7299C6;
-    border-radius: 50%;
-    padding: 10px;
-    font-size: 1em;
-    color: #fff;
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 5px; 
-}
-
-.rating-label {
-    font-size: 1em;
-    color: #000000; 
-}
 
 .cart-icon {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     margin-right: 8px; 
+
 }
 
 .production-logos {
-    position: fixed;
-    top: 120px; /* Adjusted to start below the header */
-    right: 40px;
+    position: absolute;
+    top: 120px; 
+    right: 20px;
     z-index: 10;
+    
 }
 
 .production-logos ul {
@@ -190,22 +209,25 @@
     margin: 0;
     display: flex;
     gap: 10px;
+    
 }
 
 .production-logos li {
     display: inline-block;
+    
 }
 
 .company-logo {
     width: 60px;
     height: auto;
     object-fit: contain;
+    
 }
 
 .movie-genre {
     display: flex;
     flex-wrap: wrap;
-    margin: 15px 0;
+    margin-top: 5px;
 }
 
 .genre-tag {
@@ -213,29 +235,23 @@
     border-radius: 35px;
     padding: 5px 10px;
     margin-right: 5px;
-    margin-bottom: 10px;
     font-size: 0.8em;
     color: #ffffff;
-}
-
-p {
-    margin: 5px 0;
-    color: #000000;
-    font-size: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .cast-carousel-container {
     display: flex;
     align-items: center;
     position: relative;
-    width: 580px;
+    width: 680px;
 }
 
 .cast-carousel {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
-    width: 470px;
+    width: 580px;
     gap: 20px;
     padding: 20px 0;
     -ms-overflow-style: none; 
@@ -282,6 +298,7 @@ p {
     width: 100px;
     height: auto;
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .actor-image:hover {
@@ -486,6 +503,43 @@ p {
         z-index: 3000;
     }
 
+  }
+
+.trailer-placeholder {
+    width: 410px;
+    height: 225px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 1em;
+    text-align: center;
+  }
+
+.movie-add-to-cart-container {
+    display: flex;
+    justify-content: flex-end; 
+    margin-right: 60px;
+  }
+  
+  .add-to-cart {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    background-color: #7299C6;
+    font-size: 1.6em;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    margin-left: 0;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .add-to-cart:hover {
+    background-color: #48648a; 
+    transform: scale(1.05); 
   }
 
   @media (max-width: 480px) {
@@ -845,6 +899,9 @@ p {
     border-radius: 35px;
     cursor: pointer;
     margin-left: -40px;
+
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .movie-poster img {
@@ -872,7 +929,46 @@ p {
 .movie-trailer iframe {
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+
 }
+
+.trailer-placeholder {
+    width: 410px;
+    height: 225px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 1em;
+    text-align: center;
+  }
+
+.movie-add-to-cart-container {
+    display: flex;
+    justify-content: flex-end; 
+    margin-right: 60px;
+  }
+  
+  .add-to-cart {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    background-color: #7299C6;
+    font-size: 1.6em;
+    color: white;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    margin-left: 0;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .add-to-cart:hover {
+    background-color: #48648a; 
+    transform: scale(1.05); 
+  }
 
 @media (max-width: 768px) {
 
@@ -1052,3 +1148,6 @@ p {
         }
     }
         */
+
+  
+

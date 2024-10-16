@@ -38,7 +38,6 @@ function MainContent() {
         {!isMovieDetailsPage && <Sidebar />}
 
         <Routes>
-          {/* Normal routes for non-checkout/cart pages */}
           <Route path="/" element={<MovieCatalog status={status} error={error} />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="*" element={<NotFound />} />
@@ -58,7 +57,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Full-page routes */}
         <Route
           path="/cart"
           element={
@@ -101,7 +99,6 @@ function App() {
           }
         />
 
-        {/* Main content, all other pages */}
         <Route path="/*" element={<MainContent />} />
       </Routes>
     </Router>
