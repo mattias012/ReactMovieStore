@@ -46,6 +46,7 @@
     position: relative;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.158) 40%, rgba(255, 255, 255, 1) 100%); 
     border-radius: 10px;
+    
 }
 
 .movie-left-container {
@@ -101,7 +102,7 @@ transform: scale(1.05);
   }
 
 .movie-overview {
-    flex: 1;
+    flex: 2;
     background-color: rgba(255, 255, 255, 0.185); 
     padding: 15px; 
     border-radius: 10px; 
@@ -113,6 +114,7 @@ transform: scale(1.05);
     position: relative; 
     display: flex;
     flex-direction: column; 
+    
 }
 .movie-overview-p{
     margin: 5px 0;
@@ -126,6 +128,7 @@ transform: scale(1.05);
     flex-direction: column;
     align-items: flex-end; 
     justify-content: flex-start; 
+    
   }
   .movie-price {
     font-size: 1.6em;
@@ -152,14 +155,14 @@ transform: scale(1.05);
 }
 
 .movie-info h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin: 0;
     color: #000000;
 }
 
 .movie-meta {
     font-size: 1.1em;
-    color: #777;
+    color: #1f1f1f;
     margin: 5px 0;
 }
 
@@ -216,6 +219,7 @@ transform: scale(1.05);
     align-items: center;
     position: relative;
     width: 680px;
+    
 }
 
 .cast-carousel {
@@ -302,7 +306,11 @@ transform: scale(1.05);
     margin-bottom: 20px;
 }
 
-.movie-poster img {
+  .movie-poster-mobile {
+    display: none; 
+  }
+
+.movie-poster-desktop img {
     border-radius: 8px;
     width: 100%;
     max-width: 300px; 
@@ -312,7 +320,7 @@ transform: scale(1.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
-.movie-poster img:hover {
+.movie-poster-desktop img:hover {
     transform: scale(1.05); 
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.3); 
 }
@@ -373,6 +381,7 @@ transform: scale(1.05);
   @media (max-width: 480px) {
     .movie-details-container {
         padding-top: 93px;
+
       }
       
     .movie-details {
@@ -382,6 +391,7 @@ transform: scale(1.05);
         border-radius: 0px;
         padding: 10px;
         background: linear-gradient(to bottom, rgba(0, 0, 0, 0.158) 20%, rgba(255, 255, 255, 1) 100%); 
+        
     }
 
     .movie-info h1 {
@@ -389,28 +399,108 @@ transform: scale(1.05);
         } 
 
     .backdrop-fade {
-        height: 20vh; 
+        height: 15vh; 
     }
     .overview-and-cart-container {
-        width: 60vw;
+        display: flex;
+        flex-direction: row; 
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-top: 10px;
+      }
+      
+      .movie-poster-mobile {
+        display: block; 
+        flex: 0 0 40%; 
+        margin-left: 20px;
         margin-top: 5px;
+        text-align: center; 
+      }
+      
+  .movie-price-mobile {
+    font-size: 1.2em;
+    color: #000;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  .add-to-cart-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #7299C6;
+    width: 150px;
+    font-size: 0.9em;
+    color: white;
+    padding-top: 5px;
+    border: none;
+    border-radius: 35px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+  }
+  .add-to-cart-mobile:hover {
+    background-color: #48648a;
+    transform: scale(1.05);
+  }
+
+  .add-to-cart{
+    display: none;
+  }
+  .movie-price{
+    display: none;
+  }
+ 
+
+  .add-to-cart-mobile:hover {
+    background-color: #48648a;
+    transform: scale(1.05);
+  }
+      .movie-overview {
+        font-size: 0.9em;
+        padding: 5px;
+        margin: 5px 0;
+        flex: 0 0 50%; 
+      }
+      
+
+      .movie-poster-mobile img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 0px; 
+        border-radius: 10px;
+      }
+
+      .movie-poster-desktop {
+        display: none; 
+      }
+
+      .movie-add-to-cart-section {
+        order: 2; 
+        width: 100%;
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
       }
     
       .cast-carousel-container {
         width: 370px;
         gap: 10px;
-    }
+        margin-top: 10px;
+            }
     
     .cast-carousel {
         width: 380px;
         gap: 20px;
         padding: 0px 0;
-        margin-top: 20px;
+        margin-top: 10px;
     }    
     
     .movie-trailer {
         margin: 0px 0; 
-        margin-right: 60px;
+        margin-bottom: 140px;
+    
     }
     
     
@@ -421,34 +511,28 @@ transform: scale(1.05);
     }
 
     .trailer-placeholder {
-        width: 410px;
-        height: 225px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 10px;
-        font-size: 1em;
-        text-align: center;
+        display: none;
       }
 
-      .add-to-cart {
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        bottom: auto;
-        z-index: 1000;
-        width: 150px;
-        font-size: 14px;
-        padding: 8px 12px;        
-    }
 
-    .back-button, .movie-homepage, .production-logos {
+    .back-button {
       font-size: 14px;
       padding: 8px 12px;
       top: 100px;
       left: 10px;
     }
-
+    .production-logos {
+        top: 100px;
+        right: 10px;
+      }
+      .movie-homepage {
+        font-size: 10px;
+        bottom: 0px;
+        left: 5px;
+        z-index: 5000;
+      }
+    
+  
 
     .company-logo {
         width: 40px;
@@ -461,30 +545,20 @@ transform: scale(1.05);
         font-size: 0.7em;
       }
   
-    .movie-overview {
-      font-size: 0.9em;
-      padding: 5px;
-      margin: 5px 0;
-    }
 
-    .add-to-cart {
-        width: 120px;
-        font-size: 0.9em;
-        padding: 8px 10px;
+
+      .movie-logo-container {
+        position: absolute;
+        bottom: 30px;
     }
     
-    .movie-price {
-        font-size: 1em;
-        position: relative;
-        margin-top: 5px;
-        margin-right: 5px;
-    }
-  
-
-    .movie-poster img {
-        max-width: 90%;
+    .movie-logo {
+        width: 250px;
         height: auto;
-      }
+        object-fit: contain;
+    }
+
+    
   }
 
   

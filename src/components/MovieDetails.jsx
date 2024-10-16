@@ -154,6 +154,29 @@ const MovieDetails = () => {
                 <p className="movie-budget">Budget: ${movie.budget.toLocaleString()}</p>
               )}
             </div>
+
+            <div className="movie-poster-mobile">
+        {movie.poster_path ? (
+          <img
+        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+        alt={`${movie.title} poster`}
+      />
+    ) : (
+      <div>No poster available</div>
+    )}
+    
+    <p className="movie-price-mobile">$15.99</p>
+    <button className="add-to-cart-mobile" onClick={handleAddToCart}>
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
+        alt="cart icon"
+        className="cart-icon"
+      />
+      Add to cart
+    </button>
+
+  </div>
+
             <div className="movie-add-to-cart-section">
     <p className="movie-price">$15.99</p> 
     <button className="add-to-cart" onClick={handleAddToCart}>
@@ -252,16 +275,17 @@ const MovieDetails = () => {
           </div>
           )}
         </div>
-          <div className="movie-poster">
-            {movie.poster_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                alt={`${movie.title} poster`}
-              />
-            ) : (
-              <div>No poster available</div>
-            )}
-          </div>
+        <div className="movie-poster-desktop">
+    {movie.poster_path ? (
+      <img
+        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+        alt={`${movie.title} poster`}
+      />
+    ) : (
+      <div>No poster available</div>
+    )}
+  </div>
+          
         </div>
       </div>
     </div>
