@@ -206,7 +206,7 @@ function CombinedCheckout() {
     </div>
 
         <button type="submit" className="pay-button">
-          Submit Order
+         Pay
         </button>
       </form>
     </div>
