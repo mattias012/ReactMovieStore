@@ -1,21 +1,20 @@
-import React, { useEffect, useRef } from 'react'; 
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom'; 
-import { fetchMovieById, addMovieToCart } from '../features/movieSlice'; 
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchMovieById, addMovieToCart } from '../features/movieSlice';
 import './styles/MovieDetails.css';
 
 const MovieDetails = () => {
-  const { id } = useParams(); 
-  const navigate = useNavigate();  
+  const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const movie = useSelector((state) => state.movies.selectedMovie); 
+  const movie = useSelector((state) => state.movies.selectedMovie);
   const status = useSelector((state) => state.movies.status);
-
   const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     if (!movie || movie.id !== Number(id)) {
-      dispatch(fetchMovieById(id)); 
+      dispatch(fetchMovieById(id));
     }
   }, [id, dispatch, movie]);
 
@@ -24,7 +23,7 @@ const MovieDetails = () => {
   }
 
   if (!movie) {
-    return <div>Movie not found.</div>; 
+    return <div>Movie not found.</div>;
   }
 
   const backdropPath = movie.images?.backdrops?.[0]?.file_path
@@ -34,7 +33,6 @@ const MovieDetails = () => {
   const runtime = movie.runtime || "Unknown";
   const hours = runtime !== "Unknown" ? Math.floor(runtime / 60) : "N/A";
   const minutes = runtime !== "Unknown" ? runtime % 60 : "N/A";
-
   const genres = movie.genres ? movie.genres.map((g) => g.name) : ['Unknown Genre'];
 
   let director = 'Unknown Director';
@@ -64,25 +62,24 @@ const MovieDetails = () => {
 
   const handleAddToCart = () => {
     const movieData = {
-      id: movie.id, 
+      id: movie.id,
       Title: movie.title,
       Year: movie.release_date.substring(0, 4),
       Poster: movie.poster_path
         ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
         : 'N/A',
-      Price: 15.99 
+      Price: 15.99
     };
-    
-    dispatch(addMovieToCart(movieData)); 
+
+    dispatch(addMovieToCart(movieData));
   };
 
-  const cast = movie.credits?.cast?.slice(0, 10) || []; 
-
+  const cast = movie.credits?.cast?.slice(0, 10) || [];
   const logos = movie.images?.logos?.slice(0, 1) || [];
 
   const handleScroll = (direction) => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 240; 
+      const scrollAmount = 240;
       scrollContainerRef.current.scrollBy({ left: direction === 'right' ? scrollAmount : -scrollAmount, behavior: 'smooth' });
     }
   };
@@ -99,11 +96,10 @@ const MovieDetails = () => {
           <div className="backdrop-fade"></div>
         </div>
       )}
-
       {movie.production_companies && movie.production_companies.length > 0 && (
         <div className="production-logos">
           <ul>
-          {movie.production_companies.slice(0, 4).map((company) => (
+            {movie.production_companies.slice(0, 4).map((company) => (
               <li key={company.id}>
                 {company.logo_path && (
                   <img
@@ -117,7 +113,6 @@ const MovieDetails = () => {
           </ul>
         </div>
       )}
-
       {logos.length > 0 && (
         <div className="movie-logo-container">
           <img
@@ -128,47 +123,60 @@ const MovieDetails = () => {
         </div>
       )}
       {movie.homepage && (
-            <p className="movie-homepage">
-              <a href={movie.homepage} target="_blank" rel="noopener noreferrer">
-                {movie.homepage}
-              </a>
-            </p>
-          )}
-        
+        <p className="movie-homepage">
+          <a href={movie.homepage} target="_blank" rel="noopener noreferrer">
+            {movie.homepage}
+          </a>
+        </p>
+      )}
       <div className="movie-details">
         <button className="back-button" onClick={() => navigate(-1)}>
           Back
         </button>
-
         <div className="movie-left-container">
           <div className="movie-info">
             <h1>{movie.title}</h1>
             <p className="movie-meta">
               <span>{releaseYear}</span> • <span>{hours}h {minutes}m</span>
             </p>
-
             <div className="overview-and-cart-container">
-            <div className="movie-overview">
-              <p className='movie-overview-p'>{movie.overview}</p>
-              {movie.budget && (
-                <p className="movie-budget">Budget: ${movie.budget.toLocaleString()}</p>
-              )}
+              <div className="movie-overview">
+                <p className='movie-overview-p'>{movie.overview}</p>
+                {movie.budget && (
+                  <p className="movie-budget">Budget: ${movie.budget.toLocaleString()}</p>
+                )}
+              </div>
+              <div className="movie-poster-mobile">
+                {movie.poster_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                    alt={`${movie.title} poster`}
+                  />
+                ) : (
+                  <div>No poster available</div>
+                )}
+                <p className="movie-price-mobile">$15.99</p>
+                <button className="add-to-cart-mobile" onClick={handleAddToCart}>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
+                    alt="cart icon"
+                    className="cart-icon"
+                  />
+                  Add to cart
+                </button>
+              </div>
+              <div className="movie-add-to-cart-section">
+                <p className="movie-price">$15.99</p>
+                <button className="add-to-cart" onClick={handleAddToCart}>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
+                    alt="cart icon"
+                    className="cart-icon"
+                  />
+                  Add to cart
+                </button>
+              </div>
             </div>
-            <div className="movie-add-to-cart-section">
-    <p className="movie-price">$15.99</p> 
-    
-    <button className="add-to-cart" onClick={handleAddToCart}>
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/263/263142.png"
-        alt="cart icon"
-        className="cart-icon"
-      />
-      Add to cart
-    </button>
-  </div>
-</div>
-
-            
             <div className="movie-genre">
               {genres.map((g, index) => (
                 <span key={index} className="genre-tag">{g}</span>
@@ -228,32 +236,30 @@ const MovieDetails = () => {
             </div>
           </div>
         </div>
-
-        {/* Right-side container (poster and trailer) */}
         <div className="movie-poster-and-cart-container">
-  <div className="movie-trailer">
-    {movie.videos && movie.videos.results.length > 0 ? (
-      movie.videos.results
-        .filter((video) => video.site === 'YouTube')
-        .slice(0, 1)
-        .map((video) => (
-          <div key={video.id}>
-            <iframe
-              width="410"
-              height="225"
-              src={`https://www.youtube.com/embed/${video.key}`}
-              title={video.name}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
+          <div className="movie-trailer">
+            {movie.videos && movie.videos.results.length > 0 ? (
+              movie.videos.results
+                .filter((video) => video.site === 'YouTube')
+                .slice(0, 1)
+                .map((video) => (
+                  <div key={video.id}>
+                    <iframe
+                      width="410"
+                      height="225"
+                      src={`https://www.youtube.com/embed/${video.key}`}
+                      title={video.name}
+                      frameBorder="0"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                ))
+            ) : (
+              <div className="trailer-placeholder">
+              </div>
+            )}
           </div>
-        ))
-    ) : (
-      <div className="trailer-placeholder">
-          </div>
-          )}
-        </div>
-          <div className="movie-poster">
+          <div className="movie-poster-desktop">
             {movie.poster_path ? (
               <img
                 src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
