@@ -12,7 +12,9 @@ function OrderSummary() {
   }, 0); 
   
   const handlePay = () => {
-    window.location.hash = "#checkoutinfromtaion";
+    if (cartItems.length > 0) { 
+      window.location.hash = "#checkoutinfromtaion";
+    }
   };
 
   return (
