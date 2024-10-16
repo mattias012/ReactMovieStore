@@ -38,7 +38,7 @@ function OrderSummary() {
         <p>0000-000 000</p>
         <p>supportreactmovie@react.com</p>
       </div>
-      <button className="sum-pay-button" onClick={handlePay}>Pay Now</button>
+      <button className="sum-pay-button" onClick={handlePay}>Proceed to Payment</button>
     
     </div>
   );
