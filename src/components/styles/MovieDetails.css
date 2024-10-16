@@ -1,10 +1,10 @@
 .movie-details-container {
-    width: 100vw; 
-    min-height: 100vh; 
-    overflow-x: hidden; 
-    box-sizing: border-box; 
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    box-sizing: border-box;
     padding-top: 120px;
-    position: relative; 
+    position: relative;
 }
 
 .movie-backdrop {
@@ -12,47 +12,46 @@
     top: 93px;
     left: 0;
     width: 100vw;
-    height: 70vh; 
+    height: 70vh;
     background-size: cover;
     background-position: center;
-    opacity: 0.5; 
+    opacity: 0.5;
 }
 
 .backdrop-fade {
     position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
-    height: 250px; 
-    background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, 0.5) 30%, 
-        rgba(255, 255, 255, 0.842) 60%, 
-        rgb(255, 255, 255) 100% 
-    );
+    height: 250px;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.5) 40%,
+            rgba(255, 255, 255, 0.85) 80%,
+            rgb(255, 255, 255) 100%);
 }
+
 
 .movie-details {
     display: grid;
-    grid-template-columns: 2fr 1fr; 
-    gap: 20px; 
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
     width: 100%;
-    max-width: 1200px; 
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
-    padding: 20px; 
+    padding: 20px;
     box-sizing: border-box;
-    z-index: 3; 
+    z-index: 3;
     position: relative;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.158) 40%, rgba(255, 255, 255, 1) 100%); 
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.158) 40%, rgba(255, 255, 255, 1) 100%);
     border-radius: 10px;
-    
 }
 
 .movie-left-container {
     display: flex;
     flex-direction: column;
-  }
+}
 
 .back-button {
     background-color: #7299C6;
@@ -61,18 +60,18 @@
     font-size: 16px;
     cursor: pointer;
     position: fixed;
-    border-radius: 35px; 
+    border-radius: 35px;
     color: white;
-    top: 120px; 
-    left: 20px; 
-    z-index: 1000; 
+    top: 120px;
+    left: 20px;
+    z-index: 1000;
     transition: transform 0.2s ease, background-color 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .back-button:hover {
-background-color: #48648a; 
-transform: scale(1.05); 
+    background-color: #48648a;
+    transform: scale(1.05);
 }
 
 
@@ -95,52 +94,51 @@ transform: scale(1.05);
 
 .overview-and-cart-container {
     display: flex;
-    justify-content: space-between; 
-    align-items: flex-end; 
+    justify-content: space-between;
+    align-items: flex-end;
     width: 100%;
     margin-top: 10px;
-  }
+}
 
 .movie-overview {
     flex: 2;
-    background-color: rgba(255, 255, 255, 0.185); 
-    padding: 15px; 
-    border-radius: 10px; 
+    background-color: rgba(255, 255, 255, 0.185);
+    padding: 15px;
+    border-radius: 10px;
     margin-right: 7px;
     font-size: 1em;
     line-height: 1.5;
-    color: #333; 
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
-    position: relative; 
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
     display: flex;
-    flex-direction: column; 
-    
+    flex-direction: column;
 }
-.movie-overview-p{
+
+.movie-overview-p {
     margin: 5px 0;
     color: #000000;
     font-size: 1em;
-
 }
 
 .movie-add-to-cart-section {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; 
-    justify-content: flex-start; 
-    
-  }
-  .movie-price {
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.movie-price {
     font-size: 1.6em;
     color: #000;
-    margin-bottom: 10px; 
-    margin-right: 102px;
-  }
+    margin-bottom: 10px;
+    margin-right: 90px;
+}
 
 .movie-budget {
-    margin-top: 10px; 
+    margin-top: 10px;
     margin-right: 20px;
-    align-self: flex-end; 
+    align-self: flex-end;
     font-size: 0.9em;
     color: #555;
 }
@@ -150,8 +148,7 @@ transform: scale(1.05);
     display: flex;
     flex-direction: column;
     padding: 20px;
-    box-sizing: border-box; 
-
+    box-sizing: border-box;
 }
 
 .movie-info h1 {
@@ -169,12 +166,12 @@ transform: scale(1.05);
 .cart-icon {
     width: 25px;
     height: 25px;
-    margin-right: 8px; 
+    margin-right: 8px;
 }
 
 .production-logos {
     position: absolute;
-    top: 120px; 
+    top: 120px;
     right: 20px;
     z-index: 10;
 }
@@ -184,12 +181,11 @@ transform: scale(1.05);
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 10px; 
+    gap: 10px;
 }
 
 .production-logos li {
     display: inline-block;
-    
 }
 
 .company-logo {
@@ -211,7 +207,7 @@ transform: scale(1.05);
     margin-right: 5px;
     font-size: 0.8em;
     color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .cast-carousel-container {
@@ -219,7 +215,6 @@ transform: scale(1.05);
     align-items: center;
     position: relative;
     width: 680px;
-    
 }
 
 .cast-carousel {
@@ -229,8 +224,8 @@ transform: scale(1.05);
     width: 580px;
     gap: 20px;
     padding: 20px 0;
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .carousel-arrow {
@@ -240,18 +235,18 @@ transform: scale(1.05);
     cursor: pointer;
     position: relative;
     z-index: 2;
-    transition: transform 0.2s ease, color 0.2s ease; 
-    color: #333; 
+    transition: transform 0.2s ease, color 0.2s ease;
+    color: #333;
 }
 
 .carousel-arrow:hover {
     transform: scale(1.2);
-    color: #7299C6; 
+    color: #7299C6;
 }
 
 .carousel-arrow:active {
-    transform: scale(1.1); 
-    color: #48648a; 
+    transform: scale(1.1);
+    color: #48648a;
 }
 
 .carousel-arrow.left {
@@ -272,12 +267,12 @@ transform: scale(1.05);
     border-radius: 10px;
     width: 100px;
     height: auto;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .actor-image:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
@@ -301,43 +296,41 @@ transform: scale(1.05);
 
 .movie-poster-and-cart-container {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
 }
 
-  .movie-poster-mobile {
-    display: none; 
-  }
+.movie-poster-mobile {
+    display: none;
+}
 
 .movie-poster-desktop img {
     border-radius: 8px;
     width: 100%;
-    max-width: 300px; 
+    max-width: 300px;
     height: auto;
     object-fit: cover;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .movie-poster-desktop img:hover {
-    transform: scale(1.05); 
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.05);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.3);
 }
 
 .movie-trailer {
-    margin: 20px 0; 
+    margin: 20px 0;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
 }
-
 
 .movie-trailer iframe {
-    border-radius: 10px; 
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 .trailer-placeholder {
     width: 410px;
@@ -348,15 +341,15 @@ transform: scale(1.05);
     border-radius: 10px;
     font-size: 1em;
     text-align: center;
-  }
+}
 
 .movie-add-to-cart-container {
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     margin-right: 60px;
-  }
-  
-  .add-to-cart {
+}
+
+.add-to-cart {
     display: flex;
     align-items: center;
     padding: 5px 15px;
@@ -368,197 +361,189 @@ transform: scale(1.05);
     cursor: pointer;
     margin-left: 0;
     transition: transform 0.2s ease, background-color 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  }
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-  
-  .add-to-cart:hover {
-    background-color: #48648a; 
-    transform: scale(1.05); 
-  }
+.add-to-cart:hover {
+    background-color: #48648a;
+    transform: scale(1.05);
+}
 
-
-  @media (max-width: 480px) {
+@media (max-width: 780px) {
     .movie-details-container {
         padding-top: 93px;
+    }
 
-      }
-      
     .movie-details {
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
         width: 100vw;
         border-radius: 0px;
         padding: 10px;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.158) 20%, rgba(255, 255, 255, 1) 100%); 
-        
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.158) 20%, rgba(255, 255, 255, 1) 100%);
     }
 
     .movie-info h1 {
-        margin-top: 20px;    
-        } 
+        margin-top: 35px;
+    }
 
     .backdrop-fade {
-        height: 15vh; 
+        height: 15vh;
     }
+
     .overview-and-cart-container {
         display: flex;
-        flex-direction: row; 
+        flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
         margin-top: 10px;
-      }
-      
-      .movie-poster-mobile {
-        display: block; 
-        flex: 0 0 40%; 
+    }
+
+    .movie-poster-mobile {
+        display: block;
+        flex: 0 0 40%;
         margin-left: 20px;
         margin-top: 5px;
-        text-align: center; 
-      }
-      
-  .movie-price-mobile {
-    font-size: 1.2em;
-    color: #000;
-    margin-bottom: 5px;
-    margin-top: 5px;
-  }
+        text-align: center;
+    }
 
-  .add-to-cart-mobile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #7299C6;
-    width: 150px;
-    font-size: 0.9em;
-    color: white;
-    padding-top: 5px;
-    border: none;
-    border-radius: 35px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
-  }
-  .add-to-cart-mobile:hover {
-    background-color: #48648a;
-    transform: scale(1.05);
-  }
+    .movie-price-mobile {
+        font-size: 1.2em;
+        color: #000;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
 
-  .add-to-cart{
-    display: none;
-  }
-  .movie-price{
-    display: none;
-  }
- 
+    .add-to-cart-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #7299C6;
+        width: 150px;
+        font-size: 0.9em;
+        color: white;
+        padding-top: 5px;
+        border: none;
+        border-radius: 35px;
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 10px;
+    }
 
-  .add-to-cart-mobile:hover {
-    background-color: #48648a;
-    transform: scale(1.05);
-  }
-      .movie-overview {
+    .add-to-cart-mobile:hover {
+        background-color: #48648a;
+        transform: scale(1.05);
+    }
+
+    .add-to-cart {
+        display: none;
+    }
+
+    .movie-price {
+        display: none;
+    }
+
+    .add-to-cart-mobile:hover {
+        background-color: #48648a;
+        transform: scale(1.05);
+    }
+
+    .movie-overview {
         font-size: 0.9em;
         padding: 5px;
         margin: 5px 0;
-        flex: 0 0 50%; 
-      }
-      
+        flex: 0 0 50%;
+    }
 
-      .movie-poster-mobile img {
+    .movie-poster-mobile img {
         max-width: 100%;
         height: auto;
-        margin-bottom: 0px; 
+        margin-bottom: 0px;
         border-radius: 10px;
-      }
+    }
 
-      .movie-poster-desktop {
-        display: none; 
-      }
+    .movie-poster-desktop {
+        display: none;
+    }
 
-      .movie-add-to-cart-section {
-        order: 2; 
+    .movie-add-to-cart-section {
+        order: 2;
         width: 100%;
         margin-top: 10px;
         display: flex;
         justify-content: flex-end;
-      }
-    
-      .cast-carousel-container {
+    }
+
+    .cast-carousel-container {
         width: 370px;
         gap: 10px;
         margin-top: 10px;
-            }
-    
+    }
+
     .cast-carousel {
         width: 380px;
         gap: 20px;
         padding: 0px 0;
         margin-top: 10px;
-    }    
-    
-    .movie-trailer {
-        margin: 0px 0; 
-        margin-bottom: 140px;
-    
     }
-    
-    
+
+    .movie-trailer {
+        margin: 0px 0;
+        margin-bottom: 140px;
+
+    }
+
     .movie-trailer iframe {
-        border-radius: 10px; 
+        border-radius: 10px;
         overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .trailer-placeholder {
         display: none;
-      }
-
+    }
 
     .back-button {
-      font-size: 14px;
-      padding: 8px 12px;
-      top: 100px;
-      left: 10px;
+        font-size: 14px;
+        padding: 8px 12px;
+        top: 110px;
+        left: 20px;
     }
+
     .production-logos {
         top: 100px;
         right: 10px;
-      }
-      .movie-homepage {
+    }
+
+    .movie-homepage {
         font-size: 10px;
         bottom: 0px;
         left: 5px;
         z-index: 5000;
-      }
-    
-  
+    }
 
     .company-logo {
         width: 40px;
     }
+
     .actor-image {
         width: 80px;
     }
 
     .genre-tag {
         font-size: 0.7em;
-      }
-  
+    }
 
-
-      .movie-logo-container {
+    .movie-logo-container {
         position: absolute;
         bottom: 30px;
     }
-    
+
     .movie-logo {
         width: 250px;
         height: auto;
         object-fit: contain;
     }
 
-    
-  }
-
-  
+}
