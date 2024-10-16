@@ -35,5 +35,13 @@
     padding: 10px 20px;
     font-size: 1rem;
     width: 200px;
+    background-color:  rgba(26, 67, 100, 0.95);
   }
-  
+  .total-cost {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px; 
+    margin-bottom: 10px; 
+    
+  }

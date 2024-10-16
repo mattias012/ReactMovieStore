@@ -1,5 +1,5 @@
 .cart {
-    background-color: #9eb7db;
+    background-color: rgba(24, 49, 69, 0.95);
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
@@ -18,7 +18,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #7299C6;
+    background-color: rgba(19, 44, 65, 0.95);
     border-radius: 15px;
     padding: 15px;
     margin-bottom: 10px;

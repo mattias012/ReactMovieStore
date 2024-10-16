@@ -5,7 +5,7 @@ function CheckoutInformation({ formData, handleFormChange, errors }) {
   return (
     <div className="checkout-information">
       <div className="information-section">
-        <h3>Your Information</h3>
+        <h3>Shipping Address</h3>
         <div className="information-grid">
 
           <div className="input-container">

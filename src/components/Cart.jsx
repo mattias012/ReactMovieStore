@@ -62,6 +62,7 @@ function Cart() {
                 </button>
               </div>
             </div>
+            
           ))}
         </div>
       )}
