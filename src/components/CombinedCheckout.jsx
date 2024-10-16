@@ -3,10 +3,18 @@ import CheckoutInformation from "./CheckoutInformation";
 import CheckoutCardDetails from "./CheckoutCardDetails";
 import "./styles/CombinedCheckout.css";
 import { clearCart } from '../features/movieSlice';
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 
 function CombinedCheckout() {
     const dispatch = useDispatch();
+    const cartItems = useSelector((state) => state.movies.cart);
+
+    const totalPrice = cartItems.reduce((total, item) => {
+        const price = item.Price ? item.Price : 10; 
+        return total + price * item.quantity;
+    }, 0);
+
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -193,6 +201,10 @@ function CombinedCheckout() {
             errors={errors}
           />
         </div>
+        <div className="total-cost">
+      Total Cost: {totalPrice.toFixed(2)} USD
+    </div>
+
         <button type="submit" className="pay-button">
           Submit Order
         </button>
