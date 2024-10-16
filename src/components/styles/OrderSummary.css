@@ -1,5 +1,5 @@
 .sum-order-summary {
-    background-color: #9eb7db; 
+  background-color: rgba(24, 49, 69, 0.95);
     padding: 20px;
     border-radius: 10px;
     max-width: 300px; 
@@ -26,7 +26,7 @@
   }
   
   .sum-to-pay-section {
-    background-color: #7299C6; 
+    background-color: rgba(19, 44, 65, 0.95);
     padding: 10px;
     border-radius: 8px;
   }
@@ -40,7 +40,7 @@
   }
   
   .sum-pay-button {
-    background-color: #7299C6; 
+    background-color: rgba(19, 44, 65, 0.95);
     color: white;
     border: none;
     border-radius: 8px;
@@ -52,6 +52,6 @@
   }
   
   .sum-pay-button:hover {
-    background-color: #5a87b1; 
+    background-color: rgba(31, 76, 113, 0.95);
   }
   

@@ -1,11 +1,12 @@
 .cart {
-    background-color: #9eb7db;
+    background-color: rgba(24, 49, 69, 0.95);
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
     margin: 0 auto;
     color: white;
   }
+  
   
   h2 {
     color: white;
@@ -18,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #7299C6;
+    background-color: rgba(19, 44, 65, 0.95);
     border-radius: 15px;
     padding: 15px;
     margin-bottom: 10px;
@@ -105,3 +106,14 @@
     height: auto; 
     margin-left: 8px; 
   }
+  .fullscreen-bg {
+    background-image: url('path-to-your-image.jpg'); /* Replace with your image path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 100vh;  /* Ensures the background takes up the full screen height */
+    display: flex;      /* Center the cart horizontally and vertically */
+    justify-content: center;
+    align-items: center;
+}
