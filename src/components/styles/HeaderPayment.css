@@ -1,9 +1,9 @@
-.header-cart {
+.header-payment {
     display: flex;
     justify-content: center; 
     align-items: center;
     padding: 20px;
-    background-color: rgba(24, 49, 69, 0.95);
+    background-color: rgba(19, 44, 65, 0.95);
     color: white;
     width: 100%;
     position: relative;
@@ -19,7 +19,7 @@
     align-items: center;
   }
   
-  .continue-shopping {
+  .go-back {
     text-decoration: none;
     color: #ffffff;
     font-weight: bold;

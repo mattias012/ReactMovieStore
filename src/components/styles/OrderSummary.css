@@ -1,5 +1,5 @@
-.order-summary {
-    background-color: #9eb7db; 
+.sum-order-summary {
+  background-color: rgba(24, 49, 69, 0.95);
     padding: 20px;
     border-radius: 10px;
     max-width: 300px; 
@@ -14,9 +14,9 @@
     text-align: left;
   }
   
-  .cost-section, .shipping-section, .to-pay-section {
+  .sum-shipping-section {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     margin-bottom: 10px;
   }
   
@@ -25,22 +25,22 @@
     margin: 20px 0;
   }
   
-  .to-pay-section {
-    background-color: #7299C6; 
+  .sum-to-pay-section {
+    background-color: rgba(19, 44, 65, 0.95);
     padding: 10px;
     border-radius: 8px;
   }
   
-  .questions-section {
+  .sum-questions-section {
     margin-top: 20px;
   }
   
-  .questions-section p {
+  .sum-questions-section p {
     margin: 5px 0;
   }
   
-  .pay-button {
-    background-color: #7299C6; 
+  .sum-pay-button {
+    background-color: rgba(19, 44, 65, 0.95);
     color: white;
     border: none;
     border-radius: 8px;
@@ -51,7 +51,31 @@
     margin-top: 20px;
   }
   
-  .pay-button:hover {
-    background-color: #5a87b1; 
+  .sum-pay-button:hover {
+    background-color: rgba(31, 76, 113, 0.95);
   }
-  
+  @media (max-width: 768px) {
+    .sum-order-summary {
+        max-width: 90%; 
+        padding: 15px;  
+    }
+
+    h3 {
+        font-size: 1rem; 
+        text-align: center; 
+    }
+
+    .sum-shipping-section, .sum-to-pay-section {
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+
+    .sum-shipping-section p, .sum-to-pay-section p {
+        margin-bottom: 5px; 
+    }
+
+    .sum-pay-button {
+        padding: 8px 15px; 
+        font-size: 0.9rem; 
+    }
+}

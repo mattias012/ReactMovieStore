@@ -1,0 +1,84 @@
+ .card-checkout-information {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: rgba(26, 67, 100, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px; 
+    margin: auto;
+    color: #ffffff;
+}
+
+.card-information-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 16px;
+}
+
+.wide-input {
+    grid-column: span 2; 
+}
+
+.card-information-grid input {
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input.error-input {
+    border-color: red;
+}
+
+.card-information-grid input::placeholder {
+    color: #999;
+}
+
+.card-information-grid input:focus {
+    border-color: #4A90E2;
+    outline: none;
+}
+
+
+.card-information-grid input[name="expirationDate"],
+.card-information-grid input[name="ccv"] {
+    grid-column: span 1; 
+}
+.input-container {
+    position: relative;
+   
+}
+
+.error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: red;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.card-pay-button {
+    grid-column: span 2;
+    background-color: #5a87b1;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.card-pay-button:hover {
+    background-color: #3a78c2;
+} 
+
+
+  

@@ -1,9 +1,10 @@
 .cart {
-    background-color: #9eb7db;
+    background-color: rgba(24, 49, 69, 0.95);
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
     margin: 0 auto;
+    color: white;
   }
   
   h2 {
@@ -17,7 +18,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #7299C6;
+    background-color: rgba(19, 44, 65, 0.95);
     border-radius: 15px;
     padding: 15px;
     margin-bottom: 10px;
@@ -47,27 +48,40 @@
   .quantity-controls {
     display: flex;
     align-items: center;
+    gap: 10px; 
   }
   
-  .quantity-controls button {
-    background-color: white;
-    border: none;
-    border-radius: 50%;
-    padding: 5px 10px;
-    font-size: 1.2rem;
-    margin: 0 5px;
+  .quantity-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; 
+    border: 2px solid #5a87b1; 
+    background-color: #fff; 
+    color: #000; 
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
   
-  .quantity-controls span {
-    color: white;
-    font-size: 1rem;
+  .quantity-btn:hover {
+    background-color: #e6e6e6; 
+    border-color: #3b6991; 
   }
+  
+  .quantity {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white; 
+  }
+  
   
   .actions {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-start; 
   }
   
   .remove-btn {
@@ -86,3 +100,50 @@
     cursor: pointer;
     font-size: 1.2rem;
   }
+  .trash-icon {
+    width: 20px; 
+    height: auto; 
+    margin-left: 8px; 
+  }
+  @media (max-width: 768px) {
+    .cart {
+        padding: 10px;         
+        max-width: 90%;         
+        margin: 10px;         
+        border-radius: 8px;    
+    }
+
+    .cart-item {
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+
+    .poster {
+        width: 60px;            
+        height: 90px;
+    }
+
+    .details {
+        padding: 5px 0;         
+        text-align: left;       
+    }
+
+    .quantity-controls {
+        gap: 5px;               
+    }
+
+    .quantity-btn {
+        width: 30px;            
+        height: 30px;
+        font-size: 16px;        
+    }
+
+    .quantity {
+        font-size: 1.2rem;      
+    }
+
+    .remove-btn, .trash-btn {
+        font-size: 0.9rem;      
+    }
+}
+  

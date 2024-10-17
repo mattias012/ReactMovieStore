@@ -1,15 +1,13 @@
-
-import './styles/HeaderCart.css'
+import './styles/HeaderPayment.css'
 import logo from '/src/assets/logo-nobackground.png';
 
-
-function HeaderCart() {
+function HeaderPayment() {
   return (
-    <header className="header-cart">
+    <header className="header-payment">
 
       <div className="nav-left">
-        <a href="#/" className="continue-shopping">
-          <span>&larr;</span> Continue shopping
+        <a href="#cart" className="go-back">
+          <span>&larr;</span> Back to checkout
         </a>
       </div>
 
@@ -25,4 +23,4 @@ function HeaderCart() {
   );
 }
 
-export default HeaderCart;
+export default HeaderPayment;

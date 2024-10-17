@@ -2,8 +2,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './styles/Cart.css';
-import { removeMovieFromCart, clearCart } from '../features/movieSlice';
+import { removeMovieFromCart, clearCart, updateMovieQuantity } from '../features/movieSlice';
 import trashIcon from '../assets/trashcan1.png';
+
 
 function Cart() {
   const cartItems = useSelector((state) => state.movies.cart); 
@@ -19,11 +20,15 @@ function Cart() {
 
   
   const increment = (movie) => {
- 
+    dispatch(updateMovieQuantity({ id: movie.id, quantity: movie.quantity + 1 }));
   };
 
   const decrement = (movie) => {
-  
+    if (movie.quantity > 1) {
+      dispatch(updateMovieQuantity({ id: movie.id, quantity: movie.quantity - 1 }));
+    } else {
+      dispatch(removeMovieFromCart({ id: movie.id }));
+    }
   };
 
   return (
@@ -46,25 +51,26 @@ function Cart() {
                 <p>Price: ${(item.Price || 10).toFixed(2)} USD</p>
                 <div className="quantity-controls">
                   <button onClick={() => decrement(item)}>-</button>
-                  <span>1</span> 
+                  <span>{item.quantity}</span>
                   <button onClick={() => increment(item)}>+</button>
                 </div>
               </div>
               <div className="actions">
                 <button className="remove-btn" onClick={() => handleRemoveMovie(item.id)}>Remove</button> 
-                <button className="trash-btn">
+                <button className="trash-btn" onClick={() => handleRemoveMovie(item.id)}>
                   <img src={trashIcon} alt="trash icon" className="trash-icon" />
                 </button>
               </div>
             </div>
+            
           ))}
         </div>
       )}
       {cartItems.length > 0 && (
         <div>
-          <button className="clear-cart" onClick={handleClearCart}>
+          {/* <button className="clear-cart" onClick={handleClearCart}>
             Clear Cart
-          </button>
+          </button> */}
         </div>
       )}
     </div>
